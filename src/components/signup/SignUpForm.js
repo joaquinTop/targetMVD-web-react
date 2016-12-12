@@ -1,0 +1,98 @@
+import React, {PropTypes} from 'react';
+import {Link, browserHistory} from 'react-router';
+import TextInput from '../common/TextInput';
+import validateInput from '../../utils/validations/signup.js';
+import userClient from '../../client/UsersServerClient';
+
+class SignUpForm extends React.Component{
+  constructor(props, context){
+    super(props, context);
+
+    this.onFieldChange = this.onFieldChange.bind(this);
+    this.onGenderChange = this.onGenderChange.bind(this);
+    this.onSubmitClick = this.onSubmitClick.bind(this);
+  }
+
+  onFieldChange(fieldName, value) {
+    this.props.updateUserInfo(this.props.user, fieldName, value);
+  }
+
+  onGenderChange(e){
+    this.props.updateUserInfo(this.props.user, "gender", e.target.value);
+  }
+
+  isValid(data){
+    const {isValid} = validateInput(data);
+    if (!isValid) {
+      // display the errors
+    }
+    return isValid;
+  }
+
+  onSubmitClick(e){
+    e.preventDefault();
+    let genderId = this.props.user.gender === 'male' ? 0:1;
+    let userJson = {
+      "user":{
+        "email":this.props.user.email,
+        "password":this.props.user.password,
+        "password_confirmation":this.props.user.passwordConfirmation,
+        "name":this.props.user.name,
+        "gender":genderId}
+    };
+    if (this.isValid(userJson.user)) {
+      userClient.signUp(userJson).then(data => {
+        console.log(data.email);
+        this.onFieldChange("token", data.userToken);
+        this.onFieldChange("user_id", data.user_id);
+        this.redirect();
+      }).catch(error => {
+        console.log(error);
+      });
+    }
+  }
+
+  redirect(){
+    browserHistory.push('/sign-in');
+  }
+
+  render(){
+    const {user} = this.props;
+
+    return (
+      <div className="column">
+        <div className="form">
+          <h2>SIGN UP</h2>
+          <form>
+            <label for="nameInput">NAME</label><br />
+            <TextInput id="nameInput" onChange={this.onFieldChange} name="name" type={"text"} value={user.name} required={"true"} autofocus={"true"}></TextInput><br />
+            <label for="emailInput">EMAIL</label><br />
+            <TextInput id="emailInput" onChange={this.onFieldChange} name="email" type={"email"} value={user.email} required={"true"}></TextInput><br />
+            <label for="passwordInput">PASSWORD</label><br />
+            <TextInput id="passwordInput" onChange={this.onFieldChange} name="password" type={"password"} value={user.password} required={"true"}></TextInput><br />
+            <label for="passwordConfirmationInput">PASSWORD CONFIRMATION</label><br />
+            <TextInput id="passwordConfirmationInput" onChange={this.onFieldChange} name="passwordConfirmation" type={"password"} value={user.passwordConfirmation} required={"true"}></TextInput><br />
+            <label>GENDER</label><br/>
+            <select
+            name="gender"
+            onChange={this.onGenderChange}
+            required
+            value={user.gender}>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+            ></select><br/>
+            <input type="submit" value="Sign up" onClick={this.onSubmitClick}></input><br/>
+            <Link to="sign-in">SIGN IN</Link>
+          </form>
+        </div>
+      </div>
+    );
+  }
+}
+
+SignUpForm.propTypes = {
+  updateUserInfo: PropTypes.func.isRequired,
+  user: PropTypes.object.isRequired
+};
+
+export default SignUpForm;
