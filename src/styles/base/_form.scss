@@ -1,0 +1,38 @@
+.form{
+	text-align: center;
+}
+
+.btn-sign-out{
+  margin-top: 15px;
+}
+
+.headerTitle {
+	font-family: fantasy;
+	letter-spacing: 3px;
+	color: #ffffff;
+}
+
+.subHeaderTitle {
+	font-family: monospace;
+	letter-spacing: 2px;
+	color: #000000;
+	display:table-cell;
+	vertical-align:middle;
+}
+
+.custom-input{
+	width: 180px;
+	height: 37px;
+	border: solid 0.5px #060606;
+	display: inline-block;
+}
+
+.custom-select{
+	width: 180px;
+	height: 37px;
+	border: solid 0.5px #060606;
+	-webkit-appearance: none;
+  -webkit-border-radius: 0px;
+	text-align-last: center;
+	display: inline-block;
+}

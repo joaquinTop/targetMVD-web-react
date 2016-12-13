@@ -40,13 +40,13 @@ class TargetForm extends React.Component{
 
   render(){
     return (
-      <div>
+      <div className="target-form-container">
         <form>
-          <label for="areaLength">SPECIFY AREA LENGTH</label><br/>
+          <label className="target-area-field" htmlFor="areaLength">SPECIFY AREA LENGTH</label><br/>
           <TextInput id="areaLength" onChange={this.onFieldChange} name="radius" areaLength={"number"} value={this.props.currentTarget.radius} required={"true"} autofocus={"true"}></TextInput><br/>
-          <label for="targetTitle">TARGET TITLE</label><br/>
+          <label className="target-form-field" htmlFor="targetTitle">TARGET TITLE</label><br/>
           <TextInput id="targetTitle" onChange={this.onFieldChange} name="title" type={"text"} value={this.props.currentTarget.title} required={"true"}></TextInput><br/>
-          <label>TOPIC</label><br/>
+          <label className="target-form-field">TOPIC</label><br/>
           <ul className="common-list">
             <li>What do you want to talk about?</li>
             {Topics.map((option) =>{
@@ -54,7 +54,7 @@ class TargetForm extends React.Component{
             })
             }
           </ul>
-          <input type="submit" value="Save Target" onClick={this.onTargetSubmit}></input><br/>
+          <input className="btn-save-target" type="submit" value="SAVE TARGET" onClick={this.onTargetSubmit}></input><br/>
         </form>
       </div>
     );

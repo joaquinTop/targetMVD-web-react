@@ -73,18 +73,19 @@ class SignUpForm extends React.Component{
     return (
       <div className="column">
         <div className="form">
-          <h2>SIGN UP</h2>
+          <h2 className="sign-up-title">SIGN UP</h2>
           <form>
-            <label for="nameInput">NAME</label><br />
+            <label className="sign-up-field" htmlFor="nameInput">NAME</label><br />
             <TextInput id="nameInput" onChange={this.onFieldChange} name="name" type={"text"} value={user.name} required={"true"} autofocus={"true"}></TextInput><br />
-            <label for="emailInput">EMAIL</label><br />
+            <label className="sign-up-field" htmlFor="emailInput">EMAIL</label><br />
             <TextInput id="emailInput" onChange={this.onFieldChange} name="email" type={"email"} value={user.email} required={"true"}></TextInput><br />
-            <label for="passwordInput">PASSWORD</label><br />
+            <label className="sign-up-field" htmlFor="passwordInput">PASSWORD</label><br />
             <TextInput id="passwordInput" onChange={this.onFieldChange} name="password" type={"password"} value={user.password} required={"true"}></TextInput><br />
-            <label for="passwordConfirmationInput">PASSWORD CONFIRMATION</label><br />
+            <label className="sign-up-field" htmlFor="passwordConfirmationInput">CONFIRM PASSWORD</label><br />
             <TextInput id="passwordConfirmationInput" onChange={this.onFieldChange} name="passwordConfirmation" type={"password"} value={user.passwordConfirmation} required={"true"}></TextInput><br />
-            <label>GENDER</label><br/>
+            <label className="sign-up-field">GENDER</label><br />
             <select
+            className="custom-select"
             name="gender"
             onChange={this.onGenderChange}
             required
@@ -92,8 +93,9 @@ class SignUpForm extends React.Component{
               <option value="male">Male</option>
               <option value="female">Female</option>
             ></select><br/>
-            <input type="submit" value="Sign up" onClick={this.onSubmitClick}></input><br/>
-            <Link to="sign-in">SIGN IN</Link>
+            <input className="btn-sign-up" type="submit" value="SIGN UP" onClick={this.onSubmitClick}></input><br/>
+            <hr className="custom-line"/>
+            <Link className="sign-in-link" to="sign-in">SIGN IN</Link>
           </form>
         </div>
       </div>

@@ -8,6 +8,8 @@ import * as sessionActions from '../../actions/sessionActions';
 import Header from '../common/Header';
 import SubHeader from '../common/SubHeader';
 import TargetForm from '../targets/TargetForm'
+import targetIcon from '../../res/images/png/targetIcon.png';
+import smilies from '../../res/images/png/smilies.png';
 
 export const SideBarContainer = (props) => {
 
@@ -24,13 +26,16 @@ export const SideBarContainer = (props) => {
   return (
     <div className="sidebar">
       <Header title = {"CREATE TARGET"} style = "sidebarHeader"></Header>
-      <SubHeader title = {"CREATE NEW TARGET"} style = "sidebarSubHeader"></SubHeader>
+      <img className="target-icon" src={targetIcon}></img><br/>
+      <SubHeader title = {"CREATE NEW TARGET"}></SubHeader>
       <TargetForm
       enabled={formEnabled}
       updateTargetInfo={props.actions.updateFreeTarget}
       currentTarget={props.newTarget}
       createTargetAction={props.actions.createTarget}>
       </TargetForm>
+      {/* resetFreeTarget={props.actions.resetFreeTarget} */}
+      <img className="smilies-img-sidebar" src={smilies}></img><br/>
       <button onClick={logOut} type="button" className="btn btn-danger btn-sign-out">Sign out</button>
     </div>
     );

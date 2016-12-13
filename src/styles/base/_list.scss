@@ -1,0 +1,28 @@
+.common-list{
+  list-style-type:none;
+  padding-left: 0pt;
+}
+
+.common-list li a:hover{
+  background-color: #2fbcf7;
+  cursor: pointer;
+}
+
+.titleListItem {
+	width: 257px;
+	height: 39px;
+  display: inline-block;
+  border-top: solid 0.5px #000000;
+  border-left: solid 0.5px #000000;
+  border-right: solid 0.5px #000000;
+}
+
+.listItem {
+  width: 257px;
+	height: 31px;
+  display: inline-block;
+  cursor: pointer;
+  border-top: solid 0.5px #000000;
+  border-left: solid 0.5px #000000;
+  border-right: solid 0.5px #000000;
+}

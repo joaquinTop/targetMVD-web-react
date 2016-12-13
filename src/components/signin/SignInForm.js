@@ -5,6 +5,7 @@ import * as strings from '../../res/strings/strings-en';
 import * as constants from '../../constants/constants.js'
 import validateInput from '../../utils/validations/signup.js';
 import { FacebookLogin } from 'react-facebook-login-component';
+import smilies from '../../res/images/png/smilies.png';
 
 class SignInForm extends React.Component{
   constructor(props, context){
@@ -59,16 +60,20 @@ class SignInForm extends React.Component{
     return (
       <div className="column">
         <div className="form">
-          <h2>TARGET MVD</h2>
-          <h3>{strings.SIGN_IN_FIND_PEOPLE_NEAR_YOU}</h3>
-          <h3>{strings.SIGN_IN_CREATE_TARGET}</h3>
+          <img className="smilies-img" src={smilies}></img><br/>
+          <h2 className="sign-in-title">TARGET MVD</h2><br/>
+          <h3 className="sign-in-subtitle">{strings.SIGN_IN_FIND_PEOPLE_NEAR_YOU}</h3><br/>
+          <h3 className="sign-in-info-text">{strings.SIGN_IN_CREATE_TARGET}</h3><br/>
           <form>
-            <label for="inputEmail">EMAIL</label><br/>
+            <label className="sign-in-email-field" htmlFor="inputEmail">EMAIL</label><br/>
             <TextInput id="inputEmail" onChange={this.onFieldChange} name="email" type={"email"} value={user.email} required={"true"} autofocus={"true"}></TextInput><br/>
-            <label for="inputPassword">PASSWORD</label><br/>
+            <label className="sign-in-field" htmlFor="inputPassword">PASSWORD</label><br/>
             <TextInput id="inputPassword" onChange={this.onFieldChange} name="password" type={"password"} value={user.password} required={"true"}></TextInput><br/>
-            <input type="submit" value="Sign in" onClick={this.signIn}></input><br/>
-            <label>Forgot your password?</label><br/>
+            <input className="btn-sign-in" type="submit" value="SIGN IN" onClick={this.signIn}></input><br/>
+            <label className="forgot-your-password">Forgot your password?</label><br/>
+            <label className="connect-with-facebook">CONNECT WITH FACEBOOK</label><br/>
+            <hr className="custom-line"/>
+            <Link className="sign-up-link" to="/">SIGN UP</Link>
           </form>
           <FacebookLogin
           socialId={constants.APP_SOCIAL_ID}
