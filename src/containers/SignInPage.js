@@ -20,7 +20,7 @@ export const SignInPage = (props) => {
   }
 
   return (
-    <div>
+    <div className="container-fluid">
       <SignInForm
       updateSession={props.actions.updateSessionInformation}
       session={props.session}
