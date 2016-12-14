@@ -48,8 +48,9 @@ class SignInForm extends React.Component{
         password: this.state.password
       }
     };
-    
+
     this.props.signInAction(userJson);
+
   }
 
   redirect(){
