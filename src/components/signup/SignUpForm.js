@@ -1,4 +1,4 @@
-import React, {PropTypes} from 'react';
+import React from 'react';
 import {Link, browserHistory} from 'react-router';
 import TextInput from '../common/TextInput';
 import validateInput from '../../utils/validations/signup.js';
@@ -11,14 +11,27 @@ class SignUpForm extends React.Component{
     this.onFieldChange = this.onFieldChange.bind(this);
     this.onGenderChange = this.onGenderChange.bind(this);
     this.onSubmitClick = this.onSubmitClick.bind(this);
+    this.state = {
+      name: '',
+      email: '',
+      password: '',
+      passwordConfirmation: '',
+      gender: 0,
+      token: '',
+      user_id:''
+    };
   }
 
   onFieldChange(fieldName, value) {
-    this.props.updateUserInfo(this.props.user, fieldName, value);
+    let newState = Object.assign({}, this.state);
+    newState[fieldName] = value;
+    this.setState(newState);
   }
 
   onGenderChange(e){
-    this.props.updateUserInfo(this.props.user, "gender", e.target.value);
+    let newState = Object.assign({}, this.state);
+    newState.gender = e.target.value;
+    this.setState(newState);
   }
 
   isValid(data){
@@ -31,20 +44,18 @@ class SignUpForm extends React.Component{
 
   onSubmitClick(e){
     e.preventDefault();
-    let genderId = this.props.user.gender === 'male' ? 0:1;
+    let genderId = this.state.gender === 'male' ? 0:1;
     let userJson = {
       "user":{
-        "email":this.props.user.email,
-        "password":this.props.user.password,
-        "password_confirmation":this.props.user.passwordConfirmation,
-        "name":this.props.user.name,
+        "email":this.stateemail,
+        "password":this.state.password,
+        "password_confirmation":this.state.passwordConfirmation,
+        "name":this.state.name,
         "gender":genderId}
     };
     if (this.isValid(userJson.user)) {
       userClient.signUp(userJson).then(data => {
         console.log(data.email);
-        this.onFieldChange("token", data.userToken);
-        this.onFieldChange("user_id", data.user_id);
         this.redirect();
       }).catch(error => {
         console.log(error);
@@ -57,7 +68,7 @@ class SignUpForm extends React.Component{
   }
 
   render(){
-    const {user} = this.props;
+    const user = this.state;
 
     return (
       <div className="column">
@@ -89,10 +100,5 @@ class SignUpForm extends React.Component{
     );
   }
 }
-
-SignUpForm.propTypes = {
-  updateUserInfo: PropTypes.func.isRequired,
-  user: PropTypes.object.isRequired
-};
 
 export default SignUpForm;

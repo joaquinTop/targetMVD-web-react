@@ -2,7 +2,6 @@ import React, {PropTypes} from 'react';
 import {browserHistory} from 'react-router';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import * as userActions from '../actions/userActions';
 import * as sessionActions from '../actions/sessionActions';
 import SignInForm from '../components/signin/SignInForm';
 import LandingRightSide from '../components/common/LandingRightSide';
@@ -27,8 +26,6 @@ export const SignInPage = (props) => {
   return (
     <div>
       <SignInForm
-      updateUserInfo={props.actions.updateUserInfo}
-      user={props.user}
       updateSession={props.actions.updateSessionInformation}
       session={props.session}
       />
@@ -39,20 +36,18 @@ export const SignInPage = (props) => {
 
 SignInPage.propTypes = {
   actions: PropTypes.object.isRequired,
-  user: PropTypes.object.isRequired,
   session: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state) {
   return {
-    user: state.user,
     session: state.session
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(Object.assign({}, userActions, sessionActions), dispatch)
+    actions: bindActionCreators(sessionActions, dispatch)
   };
 }
 

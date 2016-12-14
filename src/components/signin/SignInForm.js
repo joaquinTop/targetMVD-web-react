@@ -14,10 +14,16 @@ class SignInForm extends React.Component{
 
     this.onFieldChange = this.onFieldChange.bind(this);
     this.signIn = this.signIn.bind(this);
+    this.state = {
+      name: '',
+      email: ''
+    };
   }
 
   onFieldChange(fieldName, value) {
-    this.props.updateUserInfo(this.props.user, fieldName, value);
+    let newState = Object.assign({}, this.state);
+    newState[fieldName] = value;
+    this.setState(newState);
   }
 
   isValid(data){
@@ -32,8 +38,8 @@ class SignInForm extends React.Component{
     e.preventDefault();
     const userJson = {
       "user":{
-        "email":this.props.user.email,
-        "password":this.props.user.password
+        "email":this.state.email,
+        "password":this.state.password
       }
     };
     userClient.signIn(userJson).then(data => {
@@ -53,7 +59,7 @@ class SignInForm extends React.Component{
   }
 
   render(){
-    const {user} = this.props;
+    const user = this.state;
 
     return (
       <div className="column">
@@ -78,8 +84,6 @@ class SignInForm extends React.Component{
 }
 
 SignInForm.propTypes = {
-  updateUserInfo: PropTypes.func.isRequired,
-  user: PropTypes.object.isRequired,
   updateSession: PropTypes.func.isRequired,
   session: PropTypes.object.isRequired
 };
