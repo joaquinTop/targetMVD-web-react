@@ -6,6 +6,7 @@ import * as constants from '../../constants/constants.js'
 import validateInput from '../../utils/validations/signup.js';
 import { FacebookLogin } from 'react-facebook-login-component';
 import smilies from '../../res/images/png/smilies.png';
+import CustomAlert from '../../utils/uiHelper/CustomAlert';
 
 class SignInForm extends React.Component{
   constructor(props, context){
@@ -47,6 +48,7 @@ class SignInForm extends React.Component{
         password: this.state.password
       }
     };
+    
     this.props.signInAction(userJson);
   }
 
@@ -54,11 +56,16 @@ class SignInForm extends React.Component{
     browserHistory.push('/home');
   }
 
+  showAlert(text){
+    CustomAlert.showAlert(text, 'error');
+  }
+
   render(){
     const user = this.state;
 
     return (
       <div className="column">
+        <CustomAlert/>
         <div className="form">
           <img className="smilies-img" src={smilies}></img><br/>
           <h2 className="sign-in-title">TARGET MVD</h2><br/>

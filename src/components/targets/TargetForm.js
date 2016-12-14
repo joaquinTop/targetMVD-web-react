@@ -2,6 +2,7 @@ import React, {PropTypes} from 'react';
 import {browserHistory} from 'react-router';
 import TextInput from '../common/TextInput';
 import Topics from '../../res/topics';
+import CustomAlert from '../../utils/uiHelper/CustomAlert';
 
 class TargetForm extends React.Component{
   constructor(props, context){
@@ -30,6 +31,7 @@ class TargetForm extends React.Component{
         "topic": this.props.currentTarget.topic
       }
     };
+
     this.props.createTargetAction(targetJson);
     this.redirect();
   }
@@ -38,19 +40,24 @@ class TargetForm extends React.Component{
     browserHistory.push('/home');
   }
 
+  showAlert(text, type){
+    CustomAlert.showAlert(text, type);
+  }
+
   render(){
     return (
       <div className="target-form-container">
+        <CustomAlert/>
         <form>
           <label className="target-area-field" htmlFor="areaLength">SPECIFY AREA LENGTH</label><br/>
           <TextInput id="areaLength" onChange={this.onFieldChange} name="radius" areaLength={"number"} value={this.props.currentTarget.radius} required={"true"} autofocus={"true"}></TextInput><br/>
           <label className="target-form-field" htmlFor="targetTitle">TARGET TITLE</label><br/>
           <TextInput id="targetTitle" onChange={this.onFieldChange} name="title" type={"text"} value={this.props.currentTarget.title} required={"true"}></TextInput><br/>
-          <label className="target-form-field">TOPIC</label><br/>
+          <label className="target-form-field">SELECT A TOPIC</label><br/>
           <ul className="common-list">
-            <li>What do you want to talk about?</li>
+            <li><div className="target-form-firstItem">What do you want to talk about?</div></li>
             {Topics.map((option) =>{
-              return <li onClick={this.onTopicChange}><a>{option}</a></li>;
+              return <li className="clickableListItem" onClick={this.onTopicChange}><div className="target-form-listItem"><a>{option}</a></div></li>;
             })
             }
           </ul>
