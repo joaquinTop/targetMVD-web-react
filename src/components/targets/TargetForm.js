@@ -3,6 +3,7 @@ import {browserHistory} from 'react-router';
 import TextInput from '../common/TextInput';
 import Topics from '../../res/topics';
 import CustomAlert from '../../utils/uiHelper/CustomAlert';
+import smilies from '../../res/images/png/smilies.png';
 
 class TargetForm extends React.Component{
   constructor(props, context){
@@ -50,9 +51,9 @@ class TargetForm extends React.Component{
         <CustomAlert/>
         <form>
           <label className="target-area-field" htmlFor="areaLength">SPECIFY AREA LENGTH</label><br/>
-          <TextInput id="areaLength" onChange={this.onFieldChange} name="radius" areaLength={"number"} value={this.props.currentTarget.radius} required={"true"} autofocus={"true"}></TextInput><br/>
+          <TextInput id="areaLength" onChange={this.onFieldChange} style="custom-target-input" name="radius" areaLength={"number"} value={this.props.currentTarget.radius} required={"true"} autofocus={"true"}></TextInput><br/>
           <label className="target-form-field" htmlFor="targetTitle">TARGET TITLE</label><br/>
-          <TextInput id="targetTitle" onChange={this.onFieldChange} name="title" type={"text"} value={this.props.currentTarget.title} required={"true"}></TextInput><br/>
+          <TextInput id="targetTitle" onChange={this.onFieldChange} style="custom-target-input" name="title" type={"text"} value={this.props.currentTarget.title} required={"true"}></TextInput><br/>
           <label className="target-form-field">SELECT A TOPIC</label><br/>
           <ul className="common-list">
             <li><div className="target-form-firstItem">What do you want to talk about?</div></li>
@@ -62,6 +63,7 @@ class TargetForm extends React.Component{
             }
           </ul>
           <input className="btn-save-target" type="submit" value="SAVE TARGET" onClick={this.onTargetSubmit}></input><br/>
+          <img className="smilies-img-sidebar" src={smilies}></img>
         </form>
       </div>
     );

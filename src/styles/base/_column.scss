@@ -1,11 +1,15 @@
 .column{
 	width: 50%;
+	height: 100%;
 	display: inline-block;
+	margin-bottom: 20px;
 	float: left;
 }
 
 .column-right{
 	width: 50%;
+	height: 100%;
+	background-color: #2fbcf7;
+	position:absolute;
 	display: inline-block;
-	float: right;
 }

@@ -6,7 +6,7 @@ const TextInput = (props) => {
   };
 
   return (
-    <input className="custom-input"
+    <input className={props.style || "custom-input"}
     type={props.type}
     placeholder={props.placeholder}
     value={props.value}
@@ -22,6 +22,7 @@ TextInput.propTypes = {
   onChange: PropTypes.func.isRequired,
   placeholder: PropTypes.string,
   type: PropTypes.string,
+  style: PropTypes.string,
   required: PropTypes.string,
   autofocus: PropTypes.string,
   value: PropTypes.oneOfType([
