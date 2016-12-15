@@ -3,9 +3,9 @@ import {Link, browserHistory} from 'react-router';
 import TextInput from '../common/TextInput';
 import * as strings from '../../res/strings/strings-en';
 import validateInput from '../../utils/validations/signup.js';
-import userClient from '../../client/UsersServerClient';
-import targetClient from '../../client/TargetsServerClient';
-import cookie from 'react-cookie';
+// import userClient from '../../client/UsersServerClient';
+// import targetClient from '../../client/TargetsServerClient';
+// import cookie from 'react-cookie';
 
 
 class SignInForm extends React.Component{
@@ -42,16 +42,17 @@ class SignInForm extends React.Component{
         "password":this.state.password
       }
     };
-    userClient.signIn(userJson).then(data => {
-      targetClient.setUserInfo(data.token, data.user_id);
-      this.props.updateSession(this.props.session, "user_id", data.user_id);
-      this.props.updateSession(this.props.session, "user_token", data.token);
-      this.props.updateSession(this.props.session, "isLoggedIn", true);
-      cookie.save('user', userJson, { path: '/' });
-      this.redirect();
-    }).catch(error => {
-      console.log(error);
-    });
+    this.props.signInAction(userJson);
+    // userClient.signIn(userJson).then(data => {
+    //   targetClient.setUserInfo(data.token, data.user_id);
+    //   this.props.updateSession(this.props.session, "user_id", data.user_id);
+    //   this.props.updateSession(this.props.session, "user_token", data.token);
+    //   this.props.updateSession(this.props.session, "isLoggedIn", true);
+    //   cookie.save('user', userJson, { path: '/' });
+    //   this.redirect();
+    // }).catch(error => {
+    //   console.log(error);
+    // });
   }
 
   redirect(){
@@ -85,7 +86,8 @@ class SignInForm extends React.Component{
 
 SignInForm.propTypes = {
   updateSession: PropTypes.func.isRequired,
-  session: PropTypes.object.isRequired
+  session: PropTypes.object.isRequired,
+  signInAction: PropTypes.func.isRequired
 };
 
 export default SignInForm;

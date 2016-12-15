@@ -7,7 +7,7 @@ import * as sessionActions from '../../actions/sessionActions';
 import Header from '../common/Header';
 import SubHeader from '../common/SubHeader';
 import TargetForm from '../targets/TargetForm'
-import cookie from 'react-cookie';
+// import cookie from 'react-cookie';
 
 export const SideBarContainer = (props) => {
 
@@ -17,9 +17,11 @@ export const SideBarContainer = (props) => {
   });
 
   let logOut = () => {
-    props.actions.updateSessionInformation(props.session, "isLoggedIn", false);
-    cookie.remove('user', { path: '/' });
+    props.actions.signOut(props.session.user_token);
     browserHistory.push('/sign-in');
+    // props.actions.updateSessionInformation(props.session, "isLoggedIn", false);
+    // cookie.remove('user', { path: '/' });
+    // browserHistory.push('/sign-in');
   }
 
   if (currentTarget === undefined) {
@@ -41,11 +43,13 @@ export const SideBarContainer = (props) => {
       <Header title = {"CREATE TARGET"} style = "sidebarHeader"></Header>
       <SubHeader title = {"CREATE NEW TARGET"} style = "sidebarSubHeader"></SubHeader>
       <TargetForm
-        updateTargetInfo={props.actions.updateTarget}
-        updateTargetList={props.actions.createTarget}
-        targets = {props.targets}
-        currentTarget={currentTarget}
-        index={index}></TargetForm>
+      updateTargetInfo={props.actions.updateTarget}
+      // updateTargetList={props.actions.createTarget}
+      createTargetAction={props.actions.createTarget}
+      targets = {props.targets}
+      currentTarget={currentTarget}
+      index={index}>
+      </TargetForm>
       <button onClick={logOut} type="button" className="btn btn-danger btn-sign-out">Sign out</button>
     </div>
     );

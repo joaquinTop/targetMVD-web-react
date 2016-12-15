@@ -10,6 +10,10 @@ export default function sessionReducer(state = initialState.session, action){
       newState[action.fieldName] = action.value;
       return newState;
 
+    case types.RESET_SESSION:
+      newState = initialState.session;
+      return newState;
+
     default:
       return state;
   }

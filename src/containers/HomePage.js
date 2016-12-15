@@ -8,12 +8,14 @@ import * as targetActions from '../actions/targetActions';
 import targetClient from '../client/TargetsServerClient';
 
 export const HomePage = (props) => {
+  debugger;
   if (props.session.isLoggedIn === false) {
     browserHistory.push('/sign-in');
     return null;
   }else{
     props.actions.resetTargets();
     targetClient.getMyTargets().then(data => {
+      debugger;
       let targets = data.targets.map(el => {
         return {
           id: el.id,
@@ -26,8 +28,9 @@ export const HomePage = (props) => {
           isActive: true
         };
       });
+      debugger;
       for (let target in targets) {
-        props.actions.createTarget(targets[target]);
+        props.actions.createTargetSuccess(targets[target]);
       }
 
       // TODO: JG: Check for availability MAX 10 TARGETS
