@@ -49,7 +49,7 @@ class SignInForm extends React.Component{
     //   this.props.updateSession(this.props.session, "user_token", data.token);
     //   this.props.updateSession(this.props.session, "isLoggedIn", true);
     //   cookie.save('user', userJson, { path: '/' });
-    //   this.redirect();
+    // this.redirect();
     // }).catch(error => {
     //   console.log(error);
     // });

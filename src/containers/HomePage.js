@@ -9,6 +9,7 @@ import targetClient from '../client/TargetsServerClient';
 
 export const HomePage = (props) => {
   debugger;
+
   if (props.session.isLoggedIn === false) {
     browserHistory.push('/sign-in');
     return null;

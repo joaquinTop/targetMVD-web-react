@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react';
-import {browserHistory} from 'react-router';
+// import {browserHistory} from 'react-router';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as sessionActions from '../actions/sessionActions';
