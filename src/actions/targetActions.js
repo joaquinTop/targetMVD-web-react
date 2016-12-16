@@ -15,6 +15,35 @@ export const createTarget = (target) => {
   };
 };
 
+export function loadTargetsSuccess(targets){
+  return {type:types.LOAD_TARGETS, targets:targets};
+}
+
+export const loadTargets = () => {
+  return dispatch => {
+    return targetClient.getMyTargets().then(data => {
+      dispatch(loadTargetsSuccess(data.targets));
+      // let targets = data.targets.map(el => {
+      //   return {
+      //     id: el.id,
+      //     title: el.title || "",
+      //     lat: el.latitude,
+      //     lng: el.longitude,
+      //     radius: el.radius,
+      //     topic: el.topic,
+      //     isVisible: true,
+      //     isActive: true
+      //   };
+      // });
+      // for (let target in targets) {
+      //   dispatch(createTargetSuccess(targets[target]));
+      // }
+    }).catch(error => {
+      console.log(error);
+    });
+  };
+};
+
 export function updateTarget(index, fieldName, value){
   return {type:types.UPDATE_TARGET, index:index, fieldName:fieldName, value:value};
 }

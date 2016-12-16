@@ -48,6 +48,7 @@ export const HomePage = (props) => {
         }
       );
     }).catch(error => {
+      debugger;
       console.log(error);
     });
 
@@ -75,7 +76,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(targetActions, dispatch)
+    actions:bindActionCreators(targetActions, dispatch)
   };
 }
 

@@ -29,6 +29,7 @@ class TargetClient {
   }
 
   static getMyTargets() {
+    debugger;
     return new Promise((resolve, reject) => {
       instance.get('/targets').then((res=> {
         let data = res.data;

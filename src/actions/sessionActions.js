@@ -14,10 +14,10 @@ export function resetSession(){
 export const signIn = (userJson) => {
   return dispatch => {
     return userClient.signIn(userJson).then(data => {
+      targetClient.setUserInfo(data.token, data.user_id);
       dispatch(updateSessionInformation("user_id", data.user_id));
       dispatch(updateSessionInformation("user_token", data.token));
       dispatch(updateSessionInformation("isLoggedIn", true));
-      targetClient.setUserInfo(data.token, data.user_id);
       cookie.save('user', userJson, { path: '/' });
     }).catch(error => {
       console.log(error);

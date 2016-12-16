@@ -19,6 +19,11 @@ export default function targetReducer(state = initialState.targets, action){
       return newState;
     }
 
+    case types.LOAD_TARGETS:{
+      newState = action.targets;
+      return newState;
+    }
+
     case types.DELETE_TARGET:
       break;
 
