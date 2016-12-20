@@ -2,7 +2,7 @@ import React, {PropTypes} from 'react';
 import Map from '../common/Map';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import * as actions from '../../actions/targetActions';
+import * as newTargetActions from '../../actions/newTargetActions';
 
 export const GoogleMapContainer = (props) => {
   // TODO: JG: center is hardcoded, must use html5 geolocalization to set center
@@ -11,47 +11,33 @@ export const GoogleMapContainer = (props) => {
     lng: -56.185295
   };
 
-  let filtered = props.targets.filter(obj => {return obj.isVisible;});
-  let index = props.targets.length - 1;
-
-  let freeTarget = props.targets.find(el => {
-    return el.isActive === false;
-  });
-
-  if (freeTarget === undefined) {
-    freeTarget = {
-        id: 0,
-        title:"",
-        lat: 0,
-        lng: 0,
-        radius: 200,
-        topic: 0,
-        isVisible: false,
-        isActive: false
-    };
-    index += 1;
+  let markers = props.targets;
+  if (props.newTarget.isVisible) {
+    markers.push(props.newTarget);
   }
   return (
     <div className="map">
-      <Map center={location} markers={filtered} updateTargetInfo={props.actions.updateTarget} newTarget={freeTarget} index={index}/>
+      <Map center={location} markers={markers} updateTargetInfo={props.actions.updateFreeTarget} newTarget={props.newTarget}/>
     </div>
   );
 };
 
 GoogleMapContainer.propTypes = {
   targets: PropTypes.array.isRequired,
+  newTarget: PropTypes.object.isRequired,
   actions: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state) {
   return {
-    targets: state.targets
+    targets: state.targets,
+    newTarget: state.newTarget
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(actions, dispatch)
+    actions: bindActionCreators(newTargetActions, dispatch)
   };
 }
 

@@ -2,7 +2,6 @@ import React, {PropTypes} from 'react';
 import {browserHistory} from 'react-router';
 import TextInput from '../common/TextInput';
 import Topics from '../../res/topics';
-// import targetClient from '../../client/TargetsServerClient';
 
 class TargetForm extends React.Component{
   constructor(props, context){
@@ -14,11 +13,11 @@ class TargetForm extends React.Component{
   }
 
   onFieldChange(fieldName, value) {
-    this.props.updateTargetInfo(this.props.index, fieldName, value);
+    this.props.updateTargetInfo(fieldName, value);
   }
 
   onTopicChange(e) {
-    this.props.updateTargetInfo(this.props.index, "topic", e.target.textContent);
+    this.props.updateTargetInfo("topic", e.target.textContent);
   }
 
   onTargetSubmit(e){
@@ -33,15 +32,6 @@ class TargetForm extends React.Component{
     };
     this.props.createTargetAction(targetJson);
     this.redirect();
-    // targetClient.createTarget(targetJson).then(data => {
-    //   console.log(data.target);
-    //   let ok = confirm("TARGET CREATED SUCCESSFULLY");
-    //   if (ok) {
-    //       this.redirect();
-    //   }
-    // }).catch(error => {
-    //   console.log(error);
-    // });
   }
 
   redirect(){
@@ -74,9 +64,7 @@ class TargetForm extends React.Component{
 TargetForm.propTypes = {
   updateTargetInfo:PropTypes.func.isRequired,
   createTargetAction:PropTypes.func.isRequired,
-  targets:PropTypes.array.isRequired,
-  currentTarget:PropTypes.object.isRequired,
-  index: PropTypes.number.isRequired
+  currentTarget:PropTypes.object.isRequired
 };
 
 export default TargetForm;

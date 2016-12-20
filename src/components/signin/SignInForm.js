@@ -3,10 +3,6 @@ import {Link, browserHistory} from 'react-router';
 import TextInput from '../common/TextInput';
 import * as strings from '../../res/strings/strings-en';
 import validateInput from '../../utils/validations/signup.js';
-// import userClient from '../../client/UsersServerClient';
-// import targetClient from '../../client/TargetsServerClient';
-// import cookie from 'react-cookie';
-
 
 class SignInForm extends React.Component{
   constructor(props, context){
@@ -43,16 +39,6 @@ class SignInForm extends React.Component{
       }
     };
     this.props.signInAction(userJson);
-    // userClient.signIn(userJson).then(data => {
-    //   targetClient.setUserInfo(data.token, data.user_id);
-    //   this.props.updateSession(this.props.session, "user_id", data.user_id);
-    //   this.props.updateSession(this.props.session, "user_token", data.token);
-    //   this.props.updateSession(this.props.session, "isLoggedIn", true);
-    //   cookie.save('user', userJson, { path: '/' });
-    // this.redirect();
-    // }).catch(error => {
-    //   console.log(error);
-    // });
   }
 
   redirect(){

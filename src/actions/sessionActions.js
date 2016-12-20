@@ -1,6 +1,7 @@
 import * as types from './actionTypes';
 import userClient from '../client/UsersServerClient';
 import targetClient from '../client/TargetsServerClient';
+import {resetTargets} from './targetActions';
 import cookie from 'react-cookie';
 
 export function updateSessionInformation(fieldName, value){
@@ -28,6 +29,7 @@ export const signIn = (userJson) => {
 export const signOut = (userToken) => {
   return dispatch => {
     dispatch(resetSession());
+    dispatch(resetTargets());
     console.log(userToken);
     cookie.remove('user', { path: '/' });
     // NOTE: maybe should reset info assosiated to last user in targetClient
@@ -35,7 +37,6 @@ export const signOut = (userToken) => {
     //   console.log(data);
     //   debugger;
     //   dispatch(resetSession);
-    //   // NOTE: maybe should reset info assosiated to last user in targetClient
     //   cookie.remove('user', { path: '/' });
     // }).catch(error => {
     //   console.log(error);

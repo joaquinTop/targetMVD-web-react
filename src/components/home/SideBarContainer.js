@@ -3,39 +3,17 @@ import {browserHistory} from 'react-router';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as targetActions from '../../actions/targetActions';
+import * as newTargetActions from '../../actions/newTargetActions';
 import * as sessionActions from '../../actions/sessionActions';
 import Header from '../common/Header';
 import SubHeader from '../common/SubHeader';
 import TargetForm from '../targets/TargetForm'
-// import cookie from 'react-cookie';
 
 export const SideBarContainer = (props) => {
-
-  let index = props.targets.length - 1;
-  let currentTarget = props.targets.find(el => {
-    return el.isActive === false;
-  });
 
   let logOut = () => {
     props.actions.signOut(props.session.user_token);
     browserHistory.push('/sign-in');
-    // props.actions.updateSessionInformation(props.session, "isLoggedIn", false);
-    // cookie.remove('user', { path: '/' });
-    // browserHistory.push('/sign-in');
-  }
-
-  if (currentTarget === undefined) {
-    currentTarget = {
-        id: 0,
-        title:"",
-        lat: 0,
-        lng: 0,
-        radius: 200,
-        topic: 0,
-        isVisible: false,
-        isActive: false
-    };
-    index += 1;
   }
 
   return (
@@ -43,12 +21,14 @@ export const SideBarContainer = (props) => {
       <Header title = {"CREATE TARGET"} style = "sidebarHeader"></Header>
       <SubHeader title = {"CREATE NEW TARGET"} style = "sidebarSubHeader"></SubHeader>
       <TargetForm
-      updateTargetInfo={props.actions.updateTarget}
+      updateTargetInfo={props.actions.updateFreeTarget}
+      currentTarget={props.newTarget}
+      resetFreeTarget={props.actions.resetFreeTarget}
       // updateTargetList={props.actions.createTarget}
-      createTargetAction={props.actions.createTarget}
-      targets = {props.targets}
-      currentTarget={currentTarget}
-      index={index}>
+      createTargetAction={props.actions.createTarget}>
+        {/*  targets = {props.targets}
+          currentTarget={currentTarget}
+        index={index}> */}
       </TargetForm>
       <button onClick={logOut} type="button" className="btn btn-danger btn-sign-out">Sign out</button>
     </div>
@@ -57,20 +37,21 @@ export const SideBarContainer = (props) => {
 
 SideBarContainer.propTypes = {
   actions: PropTypes.object.isRequired,
+  newTarget: PropTypes.object.isRequired,
   session: PropTypes.object.isRequired
 };
 
 
 function mapStateToProps(state) {
   return {
-    targets: state.targets,
+    newTarget: state.newTarget,
     session: state.session
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(Object.assign({}, targetActions, sessionActions), dispatch)
+    actions: bindActionCreators(Object.assign({}, targetActions, newTargetActions, sessionActions), dispatch)
   };
 }
 

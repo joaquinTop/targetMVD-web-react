@@ -6,7 +6,16 @@ export default function targetReducer(state = initialState.targets, action){
   switch(action.type){
     case types.CREATE_TARGET:
       newState = [...state,
-        Object.assign({}, action.target)
+        Object.assign({}, {
+          id: action.target.id,
+          title: action.target.title || "",
+          lat: action.target.latitude,
+          lng: action.target.longitude,
+          radius: action.target.radius,
+          topic: action.target.topic,
+          isVisible: true,
+          isActive: true
+        })
       ];
       return newState;
 
@@ -21,7 +30,18 @@ export default function targetReducer(state = initialState.targets, action){
 
     case types.LOAD_TARGETS:{
       newState = action.targets;
-      return newState;
+      return newState.map(el => {
+        return {
+          id: el.id,
+          title: el.title || "",
+          lat: el.latitude,
+          lng: el.longitude,
+          radius: el.radius,
+          topic: el.topic,
+          isVisible: true,
+          isActive: true
+        };
+      });
     }
 
     case types.DELETE_TARGET:

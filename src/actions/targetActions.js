@@ -23,21 +23,6 @@ export const loadTargets = () => {
   return dispatch => {
     return targetClient.getMyTargets().then(data => {
       dispatch(loadTargetsSuccess(data.targets));
-      // let targets = data.targets.map(el => {
-      //   return {
-      //     id: el.id,
-      //     title: el.title || "",
-      //     lat: el.latitude,
-      //     lng: el.longitude,
-      //     radius: el.radius,
-      //     topic: el.topic,
-      //     isVisible: true,
-      //     isActive: true
-      //   };
-      // });
-      // for (let target in targets) {
-      //   dispatch(createTargetSuccess(targets[target]));
-      // }
     }).catch(error => {
       console.log(error);
     });

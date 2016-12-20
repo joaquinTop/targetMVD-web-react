@@ -5,52 +5,17 @@ import SideBar from '../components/home/SideBarContainer';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as targetActions from '../actions/targetActions';
-import targetClient from '../client/TargetsServerClient';
+import * as newTargetActions from '../actions/newTargetActions';
 
 export const HomePage = (props) => {
-  debugger;
 
   if (props.session.isLoggedIn === false) {
     browserHistory.push('/sign-in');
     return null;
   }else{
-    props.actions.resetTargets();
-    targetClient.getMyTargets().then(data => {
-      debugger;
-      let targets = data.targets.map(el => {
-        return {
-          id: el.id,
-          title: el.title || "",
-          lat: el.latitude,
-          lng: el.longitude,
-          radius: el.radius,
-          topic: el.topic,
-          isVisible: true,
-          isActive: true
-        };
-      });
-      debugger;
-      for (let target in targets) {
-        props.actions.createTargetSuccess(targets[target]);
-      }
 
-      // TODO: JG: Check for availability MAX 10 TARGETS
-      props.actions.createTarget(
-        {
-            id: 0,
-            title:"",
-            lat: 0,
-            lng: 0,
-            radius: 200,
-            topic: 0,
-            isVisible: false,
-            isActive: false
-        }
-      );
-    }).catch(error => {
-      debugger;
-      console.log(error);
-    });
+    props.actions.resetFreeTarget();
+    props.actions.loadTargets();
 
     return (
       <div className='outer'>
@@ -76,7 +41,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions:bindActionCreators(targetActions, dispatch)
+    actions:bindActionCreators(Object.assign({}, targetActions, newTargetActions), dispatch)
   };
 }
 

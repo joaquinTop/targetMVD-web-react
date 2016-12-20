@@ -11,9 +11,9 @@ class Map extends React.Component {
   onMapClick(e) {
     let lat = parseFloat(e.latLng.lat().toFixed(6));
     let lng = parseFloat(e.latLng.lng().toFixed(6));
-    this.props.updateTargetInfo(this.props.index, "lat", lat);
-    this.props.updateTargetInfo(this.props.index, "lng", lng);
-    this.props.updateTargetInfo(this.props.index, "isVisible", true);
+    this.props.updateTargetInfo("lat", lat);
+    this.props.updateTargetInfo("lng", lng);
+    this.props.updateTargetInfo("isVisible", true);
   }
 
   render() {
@@ -47,9 +47,7 @@ class Map extends React.Component {
 Map.propTypes = {
   center: PropTypes.object.isRequired,
   markers: PropTypes.array.isRequired,
-  updateTargetInfo: PropTypes.func.isRequired,
-  newTarget: PropTypes.object.isRequired,
-  index: PropTypes.number.isRequired
+  updateTargetInfo: PropTypes.func.isRequired
 };
 
 export default Map;
