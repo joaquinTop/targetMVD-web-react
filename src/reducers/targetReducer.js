@@ -6,17 +6,8 @@ export default function targetReducer(state = initialState.targets, action){
   switch(action.type){
     case types.CREATE_TARGET:
       newState = [...state,
-        Object.assign({}, {
-          id: action.target.id,
-          title: action.target.title || "",
-          lat: action.target.latitude,
-          lng: action.target.longitude,
-          radius: action.target.radius,
-          topic: action.target.topic,
-          isVisible: true,
-          isActive: true
-        })
-      ];
+        Object.assign({}, new target(action.target.id, action.target.title, action.target.latitude,
+          action.target.longitude, action.target.radius, action.target.topic, true, true))];
       return newState;
 
     case types.UPDATE_TARGET:{
@@ -31,16 +22,7 @@ export default function targetReducer(state = initialState.targets, action){
     case types.LOAD_TARGETS:{
       newState = action.targets;
       return newState.map(el => {
-        return {
-          id: el.id,
-          title: el.title || "",
-          lat: el.latitude,
-          lng: el.longitude,
-          radius: el.radius,
-          topic: el.topic,
-          isVisible: true,
-          isActive: true
-        };
+        return new target(el.id, el.title, el.latitude, el.longitude, el.radius, el.topic, true, true);
       });
     }
 
@@ -54,4 +36,15 @@ export default function targetReducer(state = initialState.targets, action){
       return state;
 
   }
+}
+
+function target(id, title, latitude, longitude, radius, topic, isVisible, isActive){
+  this.id = id;
+  this.title = title || "";
+  this.lat = latitude;
+  this.lng = longitude;
+  this.radius = radius;
+  this.topic = topic;
+  this.isVisible = isVisible;
+  this.isActive = isActive;
 }

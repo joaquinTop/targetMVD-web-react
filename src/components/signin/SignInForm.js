@@ -25,7 +25,7 @@ class SignInForm extends React.Component{
   isValid(data){
     const {isValid} = validateInput(data);
     if (!isValid) {
-      // display the errors
+      // TODO: display the errors
     }
     return isValid;
   }
@@ -33,9 +33,9 @@ class SignInForm extends React.Component{
   signIn(e){
     e.preventDefault();
     const userJson = {
-      "user":{
-        "email":this.state.email,
-        "password":this.state.password
+      user: {
+        email: this.state.email,
+        password: this.state.password
       }
     };
     this.props.signInAction(userJson);

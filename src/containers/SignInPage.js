@@ -12,7 +12,7 @@ export const SignInPage = (props) => {
   if (user) {
     props.actions.signIn(user);
   }
-  if (props.session.isLoggedIn == true) {
+  if (props.session.isLoggedIn) {
     browserHistory.push('/home');
     return null;
   }

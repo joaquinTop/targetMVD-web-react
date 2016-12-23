@@ -5,7 +5,6 @@ let instance;
 class TargetClient {
 
   static setUserInfo(userToken, userIdentifier){
-    debugger;
     instance = axios.create({
       baseURL: 'http://localhost:3001/api/v1/users/' + userIdentifier,
       // timeout can be overriden in those cases where the answer might take a while (i.e. images)
@@ -18,7 +17,6 @@ class TargetClient {
     return new Promise((resolve, reject)=> {
       instance.post('/targets', target).then((res=> {
         let data = res.data;
-        console.log(data);
         resolve(data);
       })).catch(error => {
         console.log(error);
@@ -30,9 +28,7 @@ class TargetClient {
   static getMyTargets() {
     return new Promise((resolve, reject) => {
       instance.get('/targets').then((res=> {
-        debugger;
         let data = res.data;
-        console.log(data);
         resolve(data);
       })).catch(error => {
         console.log(error);

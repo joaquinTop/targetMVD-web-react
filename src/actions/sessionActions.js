@@ -5,11 +5,11 @@ import {resetTargets} from './targetActions';
 import cookie from 'react-cookie';
 
 export function updateSessionInformation(fieldName, value){
-  return {type:types.UPDATE_SESSION, fieldName:fieldName, value:value};
+  return {type: types.UPDATE_SESSION, fieldName, value};
 }
 
 export function resetSession(){
-  return {type:types.RESET_SESSION};
+  return {type: types.RESET_SESSION};
 }
 
 export const signIn = (userJson) => {
@@ -26,16 +26,13 @@ export const signIn = (userJson) => {
   };
 };
 
-export const signOut = (userToken) => {
+export const signOut = () => {
   return dispatch => {
     dispatch(resetSession());
     dispatch(resetTargets());
-    console.log(userToken);
     cookie.remove('user', { path: '/' });
     // NOTE: maybe should reset info assosiated to last user in targetClient
     // return userClient.signOut(userToken).then(data => {
-    //   console.log(data);
-    //   debugger;
     //   dispatch(resetSession);
     //   cookie.remove('user', { path: '/' });
     // }).catch(error => {

@@ -12,7 +12,7 @@ import TargetForm from '../targets/TargetForm'
 export const SideBarContainer = (props) => {
 
   let logOut = () => {
-    props.actions.signOut(props.session.user_token);
+    props.actions.signOut();
     browserHistory.push('/sign-in');
   }
 
@@ -24,11 +24,7 @@ export const SideBarContainer = (props) => {
       updateTargetInfo={props.actions.updateFreeTarget}
       currentTarget={props.newTarget}
       resetFreeTarget={props.actions.resetFreeTarget}
-      // updateTargetList={props.actions.createTarget}
       createTargetAction={props.actions.createTarget}>
-        {/*  targets = {props.targets}
-          currentTarget={currentTarget}
-        index={index}> */}
       </TargetForm>
       <button onClick={logOut} type="button" className="btn btn-danger btn-sign-out">Sign out</button>
     </div>

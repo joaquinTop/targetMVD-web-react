@@ -39,19 +39,19 @@ class SignUpForm extends React.Component{
     if (!isValid) {
       // display the errors
     }
-    return isValid;
+    return true;
   }
 
   onSubmitClick(e){
     e.preventDefault();
     let genderId = this.state.gender === 'male' ? 0:1;
     let userJson = {
-      "user":{
-        "email":this.stateemail,
-        "password":this.state.password,
-        "password_confirmation":this.state.passwordConfirmation,
-        "name":this.state.name,
-        "gender":genderId}
+      user:{
+        email:this.state.email,
+        password:this.state.password,
+        password_confirmation:this.state.passwordConfirmation,
+        name:this.state.name,
+        gender:genderId}
     };
     if (this.isValid(userJson.user)) {
       userClient.signUp(userJson).then(data => {

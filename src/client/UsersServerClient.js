@@ -12,7 +12,6 @@ class UserClient {
     return new Promise((resolve, reject)=> {
         instance.post('/users', user).then((res=> {
           let data = res.data;
-          console.log(data);
           resolve(data);
         })).catch(error => {
           console.log(error);
@@ -25,7 +24,6 @@ class UserClient {
     return new Promise((resolve, reject)=> {
         instance.post('/users/sign_in', user).then((res=> {
           let data = res.data;
-          console.log(data);
           resolve(data);
         })).catch(error => {
           console.log(error);
@@ -46,7 +44,6 @@ class UserClient {
     return new Promise((resolve, reject) => {
       instance.delete('users/sign_out', null).then((res=> {
         let data = res.data;
-        console.log(data);
         resolve(data);
       })).catch(error => {
         console.log(error);

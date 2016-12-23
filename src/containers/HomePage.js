@@ -25,7 +25,6 @@ export const HomePage = (props) => {
       </div>
     );
   }
-
 };
 
 HomePage.propTypes = {

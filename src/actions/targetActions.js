@@ -2,7 +2,7 @@ import * as types from './actionTypes';
 import targetClient from '../client/TargetsServerClient';
 
 export function createTargetSuccess(target){
-  return {type:types.CREATE_TARGET, target:target};
+  return {type: types.CREATE_TARGET, target};
 }
 
 export const createTarget = (target) => {
@@ -16,7 +16,7 @@ export const createTarget = (target) => {
 };
 
 export function loadTargetsSuccess(targets){
-  return {type:types.LOAD_TARGETS, targets:targets};
+  return {type: types.LOAD_TARGETS, targets};
 }
 
 export const loadTargets = () => {
@@ -30,13 +30,13 @@ export const loadTargets = () => {
 };
 
 export function updateTarget(index, fieldName, value){
-  return {type:types.UPDATE_TARGET, index:index, fieldName:fieldName, value:value};
+  return {type: types.UPDATE_TARGET, index, fieldName, value};
 }
 
 export function resetTargets(){
-  return {type:types.RESET_TARGETS};
+  return {type: types.RESET_TARGETS};
 }
 
 export function deleteTarget(target){
-  return {type:types.DELETE_TARGET, target};
+  return {type: types.DELETE_TARGET, target};
 }
