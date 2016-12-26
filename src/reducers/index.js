@@ -1,13 +1,13 @@
 //root reducer
 import {combineReducers} from 'redux';
-import user from './userReducer';
 import targets from './targetReducer';
+import newTarget from './newTargetReducer';
 import session from './sessionReducer';
 
 const rootReducer = combineReducers({
-  user,
   targets,
-  session
+  session,
+  newTarget
 });
 
 export default rootReducer;

@@ -6,8 +6,8 @@ export default function targetReducer(state = initialState.targets, action){
   switch(action.type){
     case types.CREATE_TARGET:
       newState = [...state,
-        Object.assign({}, action.target)
-      ];
+        Object.assign({}, new target(action.target.id, action.target.title, action.target.latitude,
+          action.target.longitude, action.target.radius, action.target.topic, true, true))];
       return newState;
 
     case types.UPDATE_TARGET:{
@@ -17,6 +17,13 @@ export default function targetReducer(state = initialState.targets, action){
       newState = state.slice(0,index).concat(state.slice(index+1));
       newState.splice(index, 0, targetToUpdate);
       return newState;
+    }
+
+    case types.LOAD_TARGETS:{
+      newState = action.targets;
+      return newState.map(el => {
+        return new target(el.id, el.title, el.latitude, el.longitude, el.radius, el.topic, true, true);
+      });
     }
 
     case types.DELETE_TARGET:
@@ -29,4 +36,15 @@ export default function targetReducer(state = initialState.targets, action){
       return state;
 
   }
+}
+
+function target(id, title, latitude, longitude, radius, topic, isVisible, isActive){
+  this.id = id;
+  this.title = title || "";
+  this.lat = latitude;
+  this.lng = longitude;
+  this.radius = radius;
+  this.topic = topic;
+  this.isVisible = isVisible;
+  this.isActive = isActive;
 }

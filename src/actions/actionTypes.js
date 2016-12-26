@@ -1,12 +1,13 @@
 //session
 export const UPDATE_SESSION = 'UPDATE_SESSION';
-
-// user
-export const UPDATE_USER = 'UPDATE_USER';
-export const RESET_USER = 'RESET_USER';
+export const RESET_SESSION = 'RESET_SESSION';
+export const SIGN_IN_SUCCESS = 'SIGN_IN_SUCCESS';
 
 // targets
 export const CREATE_TARGET = 'CREATE_TARGET';
+export const LOAD_TARGETS = 'LOAD_TARGETS';
 export const UPDATE_TARGET = 'UPDATE_TARGET';
+export const UPDATE_FREE_TARGET = 'UPDATE_FREE_TARGET';
 export const DELETE_TARGET = 'DELETE_TARGET';
 export const RESET_TARGETS = 'RESET_TARGETS';
+export const RESET_FREE_TARGET = 'RESET_FREE_TARGET';

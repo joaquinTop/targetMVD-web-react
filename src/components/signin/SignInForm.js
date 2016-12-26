@@ -3,10 +3,6 @@ import {Link, browserHistory} from 'react-router';
 import TextInput from '../common/TextInput';
 import * as strings from '../../res/strings/strings-en';
 import validateInput from '../../utils/validations/signup.js';
-import userClient from '../../client/UsersServerClient';
-import targetClient from '../../client/TargetsServerClient';
-import cookie from 'react-cookie';
-
 
 class SignInForm extends React.Component{
   constructor(props, context){
@@ -14,16 +10,22 @@ class SignInForm extends React.Component{
 
     this.onFieldChange = this.onFieldChange.bind(this);
     this.signIn = this.signIn.bind(this);
+    this.state = {
+      name: '',
+      email: ''
+    };
   }
 
   onFieldChange(fieldName, value) {
-    this.props.updateUserInfo(this.props.user, fieldName, value);
+    let newState = Object.assign({}, this.state);
+    newState[fieldName] = value;
+    this.setState(newState);
   }
 
   isValid(data){
     const {isValid} = validateInput(data);
     if (!isValid) {
-      // display the errors
+      // TODO: display the errors
     }
     return isValid;
   }
@@ -31,21 +33,12 @@ class SignInForm extends React.Component{
   signIn(e){
     e.preventDefault();
     const userJson = {
-      "user":{
-        "email":this.props.user.email,
-        "password":this.props.user.password
+      user: {
+        email: this.state.email,
+        password: this.state.password
       }
     };
-    userClient.signIn(userJson).then(data => {
-      targetClient.setUserInfo(data.token, data.user_id);
-      this.props.updateSession(this.props.session, "user_id", data.user_id);
-      this.props.updateSession(this.props.session, "user_token", data.token);
-      this.props.updateSession(this.props.session, "isLoggedIn", true);
-      cookie.save('user', userJson, { path: '/' });
-      this.redirect();
-    }).catch(error => {
-      console.log(error);
-    });
+    this.props.signInAction(userJson);
   }
 
   redirect(){
@@ -53,7 +46,7 @@ class SignInForm extends React.Component{
   }
 
   render(){
-    const {user} = this.props;
+    const user = this.state;
 
     return (
       <div className="column">
@@ -78,10 +71,9 @@ class SignInForm extends React.Component{
 }
 
 SignInForm.propTypes = {
-  updateUserInfo: PropTypes.func.isRequired,
-  user: PropTypes.object.isRequired,
   updateSession: PropTypes.func.isRequired,
-  session: PropTypes.object.isRequired
+  session: PropTypes.object.isRequired,
+  signInAction: PropTypes.func.isRequired
 };
 
 export default SignInForm;
