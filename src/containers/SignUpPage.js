@@ -1,13 +1,14 @@
 import React from 'react';
-import SignUpForm from '../components/signup/SignUpForm';
+import SignUpTest from '../components/signup/SignUpTest';
 import LandingRightSide from '../components/common/LandingRightSide';
 
 export const SignUpPage = () => {
   return (
     <div>
-      <SignUpForm/>
+      <SignUpTest/>
       <LandingRightSide/>
     </div>
+
   );
 };
 

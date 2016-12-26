@@ -1,7 +1,6 @@
 .rectangle {
-	width: 683px;
-	height: 768px;
-	margin: 0 auto;
-	background-color: #2fbcf7;
-	content: url('../res/images/right.svg');
+	max-width: 100%;
+	max-height: 100%;
+	display:block;
+	margin:auto;
 }

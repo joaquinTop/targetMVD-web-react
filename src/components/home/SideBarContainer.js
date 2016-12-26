@@ -9,7 +9,6 @@ import Header from '../common/Header';
 import SubHeader from '../common/SubHeader';
 import TargetForm from '../targets/TargetForm'
 import targetIcon from '../../res/images/png/targetIcon.png';
-import smilies from '../../res/images/png/smilies.png';
 
 export const SideBarContainer = (props) => {
 
