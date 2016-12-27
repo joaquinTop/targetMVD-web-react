@@ -6,6 +6,7 @@ import * as sessionActions from '../actions/sessionActions';
 import SignInForm from '../components/signin/SignInForm';
 import LandingRightSide from '../components/common/LandingRightSide';
 import { getUser } from '../utils/sessionHelper'
+import MediaQuery from 'react-responsive';
 
 export const SignInPage = (props) => {
   const user = getUser();
@@ -21,11 +22,12 @@ export const SignInPage = (props) => {
 
   return (
     <div>
-      <SignInForm
-      updateSession={props.actions.updateSessionInformation}
-      session={props.session}
-      signInAction={props.actions.signIn}
-      signInWithFBAction={props.actions.signInWithFB}/>
+      <MediaQuery query="(min-width: 1224px)">
+        <SignInForm signInAction={props.actions.signIn} style="column-half"/>
+      </MediaQuery>
+      <MediaQuery query="(max-width: 1224px)">
+        <SignInForm signInAction={props.actions.signIn} style="none"/>
+      </MediaQuery>
       <LandingRightSide/>
     </div>
   );

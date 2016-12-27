@@ -65,7 +65,7 @@ class SignInForm extends React.Component{
     const user = this.state;
 
     return (
-      <div className="column">
+      <div className={this.props.style}>
         <CustomAlert/>
         <div className="form">
           <img className="smilies-img" src={smilies}></img><br/>
@@ -104,6 +104,7 @@ SignInForm.propTypes = {
   session: PropTypes.object.isRequired,
   signInAction: PropTypes.func.isRequired,
   signInWithFBAction: PropTypes.func.isRequired
+  style: PropTypes.object.isRequired
 };
 
 export default SignInForm;

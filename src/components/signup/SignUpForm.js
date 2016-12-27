@@ -1,8 +1,7 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import {Link, browserHistory} from 'react-router';
 import TextInput from '../common/TextInput';
 import validateInput from '../../utils/validations/signup.js';
-import userClient from '../../client/UsersServerClient';
 
 class SignUpForm extends React.Component{
   constructor(props, context){
@@ -53,14 +52,7 @@ class SignUpForm extends React.Component{
         name:this.state.name,
         gender:genderId}
     };
-    if (this.isValid(userJson.user)) {
-      userClient.signUp(userJson).then(data => {
-        console.log(data.email);
-        this.redirect();
-      }).catch(error => {
-        console.log(error);
-      });
-    }
+    this.props.signUpAction(userJson);
   }
 
   redirect(){
@@ -71,7 +63,7 @@ class SignUpForm extends React.Component{
     const user = this.state;
 
     return (
-      <div className="column">
+      <div className={this.props.style}>
         <div className="form">
           <h2 className="sign-up-title">SIGN UP</h2>
           <form>
@@ -102,5 +94,10 @@ class SignUpForm extends React.Component{
     );
   }
 }
+
+SignUpForm.propTypes = {
+  signUpAction: PropTypes.func.isRequired,
+  style: PropTypes.object.isRequired
+};
 
 export default SignUpForm;
