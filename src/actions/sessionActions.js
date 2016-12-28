@@ -3,6 +3,7 @@ import userClient from '../client/UsersServerClient';
 import targetClient from '../client/TargetsServerClient';
 import { resetTargets } from './targetActions';
 import { setUser, removeUser } from '../utils/sessionHelper'
+import { createAlert } from './alertActions';
 
 export function updateSessionInformation(fieldName, value){
   return {type: types.UPDATE_SESSION, fieldName, value};
@@ -37,6 +38,7 @@ export const signInWithFB = (accessToken) => {
     return userClient.signInWithFB(accessToken).then(data => {
       dispatch(configureSession(data));
     }).catch(error => {
+      dispatch(createAlert("SignInPage", error, "error"));
       console.log(error);
     });
   };

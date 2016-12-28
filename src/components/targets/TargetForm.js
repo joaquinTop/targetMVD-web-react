@@ -2,7 +2,6 @@ import React, {PropTypes} from 'react';
 import {browserHistory} from 'react-router';
 import TextInput from '../common/TextInput';
 import Topics from '../../res/topics';
-import CustomAlert from '../../utils/uiHelper/CustomAlert';
 import smilies from '../../res/images/png/smilies.png';
 import Dropdown from 'react-dropdown'
 
@@ -43,16 +42,11 @@ class TargetForm extends React.Component{
     browserHistory.push('/home');
   }
 
-  showAlert(text, type){
-    CustomAlert.showAlert(text, type);
-  }
-
   render(){
     const defaultOption = this.props.currentTarget.topic;
     const placeholder = (this.props.currentTarget.topic !== '' ? this.props.currentTarget.topic:"What do you want to talk about?");
     return (
       <div className="target-form-container">
-        <CustomAlert/>
         <form>
           <label className="target-area-field" htmlFor="areaLength">SPECIFY AREA LENGTH</label><br/>
           <TextInput id="areaLength" onChange={this.onFieldChange} style="custom-target-input" name="radius" areaLength={"number"} value={this.props.currentTarget.radius} required={"true"} autofocus={"true"}></TextInput><br/>

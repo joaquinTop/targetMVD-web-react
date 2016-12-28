@@ -5,6 +5,8 @@ import {bindActionCreators} from 'redux';
 import * as targetActions from '../../actions/targetActions';
 import * as newTargetActions from '../../actions/newTargetActions';
 import * as sessionActions from '../../actions/sessionActions';
+import * as alertActions from '../../actions/alertActions';
+import CustomAlert from '../../utils/uiHelper/CustomAlert';
 import Header from '../common/Header';
 import SubHeader from '../common/SubHeader';
 import TargetForm from '../targets/TargetForm'
@@ -22,8 +24,14 @@ export const SideBarContainer = (props) => {
     formEnabled = false;
   }
 
+  if (props.alert.goal === "SideBarContainer") {
+    CustomAlert.showAlert(props.alert.text, props.alert.alertType);
+    props.actions.deleteAlert();
+  }
+
   return (
     <div className="sidebar">
+      <CustomAlert/>
       <Header title = {"CREATE TARGET"} style = "sidebarHeader"></Header>
       <img className="target-icon" src={targetIcon}></img><br/>
       <SubHeader title = {"CREATE NEW TARGET"}></SubHeader>
@@ -43,19 +51,21 @@ export const SideBarContainer = (props) => {
 SideBarContainer.propTypes = {
   actions: PropTypes.object.isRequired,
   newTarget: PropTypes.object.isRequired,
-  session: PropTypes.object.isRequired
+  session: PropTypes.object.isRequired,
+  alert: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state) {
   return {
     newTarget: state.newTarget,
-    session: state.session
+    session: state.session,
+    alert: state.alert
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(Object.assign({}, targetActions, newTargetActions, sessionActions), dispatch)
+    actions: bindActionCreators(Object.assign({}, targetActions, newTargetActions, sessionActions, alertActions), dispatch)
   };
 }
 

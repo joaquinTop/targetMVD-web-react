@@ -51,13 +51,6 @@ class UserClient {
   }
 
   static signOut(token) {
-    // axios.delete('http://localhost:3001/api/v1/users/sign_out', {
-    //   headers: {
-    //   'uid': uid,
-    //   'Content-Type': 'application/json'
-    //   }
-    // });
-
     instance.defaults.headers['X-USER-TOKEN'] = token;
     return new Promise((resolve, reject) => {
       instance.delete('users/sign_out', null).then((res => {

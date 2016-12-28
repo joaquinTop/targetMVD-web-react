@@ -15,5 +15,10 @@ export default {
     user_token:'',
     isLoggedIn:false,
     currentPage:'SignUpPage'
+  },
+  alert:{
+    goal:"",
+    text:"",
+    alertType:""
   }
 };
