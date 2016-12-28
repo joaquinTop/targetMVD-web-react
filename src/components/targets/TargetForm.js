@@ -4,6 +4,7 @@ import TextInput from '../common/TextInput';
 import Topics from '../../res/topics';
 import CustomAlert from '../../utils/uiHelper/CustomAlert';
 import smilies from '../../res/images/png/smilies.png';
+import Dropdown from 'react-dropdown'
 
 class TargetForm extends React.Component{
   constructor(props, context){
@@ -18,8 +19,9 @@ class TargetForm extends React.Component{
     this.props.updateTargetInfo(fieldName, value);
   }
 
-  onTopicChange(e) {
-    this.props.updateTargetInfo("topic", e.target.textContent);
+  onTopicChange(option) {
+    console.log('You selected ', option.label);
+    this.props.updateTargetInfo("topic", option.label);
   }
 
   onTargetSubmit(e){
@@ -29,7 +31,7 @@ class TargetForm extends React.Component{
         "lat": this.props.currentTarget.lat,
         "lng":  this.props.currentTarget.lng,
         "radius": this.props.currentTarget.radius,
-        "topic": this.props.currentTarget.topic
+        "topic": this.props.currentTarget.topic.toLowerCase()
       }
     };
 
@@ -46,6 +48,8 @@ class TargetForm extends React.Component{
   }
 
   render(){
+    const defaultOption = this.props.currentTarget.topic;
+    const placeholder = (this.props.currentTarget.topic !== '' ? this.props.currentTarget.topic:"What do you want to talk about?");
     return (
       <div className="target-form-container">
         <CustomAlert/>
@@ -55,13 +59,7 @@ class TargetForm extends React.Component{
           <label className="target-form-field" htmlFor="targetTitle">TARGET TITLE</label><br/>
           <TextInput id="targetTitle" onChange={this.onFieldChange} style="custom-target-input" name="title" type={"text"} value={this.props.currentTarget.title} required={"true"}></TextInput><br/>
           <label className="target-form-field">SELECT A TOPIC</label><br/>
-          <ul className="common-list">
-            <li><div className="target-form-firstItem">What do you want to talk about?</div></li>
-            {Topics.map((option) =>{
-              return <li className="clickableListItem" onClick={this.onTopicChange}><div className="target-form-listItem"><a>{option}</a></div></li>;
-            })
-            }
-          </ul>
+          <Dropdown options={Topics} onChange={this.onTopicChange} value={defaultOption} placeholder={placeholder} />
           <input className="btn-save-target" type="submit" value="SAVE TARGET" onClick={this.onTargetSubmit}></input><br/>
           <img className="smilies-img-sidebar" src={smilies}></img>
         </form>

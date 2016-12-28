@@ -41,6 +41,7 @@
     "react-addons-update": "^15.4.1",
     "react-alert": "1.0.14",
     "react-dom": "15.3.2",
+    "react-dropdown": "1.2.0",
     "react-google-maps": "^4.11.0",
     "react-redux": "4.4.5",
     "react-responsive": "1.2.5",

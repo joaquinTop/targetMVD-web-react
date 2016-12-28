@@ -46,7 +46,6 @@ SideBarContainer.propTypes = {
   session: PropTypes.object.isRequired
 };
 
-
 function mapStateToProps(state) {
   return {
     newTarget: state.newTarget,

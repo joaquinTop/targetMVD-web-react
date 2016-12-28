@@ -1,0 +1,41 @@
+.Dropdown-root {
+  position: relative;
+}
+
+.Dropdown-control {
+  width: 257px;
+  height: 39px;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 39px;
+  display: inline-block;
+  border: solid 0.5px #000000;
+  transition: all 200ms ease;
+}
+
+.Dropdown-control:hover {
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06);
+}
+
+.Dropdown-option {
+  width: 257px;
+  height: 30px;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 30px;
+  display: inline-block;
+  border-right: solid 0.5px #000000;
+  border-left: solid 0.5px #000000;
+  border-bottom: solid 0.5px #000000;
+}
+
+.Dropdown-option:hover {
+  background-color: #f2f9fc;
+  color: #333;
+  cursor: pointer;
+}
+
+.Dropdown-option.is-selected {
+  background-color: #f2f9fc;
+  color: #333;
+}

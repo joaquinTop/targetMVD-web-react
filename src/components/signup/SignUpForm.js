@@ -97,7 +97,7 @@ class SignUpForm extends React.Component{
 
 SignUpForm.propTypes = {
   signUpAction: PropTypes.func.isRequired,
-  style: PropTypes.object.isRequired
+  style: PropTypes.string.isRequired
 };
 
 export default SignUpForm;

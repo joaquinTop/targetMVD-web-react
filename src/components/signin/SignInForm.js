@@ -103,8 +103,8 @@ SignInForm.propTypes = {
   updateSession: PropTypes.func.isRequired,
   session: PropTypes.object.isRequired,
   signInAction: PropTypes.func.isRequired,
-  signInWithFBAction: PropTypes.func.isRequired
-  style: PropTypes.object.isRequired
+  signInWithFBAction: PropTypes.func.isRequired,
+  style: PropTypes.string.isRequired
 };
 
 export default SignInForm;
