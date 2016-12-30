@@ -28,11 +28,6 @@ class Map extends React.Component {
 
   success(pos){
     const crd = pos.coords;
-    console.log('Your current position is:');
-    console.log('Latitude : ' + crd.latitude);
-    console.log('Longitude: ' + crd.longitude);
-    console.log('More or less ' + crd.accuracy + ' meters.');
-
     let newState = Object.assign({}, this.state);
     newState.locationCenter.lat = parseFloat(crd.latitude.toFixed(6));
     newState.locationCenter.lng = parseFloat(crd.longitude.toFixed(6));
@@ -40,7 +35,7 @@ class Map extends React.Component {
   }
 
   error(err){
-    console.warn('ERROR(' + err.code + '): ' + err.message);
+    console.warn(`ERROR( ${err.code} ):  ${err.message}`);
   }
 
   onMapClick(e) {
@@ -56,32 +51,32 @@ class Map extends React.Component {
     const mapContainer = <div style={{height:'100%', width:'100%'}}></div>;
     let markers = this.props.markers.map((venue, i) => {
       const marker = {
-        position:{
+        position: {
           lat: venue.lat,
           lng: venue.lng
         }
       };
-      return <Marker animation = {constants.ANIMATION_DROP} key={i} {...marker}/>;
+      return <Marker animation={constants.ANIMATION_DROP} key={i} {...marker}/>;
     });
 
     if (markers.length > 0) {
       let myPosMarker = {
-        position:{
+        position: {
           lat: this.state.locationCenter.lat,
           lng: this.state.locationCenter.lng
         }
       };
-      markers.push( <Marker icon={markerIcon} animation = {constants.ANIMATION_DROP} key={markers.length} {...myPosMarker}/> );
+      markers.push( <Marker icon={markerIcon} animation={constants.ANIMATION_DROP} key={markers.length} {...myPosMarker}/> );
     }
 
     return(
       <GoogleMapLoader
-      containerElement = {mapContainer}
-      googleMapElement = {
+      containerElement={mapContainer}
+      googleMapElement={
         <GoogleMap
-        defaultZoom = {15}
-        onClick = {this.onMapClick}
-        center = {this.state.locationCenter}
+        defaultZoom={15}
+        onClick={this.onMapClick}
+        center={this.state.locationCenter}
         options={{streetViewControl: false, mapTypeControl: false}}>
           { markers }
         </GoogleMap>
