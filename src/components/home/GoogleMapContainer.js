@@ -5,7 +5,6 @@ import {bindActionCreators} from 'redux';
 import * as newTargetActions from '../../actions/newTargetActions';
 
 export const GoogleMapContainer = (props) => {
-  // TODO: JG: center is hardcoded, must use html5 geolocalization to set center
   const location = {
     lat: -34.906501,
     lng: -56.185295
@@ -15,6 +14,7 @@ export const GoogleMapContainer = (props) => {
   if (props.newTarget.isVisible) {
     markers.push(props.newTarget);
   }
+
   return (
     <div className="map">
       <Map center={location} markers={markers} updateTargetInfo={props.actions.updateFreeTarget} newTarget={props.newTarget}/>
