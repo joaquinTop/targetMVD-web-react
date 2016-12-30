@@ -26,14 +26,6 @@ class Map extends React.Component {
     });
   }
 
-  onMapClick(e) {
-    let lat = parseFloat(e.latLng.lat().toFixed(6));
-    let lng = parseFloat(e.latLng.lng().toFixed(6));
-    this.props.updateTargetInfo("lat", lat);
-    this.props.updateTargetInfo("lng", lng);
-    this.props.updateTargetInfo("isVisible", true);
-  }
-
   success(pos){
     const crd = pos.coords;
     console.log('Your current position is:');
@@ -51,24 +43,36 @@ class Map extends React.Component {
     console.warn('ERROR(' + err.code + '): ' + err.message);
   }
 
+  onMapClick(e) {
+    let lat = parseFloat(e.latLng.lat().toFixed(6));
+    let lng = parseFloat(e.latLng.lng().toFixed(6));
+    this.props.updateTargetInfo("lat", lat);
+    this.props.updateTargetInfo("lng", lng);
+    this.props.updateTargetInfo("isVisible", true);
+  }
+
   render() {
-    // let image = {
-    //   url: {markerIcon},
-    //   size: Size(20, 32),
-    //   origin: Point(0, 0),
-    //   anchor: Point(0, 32)
-    // };
 
     const mapContainer = <div style={{height:'100%', width:'100%'}}></div>;
-    const markers = this.props.markers.map((venue, i) => {
+    let markers = this.props.markers.map((venue, i) => {
       const marker = {
         position:{
           lat: venue.lat,
           lng: venue.lng
         }
       };
-      return <Marker icon={markerIcon} animation = {constants.ANIMATION_DROP} key={i} {...marker}/>;
+      return <Marker animation = {constants.ANIMATION_DROP} key={i} {...marker}/>;
     });
+
+    if (markers.length > 0) {
+      let myPosMarker = {
+        position:{
+          lat: this.state.locationCenter.lat,
+          lng: this.state.locationCenter.lng
+        }
+      };
+      markers.push( <Marker icon={markerIcon} animation = {constants.ANIMATION_DROP} key={markers.length} {...myPosMarker}/> );
+    }
 
     return(
       <GoogleMapLoader
