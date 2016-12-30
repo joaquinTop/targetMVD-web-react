@@ -16,14 +16,19 @@ export const SideBarContainer = (props) => {
     browserHistory.push('/sign-in');
   }
 
+  let formEnabled = true;
+  if (!props.newTarget.isActive) {
+    formEnabled = false;
+  }
+
   return (
     <div className="sidebar">
       <Header title = {"CREATE TARGET"} style = "sidebarHeader"></Header>
       <SubHeader title = {"CREATE NEW TARGET"} style = "sidebarSubHeader"></SubHeader>
       <TargetForm
+      enabled={formEnabled}
       updateTargetInfo={props.actions.updateFreeTarget}
       currentTarget={props.newTarget}
-      resetFreeTarget={props.actions.resetFreeTarget}
       createTargetAction={props.actions.createTarget}>
       </TargetForm>
       <button onClick={logOut} type="button" className="btn btn-danger btn-sign-out">Sign out</button>

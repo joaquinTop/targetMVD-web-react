@@ -8,7 +8,7 @@ export default {
     radius: 200,
     topic: 0,
     isVisible: false,
-    isActive: false
+    isActive: true
   },
   session:{
     user_id:'',

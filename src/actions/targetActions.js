@@ -1,5 +1,6 @@
 import * as types from './actionTypes';
 import targetClient from '../client/TargetsServerClient';
+import {updateFreeTarget} from './newTargetActions';
 
 export function createTargetSuccess(target){
   return {type: types.CREATE_TARGET, target};
@@ -23,6 +24,9 @@ export const loadTargets = () => {
   return dispatch => {
     return targetClient.getMyTargets().then(data => {
       dispatch(loadTargetsSuccess(data.targets));
+      if (data.targets.length >= 10) {
+        dispatch(updateFreeTarget("isActive", false));
+      }
     }).catch(error => {
       console.log(error);
     });

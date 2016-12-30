@@ -62,6 +62,7 @@ class TargetForm extends React.Component{
 }
 
 TargetForm.propTypes = {
+  enabled:PropTypes.bool.isRequired,
   updateTargetInfo:PropTypes.func.isRequired,
   createTargetAction:PropTypes.func.isRequired,
   currentTarget:PropTypes.object.isRequired
