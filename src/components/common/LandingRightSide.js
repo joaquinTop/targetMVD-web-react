@@ -1,5 +1,5 @@
 import React from 'react';
-import image from '../../res/images/png/right-png.png';
+import image from '../../res/images/common/right-png.png';
 import MediaQuery from 'react-responsive';
 
 const LandingRightSide = () => {

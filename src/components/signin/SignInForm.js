@@ -5,7 +5,7 @@ import * as strings from '../../res/strings/strings-en';
 import * as constants from '../../constants/constants.js'
 import validateInput from '../../utils/validations/signup.js';
 import { FacebookLogin } from 'react-facebook-login-component';
-import smilies from '../../res/images/png/smilies.png';
+import smilies from '../../res/images/common/smilies.png';
 
 class SignInForm extends React.Component{
   constructor(props, context){

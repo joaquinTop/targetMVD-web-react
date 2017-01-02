@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react';
 import {GoogleMapLoader, GoogleMap, Marker} from 'react-google-maps';
-import markerIcon from '../../res/images/myPosition.png';
+import markerIcon from '../../res/images/targets/myPosition.png';
 import * as constants from '../../constants/constants';
 
 class Map extends React.Component {
@@ -11,6 +11,7 @@ class Map extends React.Component {
     this.success = this.success.bind(this);
     this.error = this.error.bind(this);
     this.getMyPosition = this.getMyPosition.bind(this);
+    this.getTargetTopic = this.getTargetTopic.bind(this);
     this.state = {
       locationCenter: this.props.center
     };
@@ -24,6 +25,31 @@ class Map extends React.Component {
       timeout: 10000,
       maximumAge: 0
     });
+  }
+
+  getTargetTopic(venue){
+    switch (venue.topic) {
+      case 'Football':
+        return 'target-football.png';
+      case 'Travel':
+        return 'target-travel.png';
+      case 'Politics':
+        return 'target-politics.png';
+      case 'Art':
+        return 'target-art.png';
+      case 'Dating':
+        return 'target-dating.png';
+      case 'Music':
+        return 'target-music.png';
+      case 'Movies':
+        return 'target-movies.png';
+      case 'Series':
+        return 'target-series.png';
+      case 'Food':
+        return 'target-food.png';
+      default:
+        return '';
+    }
   }
 
   success(pos){
@@ -47,7 +73,6 @@ class Map extends React.Component {
   }
 
   render() {
-
     const mapContainer = <div style={{height:'100%', width:'100%'}}></div>;
     let markers = this.props.markers.map((venue, i) => {
       const marker = {
@@ -56,7 +81,9 @@ class Map extends React.Component {
           lng: venue.lng
         }
       };
-      return <Marker animation={constants.ANIMATION_DROP} key={i} {...marker}/>;
+
+      const iconFullPath =  `../../res/images/targets/${this.getTargetTopic(venue)}`
+      return <Marker icon={iconFullPath} animation={constants.ANIMATION_DROP} key={i} {...marker}/>;
     });
 
     if (markers.length > 0) {

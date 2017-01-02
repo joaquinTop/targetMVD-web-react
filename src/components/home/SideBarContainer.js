@@ -10,7 +10,7 @@ import CustomAlert from '../../utils/uiHelper/CustomAlert';
 import Header from '../common/Header';
 import SubHeader from '../common/SubHeader';
 import TargetForm from '../targets/TargetForm'
-import targetIcon from '../../res/images/png/targetIcon.png';
+import targetIcon from '../../res/images/common/targetIcon.png';
 
 export const SideBarContainer = (props) => {
 
@@ -42,7 +42,6 @@ export const SideBarContainer = (props) => {
       createTargetAction={props.actions.createTarget}>
       </TargetForm>
       {/* resetFreeTarget={props.actions.resetFreeTarget} */}
-      <img className="smilies-img-sidebar" src={smilies}></img><br/>
       <button onClick={logOut} type="button" className="btn btn-danger btn-sign-out">Sign out</button>
     </div>
     );

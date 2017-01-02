@@ -2,7 +2,7 @@ import React, {PropTypes} from 'react';
 import {browserHistory} from 'react-router';
 import TextInput from '../common/TextInput';
 import Topics from '../../res/topics';
-import smilies from '../../res/images/png/smilies.png';
+import smilies from '../../res/images/common/smilies.png';
 import Dropdown from 'react-dropdown'
 
 class TargetForm extends React.Component{
