@@ -25,6 +25,11 @@ class TargetForm extends React.Component{
 
   onTargetSubmit(e){
     e.preventDefault();
+    if (!this.props.enabled) {
+      this.props.createAlertAction("SideBarContainer", "Max of 10 targets reached", "error");
+      return;
+    }
+
     let targetJson = {"target":
       {
         "lat": this.props.currentTarget.lat,
@@ -44,7 +49,11 @@ class TargetForm extends React.Component{
 
   render(){
     const defaultOption = this.props.currentTarget.topic;
-    const placeholder = (this.props.currentTarget.topic !== '' ? this.props.currentTarget.topic:"What do you want to talk about?");
+    const topicPlaceholder = (this.props.currentTarget.topic !== '' ? this.props.currentTarget.topic:"What do you want to talk about?");
+    // const opts = {};
+    // if (!this.props.enabled) {
+    //   opts['disabled'] = 'disabled';
+    // }
     return (
       <div className="target-form-container">
         <form>
@@ -53,7 +62,7 @@ class TargetForm extends React.Component{
           <label className="target-form-field" htmlFor="targetTitle">TARGET TITLE</label><br/>
           <TextInput id="targetTitle" onChange={this.onFieldChange} style="custom-target-input" name="title" type={"text"} value={this.props.currentTarget.title} required={"true"}></TextInput><br/>
           <label className="target-form-field">SELECT A TOPIC</label><br/>
-          <Dropdown options={Topics} onChange={this.onTopicChange} value={defaultOption} placeholder={placeholder} />
+          <Dropdown options={Topics} onChange={this.onTopicChange} value={defaultOption} placeholder={topicPlaceholder} />
           <input className="btn-save-target" type="submit" value="SAVE TARGET" onClick={this.onTargetSubmit}></input><br/>
           <img className="smilies-img-sidebar" src={smilies}></img>
         </form>
@@ -66,7 +75,8 @@ TargetForm.propTypes = {
   enabled:PropTypes.bool.isRequired,
   updateTargetInfo:PropTypes.func.isRequired,
   createTargetAction:PropTypes.func.isRequired,
-  currentTarget:PropTypes.object.isRequired
+  currentTarget:PropTypes.object.isRequired,
+  createAlertAction:PropTypes.func.isRequired
 };
 
 export default TargetForm;

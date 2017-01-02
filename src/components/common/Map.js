@@ -82,8 +82,9 @@ class Map extends React.Component {
         }
       };
 
-      const iconFullPath =  `../../res/images/targets/${this.getTargetTopic(venue)}`
-      return <Marker icon={iconFullPath} animation={constants.ANIMATION_DROP} key={i} {...marker}/>;
+      // const iconFullPath = `../../res/images/targets/${this.getTargetTopic(venue)}`;
+      // return <Marker icon={iconFullPath} animation={constants.ANIMATION_DROP} key={i} {...marker}/>;
+      return <Marker animation={constants.ANIMATION_DROP} key={i} {...marker}/>;
     });
 
     if (markers.length > 0) {

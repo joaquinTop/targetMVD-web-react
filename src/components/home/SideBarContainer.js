@@ -39,7 +39,8 @@ export const SideBarContainer = (props) => {
       enabled={formEnabled}
       updateTargetInfo={props.actions.updateFreeTarget}
       currentTarget={props.newTarget}
-      createTargetAction={props.actions.createTarget}>
+      createTargetAction={props.actions.createTarget}
+      createAlertAction={props.actions.createAlert}>
       </TargetForm>
       {/* resetFreeTarget={props.actions.resetFreeTarget} */}
       <button onClick={logOut} type="button" className="btn btn-danger btn-sign-out">Sign out</button>
