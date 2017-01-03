@@ -12,14 +12,30 @@ export function resetSession(){
   return {type: types.RESET_SESSION};
 }
 
+export function configureSession(data){
+  return dispatch => {
+    targetClient.setUserInfo(data.token, data.user_id);
+    dispatch(updateSessionInformation("user_id", data.user_id));
+    dispatch(updateSessionInformation("user_token", data.token));
+    dispatch(updateSessionInformation("isLoggedIn", true));
+    cookie.save('user', data, { path: '/' });
+  }
+}
+
 export const signIn = (userJson) => {
   return dispatch => {
     return userClient.signIn(userJson).then(data => {
-      targetClient.setUserInfo(data.token, data.user_id);
-      dispatch(updateSessionInformation("user_id", data.user_id));
-      dispatch(updateSessionInformation("user_token", data.token));
-      dispatch(updateSessionInformation("isLoggedIn", true));
-      cookie.save('user', userJson, { path: '/' });
+      dispatch(configureSession(data));
+    }).catch(error => {
+      console.log(error);
+    });
+  };
+};
+
+export const signInWithFB = (accessToken) => {
+  return dispatch => {
+    return userClient.signInWithFB(accessToken).then(data => {
+      dispatch(configureSession(data));
     }).catch(error => {
       console.log(error);
     });

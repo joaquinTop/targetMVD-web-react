@@ -8,10 +8,11 @@ let instance = axios.create({
 });
 
 class UserClient {
+
   static signUp(user) {
-    return new Promise((resolve, reject)=> {
-        instance.post('/users', user).then((res=> {
-          let data = res.data;
+    return new Promise((resolve, reject) => {
+        instance.post('/users', user).then((res => {
+          const {data} = res;
           resolve(data);
         })).catch(error => {
           console.log(error);
@@ -21,9 +22,25 @@ class UserClient {
   }
 
   static signIn(user) {
-    return new Promise((resolve, reject)=> {
-        instance.post('/users/sign_in', user).then((res=> {
-          let data = res.data;
+    return new Promise((resolve, reject) => {
+        instance.post('/users/sign_in', user).then((res => {
+          const {data} = res;
+          resolve(data);
+        })).catch(error => {
+          console.log(error);
+          reject(error.message);
+        });
+    })
+  }
+
+  static signInWithFB(accessToken) {
+    const infoJson = {
+      type: 'facebook',
+      fb_access_token: accessToken
+    }
+    return new Promise((resolve, reject) => {
+        instance.post('/users/sign_in', infoJson).then((res => {
+          const {data} = res;
           resolve(data);
         })).catch(error => {
           console.log(error);
@@ -42,8 +59,8 @@ class UserClient {
 
     instance.defaults.headers['X-USER-TOKEN'] = token;
     return new Promise((resolve, reject) => {
-      instance.delete('users/sign_out', null).then((res=> {
-        let data = res.data;
+      instance.delete('users/sign_out', null).then((res => {
+        const {data} = res;
         resolve(data);
       })).catch(error => {
         console.log(error);

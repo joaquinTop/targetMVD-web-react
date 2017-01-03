@@ -16,7 +16,7 @@ class TargetClient {
   static createTarget(target) {
     return new Promise((resolve, reject)=> {
       instance.post('/targets', target).then((res=> {
-        let data = res.data;
+        const {data} = res;
         resolve(data);
       })).catch(error => {
         console.log(error);
@@ -28,7 +28,7 @@ class TargetClient {
   static getMyTargets() {
     return new Promise((resolve, reject) => {
       instance.get('/targets').then((res=> {
-        let data = res.data;
+        const {data} = res;
         resolve(data);
       })).catch(error => {
         console.log(error);
