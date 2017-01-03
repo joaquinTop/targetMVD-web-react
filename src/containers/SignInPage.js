@@ -23,6 +23,7 @@ export const SignInPage = (props) => {
       updateSession={props.actions.updateSessionInformation}
       session={props.session}
       signInAction={props.actions.signIn}
+      signInWithFBAction={props.actions.signInWithFB}
       />
       <LandingRightSide/>
     </div>

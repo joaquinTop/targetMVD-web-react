@@ -3,6 +3,7 @@ import {Link, browserHistory} from 'react-router';
 import TextInput from '../common/TextInput';
 import * as strings from '../../res/strings/strings-en';
 import validateInput from '../../utils/validations/signup.js';
+import { FacebookLogin } from 'react-facebook-login-component';
 
 class SignInForm extends React.Component{
   constructor(props, context){
@@ -10,10 +11,16 @@ class SignInForm extends React.Component{
 
     this.onFieldChange = this.onFieldChange.bind(this);
     this.signIn = this.signIn.bind(this);
+    this.responseFacebook = this.responseFacebook.bind(this);
     this.state = {
       name: '',
       email: ''
     };
+  }
+
+  responseFacebook (response) {
+    console.log(response);
+    this.props.signInWithFBAction(response.accessToken);
   }
 
   onFieldChange(fieldName, value) {
@@ -61,9 +68,17 @@ class SignInForm extends React.Component{
             <TextInput id="inputPassword" onChange={this.onFieldChange} name="password" type={"password"} value={user.password} required={"true"}></TextInput><br/>
             <input type="submit" value="Sign in" onClick={this.signIn}></input><br/>
             <label>Forgot your password?</label><br/>
-            <label className="label-underline">CONNECT WITH FACEBOOK</label><br/>
+            {/* <label className="label-underline">CONNECT WITH FACEBOOK</label><br/> */}
             <Link to="/">SIGN UP</Link>
           </form>
+          <FacebookLogin socialId="1360608777317078"
+          class="label-underline"
+          language="en_US"
+          scope="public_profile,email"
+          responseHandler={this.responseFacebook}
+          xfbml={true}
+          version="v2.5"
+          buttonText="CONNECT WITH FACEBOOK"/>
         </div>
       </div>
     );
@@ -73,7 +88,8 @@ class SignInForm extends React.Component{
 SignInForm.propTypes = {
   updateSession: PropTypes.func.isRequired,
   session: PropTypes.object.isRequired,
-  signInAction: PropTypes.func.isRequired
+  signInAction: PropTypes.func.isRequired,
+  signInWithFBAction: PropTypes.func.isRequired
 };
 
 export default SignInForm;

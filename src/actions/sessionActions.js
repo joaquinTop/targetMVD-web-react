@@ -26,6 +26,20 @@ export const signIn = (userJson) => {
   };
 };
 
+export const signInWithFB = (accessToken) => {
+  return dispatch => {
+    return userClient.signInWithFB(accessToken).then(data => {
+      targetClient.setUserInfo(data.token, data.user_id);
+      dispatch(updateSessionInformation("user_id", data.user_id));
+      dispatch(updateSessionInformation("user_token", data.token));
+      dispatch(updateSessionInformation("isLoggedIn", true));
+      cookie.save('user', data, { path: '/' });
+    }).catch(error => {
+      console.log(error);
+    });
+  };
+};
+
 export const signOut = () => {
   return dispatch => {
     dispatch(resetSession());
