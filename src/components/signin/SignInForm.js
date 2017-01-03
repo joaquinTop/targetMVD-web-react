@@ -2,6 +2,7 @@ import React, {PropTypes} from 'react';
 import {Link, browserHistory} from 'react-router';
 import TextInput from '../common/TextInput';
 import * as strings from '../../res/strings/strings-en';
+import * as constants from '../../constants/constants.js'
 import validateInput from '../../utils/validations/signup.js';
 import { FacebookLogin } from 'react-facebook-login-component';
 
@@ -69,7 +70,8 @@ class SignInForm extends React.Component{
             <input type="submit" value="Sign in" onClick={this.signIn}></input><br/>
             <label>Forgot your password?</label><br/>
           </form>
-          <FacebookLogin socialId="1360608777317078"
+          <FacebookLogin
+          socialId={constants.APP_SOCIAL_ID}
           class="label-underline"
           language="en_US"
           scope="public_profile,email,user_about_me"
