@@ -1,8 +1,8 @@
 import * as types from './actionTypes';
 import userClient from '../client/UsersServerClient';
 import targetClient from '../client/TargetsServerClient';
-import {resetTargets} from './targetActions';
-import cookie from 'react-cookie';
+import { resetTargets } from './targetActions';
+import { setUser, removeUser } from '../utils/sessionHelper'
 
 export function updateSessionInformation(fieldName, value){
   return {type: types.UPDATE_SESSION, fieldName, value};
@@ -18,7 +18,7 @@ export function configureSession(data){
     dispatch(updateSessionInformation("user_id", data.user_id));
     dispatch(updateSessionInformation("user_token", data.token));
     dispatch(updateSessionInformation("isLoggedIn", true));
-    cookie.save('user', data, { path: '/' });
+    setUser(data);
   }
 }
 
@@ -46,11 +46,11 @@ export const signOut = () => {
   return dispatch => {
     dispatch(resetSession());
     dispatch(resetTargets());
-    cookie.remove('user', { path: '/' });
+    removeUser();
     // NOTE: maybe should reset info assosiated to last user in targetClient
     // return userClient.signOut(userToken).then(data => {
     //   dispatch(resetSession);
-    //   cookie.remove('user', { path: '/' });
+    //   localStorage.removeItem("user");
     // }).catch(error => {
     //   console.log(error);
     // });

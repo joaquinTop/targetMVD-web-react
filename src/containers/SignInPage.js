@@ -5,13 +5,15 @@ import {bindActionCreators} from 'redux';
 import * as sessionActions from '../actions/sessionActions';
 import SignInForm from '../components/signin/SignInForm';
 import LandingRightSide from '../components/common/LandingRightSide';
-import cookie from 'react-cookie';
+import { getUser } from '../utils/sessionHelper'
 
 export const SignInPage = (props) => {
-  const user = cookie.load('user');
+  const user = getUser();
+
   if (user) {
     props.actions.signIn(user);
   }
+
   if (props.session.isLoggedIn) {
     browserHistory.push('/home');
     return null;
@@ -23,8 +25,7 @@ export const SignInPage = (props) => {
       updateSession={props.actions.updateSessionInformation}
       session={props.session}
       signInAction={props.actions.signIn}
-      signInWithFBAction={props.actions.signInWithFB}
-      />
+      signInWithFBAction={props.actions.signInWithFB}/>
       <LandingRightSide/>
     </div>
   );
