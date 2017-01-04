@@ -5,13 +5,10 @@ import {bindActionCreators} from 'redux';
 import * as sessionActions from '../actions/sessionActions';
 import SignInForm from '../components/signin/SignInForm';
 import LandingRightSide from '../components/common/LandingRightSide';
+import {getUser} from '../utils/sessionHelper'
 
 export const SignInPage = (props) => {
-  let user;
-
-  if (typeof(Storage) !== "undefined") {
-    user =  JSON.parse(localStorage.getItem('user'));
-  }
+  const user = getUser();
 
   if (user) {
     props.actions.signIn(user);
@@ -28,8 +25,7 @@ export const SignInPage = (props) => {
       updateSession={props.actions.updateSessionInformation}
       session={props.session}
       signInAction={props.actions.signIn}
-      signInWithFBAction={props.actions.signInWithFB}
-      />
+      signInWithFBAction={props.actions.signInWithFB}/>
       <LandingRightSide/>
     </div>
   );

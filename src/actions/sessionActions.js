@@ -2,6 +2,7 @@ import * as types from './actionTypes';
 import userClient from '../client/UsersServerClient';
 import targetClient from '../client/TargetsServerClient';
 import {resetTargets} from './targetActions';
+import {setUser, removeUser} from '../utils/sessionHelper'
 
 export function updateSessionInformation(fieldName, value){
   return {type: types.UPDATE_SESSION, fieldName, value};
@@ -17,9 +18,7 @@ export function configureSession(data){
     dispatch(updateSessionInformation("user_id", data.user_id));
     dispatch(updateSessionInformation("user_token", data.token));
     dispatch(updateSessionInformation("isLoggedIn", true));
-    if (typeof(Storage) !== "undefined") {
-      localStorage.setItem("user", JSON.stringify(data));
-    }
+    setUser(data);
   }
 }
 
@@ -47,9 +46,7 @@ export const signOut = () => {
   return dispatch => {
     dispatch(resetSession());
     dispatch(resetTargets());
-    if (typeof(Storage) !== "undefined") {
-      localStorage.removeItem("user");
-    }
+    removeUser();
     // NOTE: maybe should reset info assosiated to last user in targetClient
     // return userClient.signOut(userToken).then(data => {
     //   dispatch(resetSession);
