@@ -1,8 +1,8 @@
 import * as types from './actionTypes';
 import userClient from '../client/UsersServerClient';
 import targetClient from '../client/TargetsServerClient';
-import {resetTargets} from './targetActions';
-import {setUser, removeUser} from '../utils/sessionHelper'
+import { resetTargets } from './targetActions';
+import { setUser, removeUser } from '../utils/sessionHelper'
 
 export function updateSessionInformation(fieldName, value){
   return {type: types.UPDATE_SESSION, fieldName, value};

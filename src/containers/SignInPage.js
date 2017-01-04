@@ -5,7 +5,7 @@ import {bindActionCreators} from 'redux';
 import * as sessionActions from '../actions/sessionActions';
 import SignInForm from '../components/signin/SignInForm';
 import LandingRightSide from '../components/common/LandingRightSide';
-import {getUser} from '../utils/sessionHelper'
+import { getUser } from '../utils/sessionHelper'
 
 export const SignInPage = (props) => {
   const user = getUser();

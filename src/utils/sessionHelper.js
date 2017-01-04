@@ -5,11 +5,10 @@ export const setUser = (user) => {
 }
 
 export const getUser = () => {
-  let user;
   if (typeof(Storage) !== "undefined") {
-    user = JSON.parse(localStorage.getItem('user'));
+    return JSON.parse(localStorage.getItem('user'));
   }
-  return user;
+  return null;
 }
 
 export const removeUser = () => {
