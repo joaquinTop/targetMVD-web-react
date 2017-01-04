@@ -5,13 +5,18 @@ import {bindActionCreators} from 'redux';
 import * as sessionActions from '../actions/sessionActions';
 import SignInForm from '../components/signin/SignInForm';
 import LandingRightSide from '../components/common/LandingRightSide';
-import cookie from 'react-cookie';
 
 export const SignInPage = (props) => {
-  const user = cookie.load('user');
+  let user;
+
+  if (typeof(Storage) !== "undefined") {
+    user =  JSON.parse(localStorage.getItem('user'));
+  }
+
   if (user) {
     props.actions.signIn(user);
   }
+
   if (props.session.isLoggedIn) {
     browserHistory.push('/home');
     return null;
