@@ -15,6 +15,10 @@ export default class CustomAlert extends React.Component {
   }
 
   static showAlert(text, type){
+    if (global.msg === null) {
+      return;
+    }
+    
     global.msg.show(text, {
       time: constants.ALERT_TIME,
       type: type
