@@ -94,8 +94,6 @@ class SignInForm extends React.Component{
 }
 
 SignInForm.propTypes = {
-  updateSession: PropTypes.func.isRequired,
-  session: PropTypes.object.isRequired,
   signInAction: PropTypes.func.isRequired,
   signInWithFBAction: PropTypes.func.isRequired,
   style: PropTypes.string.isRequired

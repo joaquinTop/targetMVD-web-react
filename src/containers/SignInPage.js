@@ -31,10 +31,10 @@ export const SignInPage = (props) => {
     <div>
       <CustomAlert/>
       <MediaQuery query="(min-width: 1224px)">
-        <SignInForm signInAction={props.actions.signIn} style="column-half"/>
+        <SignInForm signInAction={props.actions.signIn} signInWithFBAction={props.actions.signInWithFB} style="column-half"/>
       </MediaQuery>
       <MediaQuery query="(max-width: 1224px)">
-        <SignInForm signInAction={props.actions.signIn} style="none"/>
+        <SignInForm signInAction={props.actions.signIn} signInWithFBAction={props.actions.signInWithFB} style="none"/>
       </MediaQuery>
       <LandingRightSide/>
     </div>

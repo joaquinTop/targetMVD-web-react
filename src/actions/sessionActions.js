@@ -47,11 +47,7 @@ export const signInWithFB = (accessToken) => {
 export const signUp = (userJson) => {
   return dispatch => {
     return userClient.signUp(userJson).then(data => {
-      targetClient.setUserInfo(data.token, data.user_id);
-      dispatch(updateSessionInformation("user_id", data.user_id));
-      dispatch(updateSessionInformation("user_token", data.token));
-      dispatch(updateSessionInformation("isLoggedIn", true));
-      cookie.save('user', userJson, { path: '/' });
+      dispatch(configureSession(data));
     }).catch(error => {
       console.log(error);
     });
