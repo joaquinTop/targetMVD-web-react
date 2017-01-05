@@ -2,6 +2,7 @@ import React, {PropTypes} from 'react';
 import {GoogleMapLoader, GoogleMap, Marker} from 'react-google-maps';
 import markerIcon from '../../res/images/targets/myPosition.png';
 import * as constants from '../../constants/constants';
+import { getTopicIcon } from '../../utils/TopicsHelper';
 
 class Map extends React.Component {
   constructor(props, context){
@@ -11,7 +12,6 @@ class Map extends React.Component {
     this.success = this.success.bind(this);
     this.error = this.error.bind(this);
     this.getMyPosition = this.getMyPosition.bind(this);
-    this.getTargetTopic = this.getTargetTopic.bind(this);
     this.state = {
       locationCenter: this.props.center
     };
@@ -25,31 +25,6 @@ class Map extends React.Component {
       timeout: 10000,
       maximumAge: 0
     });
-  }
-
-  getTargetTopic(venue){
-    switch (venue.topic) {
-      case 'Football':
-        return 'target-football.png';
-      case 'Travel':
-        return 'target-travel.png';
-      case 'Politics':
-        return 'target-politics.png';
-      case 'Art':
-        return 'target-art.png';
-      case 'Dating':
-        return 'target-dating.png';
-      case 'Music':
-        return 'target-music.png';
-      case 'Movies':
-        return 'target-movies.png';
-      case 'Series':
-        return 'target-series.png';
-      case 'Food':
-        return 'target-food.png';
-      default:
-        return 'target-art.png';
-    }
   }
 
   success(pos){
@@ -81,12 +56,15 @@ class Map extends React.Component {
           lng: venue.lng
         }
       };
-
-      const iconFullPath = `../../res/images/targets/${this.getTargetTopic(venue)}`;
-      return <Marker icon={iconFullPath} animation={constants.ANIMATION_DROP} key={i} {...marker}/>;
+      const iconLastPath = getTopicIcon(venue.topic);
+      let opts = {};
+      if (iconLastPath !== '') {
+        opts['icon'] = `../../res/images/targets/${iconLastPath}`;
+      }
+      return <Marker {...opts} animation={constants.ANIMATION_DROP} key={i} {...marker}/>;
     });
 
-    if (markers.length >= 0) {
+    if (markers.length > 0) {
       let myPosMarker = {
         position: {
           lat: this.state.locationCenter.lat,

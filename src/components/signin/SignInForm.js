@@ -73,20 +73,18 @@ class SignInForm extends React.Component{
             <TextInput id="inputPassword" onChange={this.onFieldChange} name="password" type={"password"} value={user.password} required={"true"}></TextInput><br/>
             <input className="btn-sign-in" type="submit" value="SIGN IN" onClick={this.signIn}></input><br/>
             <label className="forgot-your-password">Forgot your password?</label><br/>
-            <label className="connect-with-facebook">CONNECT WITH FACEBOOK</label><br/>
-            <hr className="custom-line"/>
-            <Link className="sign-up-link" to="/">SIGN UP</Link>
           </form>
           <FacebookLogin
           socialId={constants.APP_SOCIAL_ID}
-          class="label-underline"
+          class="connect-with-facebook"
           language="en_US"
           scope="public_profile,email,user_about_me"
           responseHandler={this.responseFacebook}
           xfbml={true}
           version="v2.5"
           buttonText="CONNECT WITH FACEBOOK"/>
-          <Link to="/">SIGN UP</Link>
+          <hr className="custom-line"/>
+          <Link className="sign-up-link" to="/">SIGN UP</Link>
         </div>
       </div>
     );

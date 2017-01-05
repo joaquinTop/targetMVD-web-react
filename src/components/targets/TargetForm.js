@@ -3,7 +3,8 @@ import {browserHistory} from 'react-router';
 import TextInput from '../common/TextInput';
 import Topics from '../../res/topics';
 import smilies from '../../res/images/common/smilies.png';
-import Dropdown from 'react-dropdown'
+import Dropdown from 'react-dropdown';
+import { getTopicId, getTopicName } from '../../utils/TopicsHelper';
 
 class TargetForm extends React.Component{
   constructor(props, context){
@@ -12,7 +13,6 @@ class TargetForm extends React.Component{
     this.onFieldChange = this.onFieldChange.bind(this);
     this.onTopicChange = this.onTopicChange.bind(this);
     this.onTargetSubmit = this.onTargetSubmit.bind(this);
-    this.getTopicIndex = this.getTopicIndex.bind(this);
   }
 
   onFieldChange(fieldName, value) {
@@ -21,33 +21,7 @@ class TargetForm extends React.Component{
 
   onTopicChange(option) {
     console.log('You selected ', option.label);
-    this.props.updateTargetInfo("topic", option.label);
-  }
-
-  getTopicIndex(name){
-    switch (name) {
-      case 'Football':
-        return 1;
-      case 'Travel':
-        return 2;
-      case 'Politics':
-        return 3;
-      case 'Art':
-        return 4;
-      case 'Dating':
-        return 5;
-      case 'Music':
-        return 6;
-      case 'Movies':
-        return 7;
-      case 'Series':
-        return 8;
-      case 'Food':
-        return 9;
-      default:
-        return 0;
-
-    }
+    this.props.updateTargetInfo("topic", getTopicId(option.label));
   }
 
   onTargetSubmit(e){
@@ -63,7 +37,7 @@ class TargetForm extends React.Component{
         lat: this.props.currentTarget.lat,
         lng:  this.props.currentTarget.lng,
         radius: this.props.currentTarget.radius,
-        topic: this.getTopicIndex(this.props.currentTarget.topic)
+        topic: this.props.currentTarget.topic
       }
     };
 
@@ -76,8 +50,8 @@ class TargetForm extends React.Component{
   }
 
   render(){
-    const defaultOption = this.props.currentTarget.topic;
-    const topicPlaceholder = (this.props.currentTarget.topic !== '' ? this.props.currentTarget.topic:"What do you want to talk about?");
+    const defaultOption = getTopicName(this.props.currentTarget.topic);
+    const topicPlaceholder = (defaultOption !== '' ? defaultOption:"What do you want to talk about?");
     // const opts = {};
     // if (!this.props.enabled) {
     //   opts['disabled'] = 'disabled';

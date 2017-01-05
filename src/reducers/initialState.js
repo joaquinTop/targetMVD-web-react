@@ -6,7 +6,7 @@ export default {
     lat: 0,
     lng: 0,
     radius: 200,
-    topic: '',
+    topic: 0,
     isVisible: false,
     isActive: true
   },
