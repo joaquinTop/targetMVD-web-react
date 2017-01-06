@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react';
-import {GoogleMapLoader, GoogleMap, Marker} from 'react-google-maps';
+import {GoogleMapLoader, GoogleMap, Marker, Circle} from 'react-google-maps';
 import markerIcon from '../../res/images/targets/myPosition.png';
 import * as constants from '../../constants/constants';
 import { getTopicIcon } from '../../utils/TopicsHelper';
@@ -12,6 +12,7 @@ class Map extends React.Component {
     this.success = this.success.bind(this);
     this.error = this.error.bind(this);
     this.getMyPosition = this.getMyPosition.bind(this);
+    this.getCircle = this.getCircle.bind(this);
     this.state = {
       locationCenter: this.props.center
     };
@@ -25,6 +26,14 @@ class Map extends React.Component {
       timeout: 10000,
       maximumAge: 0
     });
+  }
+
+  getCircle(radius, center, options){
+    return (<Circle
+    options={options}
+    center={center}
+    radius={radius}
+    />);
   }
 
   success(pos){
@@ -74,6 +83,30 @@ class Map extends React.Component {
       markers.push( <Marker icon={markerIcon} animation={constants.ANIMATION_DROP} key={0} {...myPosMarker}/> );
     }
 
+    let circles = this.props.markers.map((venue, i) => {
+      console.log(i);
+      return this.getCircle(venue.radius * 10, {
+        lat: venue.lat,
+        lng: venue.lng
+      }, {
+        fillColor: 'rgb(239, 197, 55)',
+        fillOpacity: 0.70,
+        strokeOpacity: 0
+      });
+    });
+
+    let myPositionRadius = this.getCircle(
+    200, {
+      lat: this.state.locationCenter.lat,
+      lng: this.state.locationCenter.lng
+    }, {
+      fillOpacity: 0,
+      strokeColor: 'rgb(239, 197, 55)',
+      strokeOpacity: 1,
+      strokeWeight: 1
+    });
+    circles.push(myPositionRadius);
+
     return(
       <GoogleMapLoader
       containerElement={mapContainer}
@@ -84,6 +117,7 @@ class Map extends React.Component {
         center={this.state.locationCenter}
         options={{streetViewControl: false, mapTypeControl: false}}>
           { markers }
+          { circles }
         </GoogleMap>
       } />
     );
