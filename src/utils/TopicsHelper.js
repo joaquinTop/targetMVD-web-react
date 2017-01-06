@@ -1,3 +1,13 @@
+import footballIcon from '../res/images/targets/target-football.png';
+import travelIcon from '../res/images/targets/target-travel.png';
+import politicsIcon from '../res/images/targets/target-politics.png';
+import artIcon from '../res/images/targets/target-art.png';
+import datingIcon from '../res/images/targets/target-dating.png';
+import musicIcon from '../res/images/targets/target-music.png';
+import moviesIcon from '../res/images/targets/target-movies.png';
+import seriesIcon from '../res/images/targets/target-series.png';
+import foodIcon from '../res/images/targets/target-food.png';
+
 export const getTopicId = (name) => {
   switch (name) {
     case 'Football':
@@ -52,23 +62,23 @@ export const getTopicIcon = (id) => {
   // TODO: JG: Replace integers for the real topic id
   switch (id) {
     case 2:
-      return 'target-football.png';
+      return footballIcon;
     case 3:
-      return 'target-travel.png';
+      return travelIcon;
     case 4:
-      return 'target-politics.png';
+      return politicsIcon;
     case 5:
-      return 'target-art.png';
+      return artIcon;
     case 6:
-      return 'target-dating.png';
+      return datingIcon;
     case 7:
-      return 'target-music.png';
+      return musicIcon;
     case 8:
-      return 'target-movies.png';
+      return moviesIcon;
     case 9:
-      return 'target-series.png';
+      return seriesIcon;
     case 10:
-      return 'target-food.png';
+      return foodIcon;
     default:
       return '';
   }

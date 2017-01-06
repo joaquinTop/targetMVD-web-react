@@ -56,10 +56,10 @@ class Map extends React.Component {
           lng: venue.lng
         }
       };
-      const iconLastPath = getTopicIcon(venue.topic);
+      const icon = getTopicIcon(venue.topic);
       let opts = {};
-      if (iconLastPath !== '') {
-        opts['icon'] = `../../res/images/targets/${iconLastPath}`;
+      if (icon !== '') {
+        opts['icon'] = icon;
       }
       return <Marker {...opts} animation={constants.ANIMATION_DROP} key={i} {...marker}/>;
     });
