@@ -1,5 +1,6 @@
 import React, {PropTypes} from 'react';
-import {GoogleMapLoader, GoogleMap, Marker, Circle} from 'react-google-maps';
+import {GoogleMapLoader, GoogleMap, Marker} from 'react-google-maps';
+import { getCircle, getMyPosition } from '../../utils/uiHelper/MapHelper';
 import markerIcon from '../../res/images/targets/myPosition.png';
 import * as constants from '../../constants/constants';
 import { getTopicIcon } from '../../utils/TopicsHelper';
@@ -11,29 +12,11 @@ class Map extends React.Component {
     this.onMapClick = this.onMapClick.bind(this);
     this.success = this.success.bind(this);
     this.error = this.error.bind(this);
-    this.getMyPosition = this.getMyPosition.bind(this);
-    this.getCircle = this.getCircle.bind(this);
     this.state = {
       locationCenter: this.props.center
     };
 
-    this.getMyPosition();
-  }
-
-  getMyPosition(){
-    navigator.geolocation.getCurrentPosition(this.success, this.error, {
-      enableHighAccuracy: true,
-      timeout: 10000,
-      maximumAge: 0
-    });
-  }
-
-  getCircle(radius, center, options){
-    return (<Circle
-    options={options}
-    center={center}
-    radius={radius}
-    />);
+    getMyPosition(this.success, this.error);
   }
 
   success(pos){
@@ -65,7 +48,7 @@ class Map extends React.Component {
           lng: venue.lng
         }
       };
-      const icon = getTopicIcon(venue.topic);
+      const icon = getTopicIcon(venue.topic, this.props.topicsList);
       let opts = {};
       if (icon !== '') {
         opts.icon = icon;
@@ -85,7 +68,7 @@ class Map extends React.Component {
 
     let circles = this.props.markers.map((venue, i) => {
       console.log(i);
-      return this.getCircle(venue.radius * 10, {
+      return getCircle(venue.radius * 10, {
         lat: venue.lat,
         lng: venue.lng
       }, {
@@ -95,7 +78,7 @@ class Map extends React.Component {
       });
     });
 
-    let myPositionRadius = this.getCircle(
+    let myPositionRadius = getCircle(
     200, {
       lat: this.state.locationCenter.lat,
       lng: this.state.locationCenter.lng
@@ -127,7 +110,8 @@ class Map extends React.Component {
 Map.propTypes = {
   center: PropTypes.object.isRequired,
   markers: PropTypes.array.isRequired,
-  updateTargetInfo: PropTypes.func.isRequired
+  updateTargetInfo: PropTypes.func.isRequired,
+  topicsList:PropTypes.array.isRequired
 };
 
 export default Map;

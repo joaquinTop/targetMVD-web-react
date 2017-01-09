@@ -20,7 +20,7 @@ export const HomePage = (props) => {
     return (
       <div className='outer'>
         <SideBar
-          className="sidebar"/>
+        className="sidebar"/>
         <GoogleMap/>
       </div>
     );

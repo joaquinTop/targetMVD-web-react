@@ -15,3 +15,6 @@ export const RESET_FREE_TARGET = 'RESET_FREE_TARGET';
 // alerts
 export const CREATE_ALERT = 'CREATE_ALERT';
 export const DELETE_ALERT = 'DELETE_ALERT';
+
+// topics
+export const LOAD_TOPICS = 'LOAD_TOPICS';
