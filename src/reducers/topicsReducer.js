@@ -10,7 +10,7 @@ export default function targetReducer(state = initialState.topics, action){
         return {
           id : el.topic_id,
           label : el.label,
-          url : el.url
+          url : el.icon
         }
       });
 

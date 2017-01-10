@@ -48,10 +48,29 @@ class Map extends React.Component {
           lng: venue.lng
         }
       };
-      const icon = getTopicIcon(venue.topic, this.props.topicsList);
+      // const icon = getTopicIcon(venue.topic, this.props.topicsList);
+      let icon = '';
+      if (venue.topic !== null) {
+        icon = venue.topic.icon || getTopicIcon(venue.topic, this.props.topicsList);
+      }
+
       let opts = {};
       if (icon !== '') {
-        opts.icon = icon;
+        opts.icon = {
+          url: icon,
+          origin: {
+            x: 0,
+            y: 0
+          },
+          anchor: {
+            x: 16,
+            y: 14
+          },
+          scaledSize: {
+            height: 28,
+            width: 28
+          }
+        };
       }
       return <Marker {...opts} animation={constants.ANIMATION_DROP} key={venue.id} {...marker}/>;
     });

@@ -1,10 +1,9 @@
 import React, {PropTypes} from 'react';
 import {browserHistory} from 'react-router';
 import TextInput from '../common/TextInput';
-// import Topics from '../../res/topics';
 import smilies from '../../res/images/common/smilies.png';
 import Dropdown from 'react-dropdown';
-import { getTopicId, getTopicName } from '../../utils/TopicsHelper';
+import { getTopicId } from '../../utils/TopicsHelper';
 
 class TargetForm extends React.Component{
   constructor(props, context){
@@ -21,7 +20,6 @@ class TargetForm extends React.Component{
 
   onTopicChange(option) {
     console.log('You selected ', option.label);
-    debugger;
     let index = getTopicId(option.label, this.props.topicsList);
     this.props.updateTargetInfo("topic", index);
   }
@@ -39,10 +37,9 @@ class TargetForm extends React.Component{
         lat: this.props.currentTarget.lat,
         lng:  this.props.currentTarget.lng,
         radius: this.props.currentTarget.radius,
-        topic: this.props.currentTarget.topic
+        topic_id: this.props.currentTarget.topic
       }
     };
-    debugger;
     this.props.createTargetAction(targetJson);
     this.redirect();
   }
@@ -52,7 +49,7 @@ class TargetForm extends React.Component{
   }
 
   render(){
-    const defaultOption = getTopicName(this.props.currentTarget.topic);
+    const defaultOption = this.props.currentTarget.topic.label;
     const topicPlaceholder = defaultOption || 'What do you want to talk about?';
     const topicsName = this.props.topicsList.map(el => {
       return el.label;
