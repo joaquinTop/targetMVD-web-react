@@ -52,10 +52,6 @@ class TargetForm extends React.Component{
   render(){
     const defaultOption = getTopicName(this.props.currentTarget.topic);
     const topicPlaceholder = (defaultOption !== '' ? defaultOption:"What do you want to talk about?");
-    // const opts = {};
-    // if (!this.props.enabled) {
-    //   opts['disabled'] = 'disabled';
-    // }
     return (
       <div className="target-form-container">
         <form>

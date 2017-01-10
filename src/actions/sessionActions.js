@@ -1,7 +1,6 @@
 import * as types from './actionTypes';
 import userClient from '../client/UsersServerClient';
 import targetClient from '../client/TargetsServerClient';
-// import topicClient from '../client/TopicsServerClient';
 import { resetTargets } from './targetActions';
 import { setUser, removeUser } from '../utils/sessionHelper'
 import { createAlert } from './alertActions';
@@ -17,7 +16,6 @@ export function resetSession(){
 export function configureSession(data){
   return dispatch => {
     targetClient.setUserInfo(data.token, data.user_id);
-    // topicClient.setUserInfo(data.token);
     dispatch(updateSessionInformation("user_id", data.user_id));
     dispatch(updateSessionInformation("user_token", data.token));
     dispatch(updateSessionInformation("isLoggedIn", true));

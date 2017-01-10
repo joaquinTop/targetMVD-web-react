@@ -59,7 +59,7 @@ class Map extends React.Component {
       const icon = getTopicIcon(venue.topic);
       let opts = {};
       if (icon !== '') {
-        opts['icon'] = icon;
+        opts.icon = icon;
       }
       return <Marker {...opts} animation={constants.ANIMATION_DROP} key={i} {...marker}/>;
     });

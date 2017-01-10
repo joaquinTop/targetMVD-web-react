@@ -42,7 +42,6 @@ export const SideBarContainer = (props) => {
       createTargetAction={props.actions.createTarget}
       createAlertAction={props.actions.createAlert}>
       </TargetForm>
-      {/* resetFreeTarget={props.actions.resetFreeTarget} */}
       <button onClick={logOut} type="button" className="btn btn-danger btn-sign-out">Sign out</button>
     </div>
     );
@@ -55,7 +54,7 @@ SideBarContainer.propTypes = {
   alert: PropTypes.object.isRequired
 };
 
-function mapStateToProps(state) {
+function mapStateToProps({state}) {
   return {
     newTarget: state.newTarget,
     session: state.session,

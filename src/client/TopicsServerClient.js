@@ -8,14 +8,14 @@ class TopicClient {
     instance = axios.create({
       baseURL: 'http://localhost:3001/api/v1',
       timeout: 2000,
-      headers: {'Content-Type': 'application/json', 'Accept': 'application/json', 'X-USER-TOKEN': userToken}
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json', 'X-USER-TOKEN': userToken }
     });
   }
 
   static getTopics() {
     return new Promise((resolve, reject) => {
       instance.get('/topics').then((res => {
-        const {data} = res;
+        const { data } = res;
         resolve(data);
       })).catch(error => {
         console.log(error);

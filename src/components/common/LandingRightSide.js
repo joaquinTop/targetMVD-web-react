@@ -8,13 +8,11 @@ const LandingRightSide = () => {
       <MediaQuery query="(min-width: 1224px)">
         <div className="column-right-half">
           <img className="rectangle" src={image}></img>
-          {/* <div className="rectangle"></div> */}
         </div>
       </MediaQuery>
       <MediaQuery query="(max-width: 1224px)">
         <div className="column-right">
           <img className="rectangle" src={image}></img>
-          {/* <div className="rectangle"></div> */}
         </div>
       </MediaQuery>
     </div>
