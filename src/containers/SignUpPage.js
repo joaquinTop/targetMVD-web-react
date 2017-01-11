@@ -27,9 +27,9 @@ SignUpPage.propTypes = {
   session: PropTypes.object.isRequired
 };
 
-function mapStateToProps(state) {
+const mapStateToProps = ({ session }) => {
   return {
-    session: state.session
+    session
   };
 }
 

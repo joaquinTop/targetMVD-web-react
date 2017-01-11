@@ -28,10 +28,10 @@ GoogleMapContainer.propTypes = {
   actions: PropTypes.object.isRequired
 };
 
-function mapStateToProps(state) {
+const mapStateToProps = ({ targets, newTarget }) => {
   return {
-    targets: state.targets,
-    newTarget: state.newTarget
+    targets,
+    newTarget
   };
 }
 

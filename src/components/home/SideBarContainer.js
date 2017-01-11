@@ -54,11 +54,11 @@ SideBarContainer.propTypes = {
   alert: PropTypes.object.isRequired
 };
 
-function mapStateToProps({state}) {
+const mapStateToProps = ({ newTarget, session, alert }) => {
   return {
-    newTarget: state.newTarget,
-    session: state.session,
-    alert: state.alert
+    newTarget,
+    session,
+    alert
   };
 }
 

@@ -41,10 +41,10 @@ SignInPage.propTypes = {
   alert: PropTypes.object.isRequired
 };
 
-function mapStateToProps(state) {
+const mapStateToProps = ({ session, alert }) => {
   return {
-    session: state.session,
-    alert: state.alert
+    session,
+    alert
   };
 }
 
