@@ -5,7 +5,6 @@ import {bindActionCreators} from 'redux';
 import * as sessionActions from '../actions/sessionActions';
 import SignUpForm from '../components/signup/SignUpForm';
 import LandingRightSide from '../components/common/LandingRightSide';
-import MediaQuery from 'react-responsive';
 
 export const SignUpPage = (props) => {
 
@@ -16,12 +15,7 @@ export const SignUpPage = (props) => {
 
   return (
     <div>
-      <MediaQuery query="(min-width: 1224px)">
-        <SignUpForm signUpAction={props.actions.signUp} style="column-half"/>
-      </MediaQuery>
-      <MediaQuery query="(max-width: 1224px)">
-        <SignUpForm signUpAction={props.actions.signUp} style="none"/>
-      </MediaQuery>
+      <SignUpForm signUpAction={props.actions.signUp} style="column-half-media"/>
       <LandingRightSide/>
     </div>
 

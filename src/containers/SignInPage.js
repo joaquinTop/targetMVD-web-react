@@ -8,7 +8,6 @@ import CustomAlert from '../utils/uiHelper/CustomAlert';
 import SignInForm from '../components/signin/SignInForm';
 import LandingRightSide from '../components/common/LandingRightSide';
 import { getUser } from '../utils/sessionHelper'
-import MediaQuery from 'react-responsive';
 
 export const SignInPage = (props) => {
   const user = getUser();
@@ -30,12 +29,7 @@ export const SignInPage = (props) => {
   return (
     <div>
       <CustomAlert/>
-      <MediaQuery query="(min-width: 1224px)">
-        <SignInForm signInAction={props.actions.signIn} signInWithFBAction={props.actions.signInWithFB} style="column-half"/>
-      </MediaQuery>
-      <MediaQuery query="(max-width: 1224px)">
-        <SignInForm signInAction={props.actions.signIn} signInWithFBAction={props.actions.signInWithFB} style="none"/>
-      </MediaQuery>
+      <SignInForm signInAction={props.actions.signIn} signInWithFBAction={props.actions.signInWithFB} style="column-half-media"/>
       <LandingRightSide/>
     </div>
   );

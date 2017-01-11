@@ -25,7 +25,18 @@
 	display: inline-block;
 }
 
-.column-riht-media{
+.column-half-media{
+	@media (min-width: 1224px) {
+		width: 50%;
+		height: 100%;
+		min-height: 768px;
+		display: inline-block;
+		margin-bottom: 20px;
+		float: left;
+	}
+}
+
+.column-right-media{
 	@media (min-width: 1224px) {
 		width: 50%;
 		height: 100%;
