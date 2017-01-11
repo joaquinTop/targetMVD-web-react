@@ -11,10 +11,10 @@ export const GoogleMapContainer = (props) => {
   };
 
   let markers = props.targets;
-  if (props.newTarget.isVisible) {
-    markers.push(props.newTarget);
-  }
-
+  // const newTarget = props.newTarget;
+  // if (newTarget.isVisible) {
+  //   markers.push(props.newTarget);
+  // }
   return (
     <div className="map">
       <Map center={location} markers={markers} updateTargetInfo={props.actions.updateFreeTarget} newTarget={props.newTarget} topicsList={props.topics}/>

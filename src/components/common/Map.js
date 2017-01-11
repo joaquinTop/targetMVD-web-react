@@ -12,11 +12,39 @@ class Map extends React.Component {
     this.onMapClick = this.onMapClick.bind(this);
     this.success = this.success.bind(this);
     this.error = this.error.bind(this);
+    this.getOpts = this.getOpts.bind(this);
     this.state = {
       locationCenter: this.props.center
     };
 
     getMyPosition(this.success, this.error);
+  }
+
+  getOpts(venue){
+    let icon = '';
+    if (venue.topic !== null) {
+      icon = venue.topic.icon || getTopicIcon(venue.topic, this.props.topicsList);
+    }
+
+    let opts = {};
+    if (icon !== '') {
+      opts['icon'] = {
+        url: icon,
+        origin: {
+          x: 0,
+          y: 0
+        },
+        anchor: {
+          x: 16,
+          y: 14
+        },
+        scaledSize: {
+          height: 28,
+          width: 28
+        }
+      };
+    }
+    return opts;
   }
 
   success(pos){
@@ -48,32 +76,21 @@ class Map extends React.Component {
           lng: venue.lng
         }
       };
-      // const icon = getTopicIcon(venue.topic, this.props.topicsList);
-      let icon = '';
-      if (venue.topic !== null) {
-        icon = venue.topic.icon || getTopicIcon(venue.topic, this.props.topicsList);
-      }
-
-      let opts = {};
-      if (icon !== '') {
-        opts.icon = {
-          url: icon,
-          origin: {
-            x: 0,
-            y: 0
-          },
-          anchor: {
-            x: 16,
-            y: 14
-          },
-          scaledSize: {
-            height: 28,
-            width: 28
-          }
-        };
-      }
-      return <Marker {...opts} animation={constants.ANIMATION_DROP} key={venue.id} {...marker}/>;
+      const opts = this.getOpts(venue);
+      return <Marker {...opts} animation={constants.ANIMATION_DROP} key={i} {...marker}/>;
     });
+
+    if (this.props.newTarget.isVisible) {
+      const newTargetMarker = {
+        position: {
+          lat: this.props.newTarget.lat,
+          lng: this.props.newTarget.lng
+        }
+      };
+
+      const opts = this.getOpts(this.props.newTarget);
+      markers.push( <Marker {...opts} animation={constants.ANIMATION_DROP} key={markers.length} {...newTargetMarker}/> );
+    }
 
     if (markers.length > 0) {
       let myPosMarker = {
@@ -96,6 +113,16 @@ class Map extends React.Component {
         strokeOpacity: 0
       });
     });
+
+    let newTargetRadius = getCircle(this.props.newTarget.radius * 10, {
+      lat: this.props.newTarget.lat,
+      lng: this.props.newTarget.lng
+    }, {
+      fillColor: 'rgb(239, 197, 55)',
+      fillOpacity: 0.70,
+      strokeOpacity: 0
+    });
+    circles.push(newTargetRadius);
 
     let myPositionRadius = getCircle(
     200, {
@@ -130,7 +157,8 @@ Map.propTypes = {
   center: PropTypes.object.isRequired,
   markers: PropTypes.array.isRequired,
   updateTargetInfo: PropTypes.func.isRequired,
-  topicsList:PropTypes.array.isRequired
+  topicsList:PropTypes.array.isRequired,
+  newTarget:PropTypes.object.isRequired
 };
 
 export default Map;
