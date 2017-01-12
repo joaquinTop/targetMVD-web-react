@@ -54,7 +54,7 @@ export const getTopicName = (id) => {
     case 10:
       return 'Food';
     default:
-      return '';
+      return undefined;
   }
 }
 

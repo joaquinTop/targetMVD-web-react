@@ -8,13 +8,13 @@
 	font-size: 11px;
 	font-weight: 600;
 	letter-spacing: 0.7px;
-	color: #000000;
+	color: $text-primary-color;
 }
 
 .custom-target-input{
   width: 257px;
   height: 30px;
-  border: solid 0.5px #060606;
+  border: solid 0.5px $text-primary-color;
   text-align: center;
   vertical-align: middle;
   display: inline-block;
@@ -26,7 +26,7 @@
 	font-size: 11px;
 	font-weight: 600;
 	letter-spacing: 0.7px;
-	color: #000000;
+	color: $text-primary-color;
 }
 
 .target-form-input{
@@ -35,19 +35,19 @@
 	font-size: 11px;
 	font-weight: 600;
 	letter-spacing: 0.7px;
-	color: #000000;
+	color: $text-primary-color;
 }
 
 .btn-save-target{
   width: 113.5px;
   height: 39px;
-	background-color: #000000;
-	color: #ffffff;
+	background-color: $text-primary-color;
+	color: $background-primary-color;
 	font-family: sans-serif;;
 	font-size: 11px;
 	letter-spacing: 1.6px;
 	margin-top: 6px;
-	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.3);
+	box-shadow: 0 2px 4px 0 $box-shadow-color;
 }
 
 .target-form-firstItem{
@@ -57,7 +57,7 @@
   vertical-align: middle;
   line-height: 39px;
   display: inline-block;
-  border: solid 0.5px #000000;
+  border: solid 0.5px $text-primary-color;
 }
 
 .target-form-listItem{
@@ -67,7 +67,7 @@
   vertical-align: middle;
   line-height: 30px;
   display: inline-block;
-  border-right: solid 0.5px #000000;
-  border-left: solid 0.5px #000000;
-  border-bottom: solid 0.5px #000000;
+  border-right: solid 0.5px $background-secondary-color;
+  border-left: solid 0.5px $background-secondary-color;
+  border-bottom: solid 0.5px $background-secondary-color;
 }

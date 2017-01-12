@@ -1,8 +1,8 @@
 export default {
-  targets:[],
-  newTarget:{
+  targets: [],
+  newTarget: {
     id: 0,
-    title:"",
+    title: "",
     lat: 0,
     lng: 0,
     radius: 200,
@@ -10,15 +10,15 @@ export default {
     isVisible: false,
     isActive: true
   },
-  session:{
-    user_id:'',
-    user_token:'',
-    isLoggedIn:false,
-    currentPage:'SignUpPage'
+  session: {
+    user_id: '',
+    user_token: '',
+    isLoggedIn: false,
+    currentPage: 'SignUpPage'
   },
-  alert:{
-    goal:"",
-    text:"",
-    alertType:""
+  alert: {
+    goal: "",
+    text: "",
+    alertType: ""
   }
 };

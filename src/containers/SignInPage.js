@@ -29,7 +29,11 @@ export const SignInPage = (props) => {
   return (
     <div>
       <CustomAlert/>
-      <SignInForm signInAction={props.actions.signIn} signInWithFBAction={props.actions.signInWithFB} style="column-half-media"/>
+      <SignInForm
+        signInAction={props.actions.signIn}
+        signInWithFBAction={props.actions.signInWithFB}
+        style="column-half-media"
+      />
       <LandingRightSide/>
     </div>
   );

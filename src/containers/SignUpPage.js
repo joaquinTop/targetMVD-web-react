@@ -28,9 +28,7 @@ SignUpPage.propTypes = {
 };
 
 const mapStateToProps = ({ session }) => {
-  return {
-    session
-  };
+  return { session };
 }
 
 function mapDispatchToProps(dispatch) {

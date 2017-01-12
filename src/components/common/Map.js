@@ -49,7 +49,7 @@ class Map extends React.Component {
 
   render() {
     const mapContainer = <div style={{height:'100%', width:'100%'}}></div>;
-    let markers = this.props.markers.map((venue, i) => {
+    let markers = this.props.markers.map((venue) => {
       const marker = {
         position: {
           lat: venue.lat,
@@ -61,7 +61,7 @@ class Map extends React.Component {
       if (icon !== '') {
         opts.icon = icon;
       }
-      return <Marker {...opts} animation={constants.ANIMATION_DROP} key={i} {...marker}/>;
+      return <Marker {...opts} animation={constants.ANIMATION_DROP} key={venue.id} {...marker}/>;
     });
 
     if (markers.length > 0) {
@@ -71,7 +71,7 @@ class Map extends React.Component {
           lng: this.state.locationCenter.lng
         }
       };
-      markers.push( <Marker icon={markerIcon} animation={constants.ANIMATION_DROP} key={markers.length} {...myPosMarker}/> );
+      markers.push( <Marker icon={markerIcon} animation={constants.ANIMATION_DROP} key={0} {...myPosMarker}/> );
     }
 
     return(
