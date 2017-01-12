@@ -1,0 +1,54 @@
+.sign-up-title {
+	width: 156px;
+	height: 27px;
+	margin: 108px 0 21px 0;
+	font-size: 20px;
+	font-weight: bold;
+  display: inline-block;
+	letter-spacing: 3px;
+	color: $text-primary-color;
+}
+
+.sign-up-field {
+	width: 102.3px;
+	height: 15px;
+	margin: 17px 0 4px 0;
+	font-family: sans-serif;
+	font-size: 11px;
+	font-weight: 600;
+	letter-spacing: 1.6px;
+	display: inline-block;
+	text-align: center;
+	color: $text-primary-color;
+}
+
+.sign-in-link {
+	width: 102.3px;
+	height: 15px;
+	font-family: sans-serif;
+	font-size: 11px;
+	font-weight: 600;
+	margin-bottom: 27px;
+	letter-spacing: 1.6px;
+	display: inline-block;
+	text-align: center;
+	color: $text-primary-color;
+}
+
+.custom-line {
+	width: 121px;
+	border: solid 0.5px $background-secondary-color;
+}
+
+.btn-sign-up{
+	width: 180px;
+	height: 37px;
+	background-color: $text-primary-color;
+	color: #ffffff;
+	font-family: sans-serif;;
+	font-size: 11px;
+	letter-spacing: 1.6px;
+	display: inline-block;
+	margin-top: 34px;
+	box-shadow: 0 2px 4px 0 $box-shadow-color;
+}

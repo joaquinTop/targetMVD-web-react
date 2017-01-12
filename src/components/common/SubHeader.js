@@ -1,18 +1,14 @@
 import React, {PropTypes} from 'react';
 
-export class SubHeader extends React.Component {
-  render() {
-    return(
-      <div className={this.props.style}>
-        <h5 className="subHeaderTitle">{this.props.title}</h5>
-      </div>
-    );
-  }
-}
+
+export const SubHeader = (props) => {
+  return(
+    <h5 className="sidebarSubHeader">{props.title}</h5>
+  );
+};
 
 SubHeader.propTypes = {
-  title: PropTypes.string.isRequired,
-  style: PropTypes.string.isRequired
+  title: PropTypes.string.isRequired
 };
 
 export default SubHeader;

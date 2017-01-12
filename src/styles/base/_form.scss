@@ -1,0 +1,38 @@
+.form{
+	text-align: center;
+}
+
+.btn-sign-out{
+  margin-top: 15px;
+}
+
+.headerTitle {
+	font-family: fantasy;
+	letter-spacing: 3px;
+	color: $background-primary-color;
+}
+
+.subHeaderTitle {
+	font-family: monospace;
+	letter-spacing: 2px;
+	color: $background-secondary-color;
+	display: table-cell;
+	vertical-align: middle;
+}
+
+.custom-input{
+	width: 180px;
+	height: 37px;
+	border: solid 0.5px $border-primary-color;
+	display: inline-block;
+}
+
+.custom-select{
+	width: 180px;
+	height: 37px;
+	border: solid 0.5px $border-primary-color;
+	-webkit-appearance: none;
+  -webkit-border-radius: 0px;
+	text-align-last: center;
+	display: inline-block;
+}

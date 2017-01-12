@@ -1,0 +1,61 @@
+.Dropdown-root {
+  position: relative;
+}
+
+.Dropdown-control {
+  width: 257px;
+  height: 39px;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 39px;
+  display: inline-block;
+  border: solid 0.5px $border-primary-color;
+  transition: all 200ms ease;
+}
+
+.Dropdown-control:hover {
+  box-shadow: 0 1px 0 $option-hover-color;
+  cursor: pointer;
+}
+
+.Dropdown-arrow {
+  border-color: $border-secondary-color transparent transparent;
+  border-style: solid;
+  border-width: 5px 5px 0;
+  content: ' ';
+  display: block;
+  height: 0;
+  margin-top: -ceil(2.5);
+  position: absolute;
+  right: 10px;
+  top: 14px;
+  width: 0
+}
+
+.is-open .Dropdown-arrow {
+  border-color: transparent transparent $border-secondary-color;
+  border-width: 0 5px 5px;
+}
+
+.Dropdown-option {
+  width: 257px;
+  height: 30px;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 30px;
+  display: inline-block;
+  border-right: solid 0.5px $text-primary-color;
+  border-left: solid 0.5px $text-primary-color;
+  border-bottom: solid 0.5px $text-primary-color;
+}
+
+.Dropdown-option:hover {
+  background-color: $hover-background-color;
+  color: $hover-color;
+  cursor: pointer;
+}
+
+.Dropdown-option.is-selected {
+  background-color: $hover-background-color;
+  color: $hover-color;
+}

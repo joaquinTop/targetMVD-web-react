@@ -8,6 +8,7 @@ class TargetClient {
     instance = axios.create({
       baseURL: 'http://localhost:3001/api/v1/users/' + userIdentifier,
       // timeout can be overriden in those cases where the answer might take a while (i.e. images)
+      // target-mvd-api.herokuapp.com
       timeout: 2000,
       headers: {'Content-Type': 'application/json', 'Accept': 'application/json', 'X-USER-TOKEN': userToken}
     });

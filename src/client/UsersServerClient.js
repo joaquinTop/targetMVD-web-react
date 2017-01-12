@@ -3,6 +3,7 @@ import axios from 'axios';
 let instance = axios.create({
   baseURL: 'http://localhost:3001/api/v1/',
   // timeout can be overriden in those cases where the answer might take a while
+  // target-mvd-api.herokuapp.com
   timeout: 2000,
   headers: {'Content-Type': 'application/json', 'Accept': 'application/json'}
 });
@@ -50,13 +51,6 @@ class UserClient {
   }
 
   static signOut(token) {
-    // axios.delete('http://localhost:3001/api/v1/users/sign_out', {
-    //   headers: {
-    //   'uid': uid,
-    //   'Content-Type': 'application/json'
-    //   }
-    // });
-
     instance.defaults.headers['X-USER-TOKEN'] = token;
     return new Promise((resolve, reject) => {
       instance.delete('users/sign_out', null).then((res => {

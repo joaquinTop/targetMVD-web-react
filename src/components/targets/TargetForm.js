@@ -2,6 +2,9 @@ import React, {PropTypes} from 'react';
 import {browserHistory} from 'react-router';
 import TextInput from '../common/TextInput';
 import Topics from '../../res/topics';
+import smilies from '../../res/images/common/smilies.png';
+import Dropdown from 'react-dropdown';
+import { getTopicId, getTopicName } from '../../utils/TopicsHelper';
 
 class TargetForm extends React.Component{
   constructor(props, context){
@@ -16,20 +19,28 @@ class TargetForm extends React.Component{
     this.props.updateTargetInfo(fieldName, value);
   }
 
-  onTopicChange(e) {
-    this.props.updateTargetInfo("topic", e.target.textContent);
+  onTopicChange(option) {
+    console.log('You selected ', option.label);
+    this.props.updateTargetInfo("topic", getTopicId(option.label));
   }
 
   onTargetSubmit(e){
     e.preventDefault();
-    let targetJson = {"target":
+    if (!this.props.enabled) {
+      this.props.createAlertAction("SideBarContainer", "Max of 10 targets reached", "error");
+      return;
+    }
+
+    let targetJson = {
+      target:
       {
-        "lat": this.props.currentTarget.lat,
-        "lng":  this.props.currentTarget.lng,
-        "radius": this.props.currentTarget.radius,
-        "topic": this.props.currentTarget.topic
+        lat: this.props.currentTarget.lat,
+        lng:  this.props.currentTarget.lng,
+        radius: this.props.currentTarget.radius,
+        topic: this.props.currentTarget.topic
       }
     };
+
     this.props.createTargetAction(targetJson);
     this.redirect();
   }
@@ -39,22 +50,48 @@ class TargetForm extends React.Component{
   }
 
   render(){
+    const defaultOption = getTopicName(this.props.currentTarget.topic);
+    const topicPlaceholder = defaultOption || 'What do you want to talk about?';
     return (
-      <div>
+      <div className="target-form-container">
         <form>
-          <label for="areaLength">SPECIFY AREA LENGTH</label><br/>
-          <TextInput id="areaLength" onChange={this.onFieldChange} name="radius" areaLength={"number"} value={this.props.currentTarget.radius} required={"true"} autofocus={"true"}></TextInput><br/>
-          <label for="targetTitle">TARGET TITLE</label><br/>
-          <TextInput id="targetTitle" onChange={this.onFieldChange} name="title" type={"text"} value={this.props.currentTarget.title} required={"true"}></TextInput><br/>
-          <label>TOPIC</label><br/>
-          <ul className="common-list">
-            <li>What do you want to talk about?</li>
-            {Topics.map((option) =>{
-              return <li onClick={this.onTopicChange}><a>{option}</a></li>;
-            })
-            }
-          </ul>
-          <input type="submit" value="Save Target" onClick={this.onTargetSubmit}></input><br/>
+          <label className="target-area-field" htmlFor="areaLength">SPECIFY AREA LENGTH</label><br/>
+          <TextInput
+            id="areaLength"
+            onChange={this.onFieldChange}
+            style="custom-target-input"
+            name="radius"
+            areaLength={"number"}
+            value={this.props.currentTarget.radius}
+            required={"true"}
+            autofocus={"true"}
+          />
+          <br />
+          <label className="target-form-field" htmlFor="targetTitle">TARGET TITLE</label><br/>
+          <TextInput
+            id="targetTitle"
+            onChange={this.onFieldChange}
+            style="custom-target-input"
+            name="title"
+            type={"text"}
+            value={this.props.currentTarget.title}
+            required={"true"}
+          />
+          <br />
+          <label className="target-form-field">SELECT A TOPIC</label><br/>
+          <Dropdown
+            options={Topics}
+            onChange={this.onTopicChange}
+            value={defaultOption}
+            placeholder={topicPlaceholder}
+          />
+          <input
+            className="btn-save-target"
+            type="submit"
+            value="SAVE TARGET"
+            onClick={this.onTargetSubmit}
+          /><br/>
+          <img className="smilies-img-sidebar" src={smilies} alt="Smiley faces" />
         </form>
       </div>
     );
@@ -65,7 +102,8 @@ TargetForm.propTypes = {
   enabled:PropTypes.bool.isRequired,
   updateTargetInfo:PropTypes.func.isRequired,
   createTargetAction:PropTypes.func.isRequired,
-  currentTarget:PropTypes.object.isRequired
+  currentTarget:PropTypes.object.isRequired,
+  createAlertAction:PropTypes.func.isRequired
 };
 
 export default TargetForm;

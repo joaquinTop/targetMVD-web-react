@@ -1,0 +1,14 @@
+#circle {
+	width: 100px;
+	height: 100px;
+  background-color: rgba 239 197 55, 0.70;
+	-moz-border-radius: 50px;
+	-webkit-border-radius: 50px;
+	border-radius: 50px;
+}
+
+.circle2 {
+	border-radius: 50%;
+	width: 100px;
+	height: 100px;
+}

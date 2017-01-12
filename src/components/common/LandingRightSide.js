@@ -1,12 +1,14 @@
 import React from 'react';
+import image from '../../res/images/common/right-png.png';
 
 const LandingRightSide = () => {
   return (
-    <div className="column">
-      <div className="rectangle"></div>
+    <div>
+      <div className="column-right-media">
+        <img className="rectangle" src={image}></img>
+      </div>
     </div>
   );
 };
-
 
 export default LandingRightSide;

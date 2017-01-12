@@ -1,4 +1,4 @@
-//session
+// session
 export const UPDATE_SESSION = 'UPDATE_SESSION';
 export const RESET_SESSION = 'RESET_SESSION';
 export const SIGN_IN_SUCCESS = 'SIGN_IN_SUCCESS';
@@ -11,3 +11,7 @@ export const UPDATE_FREE_TARGET = 'UPDATE_FREE_TARGET';
 export const DELETE_TARGET = 'DELETE_TARGET';
 export const RESET_TARGETS = 'RESET_TARGETS';
 export const RESET_FREE_TARGET = 'RESET_FREE_TARGET';
+
+// alerts
+export const CREATE_ALERT = 'CREATE_ALERT';
+export const DELETE_ALERT = 'DELETE_ALERT';

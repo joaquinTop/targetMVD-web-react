@@ -1,7 +1,8 @@
 import React, {PropTypes} from 'react';
 import {GoogleMapLoader, GoogleMap, Marker} from 'react-google-maps';
-import markerIcon from '../../res/images/myPosition.png';
+import markerIcon from '../../res/images/targets/myPosition.png';
 import * as constants from '../../constants/constants';
+import { getTopicIcon } from '../../utils/TopicsHelper';
 
 class Map extends React.Component {
   constructor(props, context){
@@ -47,16 +48,20 @@ class Map extends React.Component {
   }
 
   render() {
-
     const mapContainer = <div style={{height:'100%', width:'100%'}}></div>;
-    let markers = this.props.markers.map((venue, i) => {
+    let markers = this.props.markers.map((venue) => {
       const marker = {
         position: {
           lat: venue.lat,
           lng: venue.lng
         }
       };
-      return <Marker animation={constants.ANIMATION_DROP} key={i} {...marker}/>;
+      const icon = getTopicIcon(venue.topic);
+      let opts = {};
+      if (icon !== '') {
+        opts.icon = icon;
+      }
+      return <Marker {...opts} animation={constants.ANIMATION_DROP} key={venue.id} {...marker}/>;
     });
 
     if (markers.length > 0) {
@@ -66,7 +71,7 @@ class Map extends React.Component {
           lng: this.state.locationCenter.lng
         }
       };
-      markers.push( <Marker icon={markerIcon} animation={constants.ANIMATION_DROP} key={markers.length} {...myPosMarker}/> );
+      markers.push( <Marker icon={markerIcon} animation={constants.ANIMATION_DROP} key={0} {...myPosMarker}/> );
     }
 
     return(

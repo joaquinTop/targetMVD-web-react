@@ -1,6 +1,7 @@
 import * as types from './actionTypes';
 import targetClient from '../client/TargetsServerClient';
 import {updateFreeTarget} from './newTargetActions';
+import {createAlert} from './alertActions';
 
 export function createTargetSuccess(target){
   return {type: types.CREATE_TARGET, target};
@@ -9,6 +10,7 @@ export function createTargetSuccess(target){
 export const createTarget = (target) => {
   return dispatch => {
     return targetClient.createTarget(target).then(data => {
+      dispatch(createAlert("SideBarContainer", "Target created successfully", "success"));
       dispatch(createTargetSuccess(data.target));
     }).catch(error => {
       console.log(error);
