@@ -14,5 +14,6 @@ export const getUser = () => {
 export const removeUser = () => {
   if (typeof(Storage) !== "undefined") {
     localStorage.removeItem('user');
+    localStorage.removeItem('myPositionCoords');
   }
 }
