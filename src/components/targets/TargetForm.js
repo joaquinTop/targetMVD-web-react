@@ -83,7 +83,7 @@ class TargetForm extends React.Component{
           <br />
           <label className="target-form-field">SELECT A TOPIC</label><br/>
           <Dropdown
-            options={Topics}
+            options={topicsName}
             onChange={this.onTopicChange}
             value={defaultOption}
             placeholder={topicPlaceholder}

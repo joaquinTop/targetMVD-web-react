@@ -77,7 +77,7 @@ class Map extends React.Component {
         }
       };
       const opts = this.getOpts(venue);
-      return <Marker {...opts} animation={constants.ANIMATION_DROP} key={i} {...marker}/>;
+      return <Marker {...opts} animation={constants.ANIMATION_DROP} key={venue.id} {...marker}/>;
     });
 
     if (this.props.newTarget.isVisible) {
