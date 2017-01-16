@@ -10,7 +10,7 @@ export default function alertReducer(state = initialState.alert, action){
         goal:action.goal,
         text:action.text,
         alertType:action.alertType
-      }
+      };
     }
 
     case types.DELETE_ALERT:{

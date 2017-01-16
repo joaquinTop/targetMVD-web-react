@@ -16,10 +16,9 @@ class UserClient {
           const {data} = res;
           resolve(data);
         })).catch(error => {
-          console.log(error);
           reject(error.message);
         });
-    })
+    });
   }
 
   static signIn(user) {
@@ -28,26 +27,24 @@ class UserClient {
           const {data} = res;
           resolve(data);
         })).catch(error => {
-          console.log(error);
           reject(error.message);
         });
-    })
+    });
   }
 
   static signInWithFB(accessToken) {
     const infoJson = {
       type: 'facebook',
       fb_access_token: accessToken
-    }
+    };
     return new Promise((resolve, reject) => {
         instance.post('/users/sign_in', infoJson).then((res => {
           const {data} = res;
           resolve(data);
         })).catch(error => {
-          console.log(error);
           reject(error.message);
         });
-    })
+    });
   }
 
   static signOut(token) {
@@ -57,7 +54,6 @@ class UserClient {
         const {data} = res;
         resolve(data);
       })).catch(error => {
-        console.log(error);
         reject(error.message);
       });
     });

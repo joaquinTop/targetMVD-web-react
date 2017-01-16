@@ -3,7 +3,7 @@ import userClient from '../client/UsersServerClient';
 import targetClient from '../client/TargetsServerClient';
 import topicClient from '../client/TopicsServerClient';
 import { resetTargets } from './targetActions';
-import { setUser, removeUser } from '../utils/sessionHelper'
+import { setUser, removeUser } from '../utils/sessionHelper';
 import { loadTopics } from '../actions/topicActions';
 import { createAlert } from './alertActions';
 
@@ -23,7 +23,7 @@ export function configureSession(data){
     dispatch(updateSessionInformation("user_token", data.token));
     dispatch(updateSessionInformation("isLoggedIn", true));
     dispatch(loadTopics());
-  }
+  };
 }
 
 export const signIn = (userJson) => {
@@ -33,7 +33,6 @@ export const signIn = (userJson) => {
       setUser(userJson);
     }).catch(error => {
       dispatch(createAlert("SignInPage", error, "error"));
-      console.log(error);
     });
   };
 };
@@ -44,7 +43,6 @@ export const signInWithFB = (accessToken) => {
       dispatch(configureSession(data));
     }).catch(error => {
       dispatch(createAlert("SignInPage", error, "error"));
-      console.log(error);
     });
   };
 };
@@ -55,7 +53,6 @@ export const signUp = (userJson) => {
       dispatch(configureSession(data));
     }).catch(error => {
       dispatch(createAlert("SignInPage", error, "error"));
-      console.log(error);
     });
   };
 };

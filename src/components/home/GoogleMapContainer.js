@@ -31,7 +31,7 @@ const mapStateToProps = ({ targets, newTarget, topics }) => {
     newTarget,
     topics
   };
-}
+};
 
 function mapDispatchToProps(dispatch) {
   return {

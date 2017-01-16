@@ -9,7 +9,7 @@ const TextInput = (props) => {
     <input className={props.style || "custom-input"}
     type={props.type}
     placeholder={props.placeholder}
-    value={props.value}
+    value={props.value || ""}
     onChange={handleChange}
     required={props.required}
     autoFocus={props.autofocus}

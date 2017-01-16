@@ -6,7 +6,7 @@ export const getTopicId = (name, topicsList) => {
     }
   }
   return id;
-}
+};
 
 
 export const getTopicName = (id, topicsList) => {
@@ -17,14 +17,14 @@ export const getTopicName = (id, topicsList) => {
     }
   }
   return name;
-}
+};
 
 export const getTopicIcon = (id, topicsList) => {
-  let url;
+  let url = '';
   for (let i = 0; i < topicsList.length; i++) {
     if (topicsList[i].id === id) {
       url = topicsList[i].url;
     }
   }
   return url;
-}
+};

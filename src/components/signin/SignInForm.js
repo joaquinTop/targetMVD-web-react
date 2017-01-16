@@ -2,7 +2,7 @@ import React, {PropTypes} from 'react';
 import {Link, browserHistory} from 'react-router';
 import TextInput from '../common/TextInput';
 import * as strings from '../../res/strings/strings-en';
-import * as constants from '../../constants/constants.js'
+import * as constants from '../../constants/constants.js';
 import validateInput from '../../utils/validations/signup.js';
 import { FacebookLogin } from 'react-facebook-login-component';
 import smilies from '../../res/images/common/smilies.png';
@@ -21,7 +21,6 @@ class SignInForm extends React.Component{
   }
 
   responseFacebook (response) {
-    console.log(response);
     this.props.signInWithFBAction(response.accessToken);
   }
 
@@ -62,17 +61,40 @@ class SignInForm extends React.Component{
     return (
       <div className={this.props.style}>
         <div className="form">
-          <img className="smilies-img" src={smilies}></img><br/>
-          <h2 className="sign-in-title">TARGET MVD</h2><br/>
-          <h3 className="sign-in-subtitle">{strings.SIGN_IN_FIND_PEOPLE_NEAR_YOU}</h3><br/>
-          <h3 className="sign-in-info-text">{strings.SIGN_IN_CREATE_TARGET}</h3><br/>
+          <img className="smilies-img" src={smilies} />
+          <br />
+          <h2 className="sign-in-title">TARGET MVD</h2>
+          <br />
+          <h3 className="sign-in-subtitle">{strings.SIGN_IN_FIND_PEOPLE_NEAR_YOU}</h3>
+          <br />
+          <h3 className="sign-in-info-text">{strings.SIGN_IN_CREATE_TARGET}</h3>
+          <br />
           <form>
-            <label className="sign-in-email-field" htmlFor="inputEmail">EMAIL</label><br/>
-            <TextInput id="inputEmail" onChange={this.onFieldChange} name="email" type={"email"} value={user.email} required={"true"} autofocus={"true"}></TextInput><br/>
-            <label className="sign-in-field" htmlFor="inputPassword">PASSWORD</label><br/>
-            <TextInput id="inputPassword" onChange={this.onFieldChange} name="password" type={"password"} value={user.password} required={"true"}></TextInput><br/>
-            <input className="btn-sign-in" type="submit" value="SIGN IN" onClick={this.signIn}></input><br/>
-            <label className="forgot-your-password">Forgot your password?</label><br/>
+            <label className="sign-in-email-field" htmlFor="inputEmail">EMAIL</label><br />
+            <TextInput
+              id="inputEmail"
+              onChange={this.onFieldChange}
+              name="email"
+              type={"email"}
+              value={user.email}
+              required={"true"}
+              autofocus={"true"}
+            />
+            <br />
+            <label className="sign-in-field" htmlFor="inputPassword">PASSWORD</label><br />
+            <TextInput
+              id="inputPassword"
+              onChange={this.onFieldChange}
+              name="password"
+              type={"password"}
+              value={user.password}
+              required={"true"}
+            />
+            <br />
+            <input className="btn-sign-in" type="submit" value="SIGN IN" onClick={this.signIn} />
+            <br />
+            <label className="forgot-your-password">Forgot your password?</label>
+            <br />
           </form>
           <FacebookLogin
           socialId={constants.APP_SOCIAL_ID}

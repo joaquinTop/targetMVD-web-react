@@ -18,7 +18,6 @@ class TopicClient {
         const { data } = res;
         resolve(data);
       })).catch(error => {
-        console.log(error);
         reject(error.message);
       });
     });

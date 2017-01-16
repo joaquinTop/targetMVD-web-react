@@ -19,7 +19,6 @@ class TargetForm extends React.Component{
   }
 
   onTopicChange(option) {
-    console.log('You selected ', option.label);
     let index = getTopicId(option.label, this.props.topicsList);
     this.props.updateTargetInfo("topic", index);
   }

@@ -9,7 +9,7 @@ import * as alertActions from '../../actions/alertActions';
 import CustomAlert from '../../utils/uiHelper/CustomAlert';
 import Header from '../common/Header';
 import SubHeader from '../common/SubHeader';
-import TargetForm from '../targets/TargetForm'
+import TargetForm from '../targets/TargetForm';
 import targetIcon from '../../res/images/common/targetIcon.png';
 
 export const SideBarContainer = (props) => {
@@ -17,7 +17,7 @@ export const SideBarContainer = (props) => {
   let logOut = () => {
     props.actions.signOut();
     browserHistory.push('/sign-in');
-  }
+  };
 
   let formEnabled = true;
   if (!props.newTarget.isActive) {
@@ -32,17 +32,18 @@ export const SideBarContainer = (props) => {
   return (
     <div className="sidebar">
       <CustomAlert/>
-      <Header title = {"CREATE TARGET"} style = "sidebarHeader"></Header>
-      <img className="target-icon" src={targetIcon}></img><br/>
-      <SubHeader title = {"CREATE NEW TARGET"}></SubHeader>
+      <Header title = {"CREATE TARGET"} style = "sidebarHeader" />
+      <img className="target-icon" src={targetIcon} />
+      <br/>
+      <SubHeader title = {"CREATE NEW TARGET"} />
       <TargetForm
-      enabled={formEnabled}
-      updateTargetInfo={props.actions.updateFreeTarget}
-      currentTarget={props.newTarget}
-      createTargetAction={props.actions.createTarget}
-      createAlertAction={props.actions.createAlert}
-      topicsList={props.topics}>
-      </TargetForm>
+        enabled={formEnabled}
+        updateTargetInfo={props.actions.updateFreeTarget}
+        currentTarget={props.newTarget}
+        createTargetAction={props.actions.createTarget}
+        createAlertAction={props.actions.createAlert}
+        topicsList={props.topics}
+      />
       <button onClick={logOut} type="button" className="btn btn-danger btn-sign-out">Sign out</button>
     </div>
     );
@@ -63,7 +64,7 @@ const mapStateToProps = ({ newTarget, session, alert, topics }) => {
     alert,
     topics
   };
-}
+};
 
 function mapDispatchToProps(dispatch) {
   return {

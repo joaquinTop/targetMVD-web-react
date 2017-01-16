@@ -20,7 +20,6 @@ class TargetClient {
         const {data} = res;
         resolve(data);
       })).catch(error => {
-        console.log(error);
         reject(error.message);
       });
     });
@@ -32,7 +31,6 @@ class TargetClient {
         const {data} = res;
         resolve(data);
       })).catch(error => {
-        console.log(error);
         reject(error.message);
       });
     });

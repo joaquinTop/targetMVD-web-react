@@ -29,7 +29,7 @@ SignUpPage.propTypes = {
 
 const mapStateToProps = ({ session }) => {
   return { session };
-}
+};
 
 function mapDispatchToProps(dispatch) {
   return {

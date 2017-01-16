@@ -11,7 +11,7 @@ export default function targetReducer(state = initialState.topics, action){
           id : el.topic_id,
           label : el.label,
           url : el.icon
-        }
+        };
       });
 
     default:

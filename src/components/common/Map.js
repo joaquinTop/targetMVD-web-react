@@ -78,7 +78,6 @@ class Map extends React.Component {
     let newState = Object.assign({}, this.state);
     newState.locationCenter.lat = parseFloat(crd.latitude.toFixed(6));
     newState.locationCenter.lng = parseFloat(crd.longitude.toFixed(6));
-    debugger;
     localStorage.setItem('myPositionCoords', JSON.stringify(newState.locationCenter));
     this.setState(newState);
   }
@@ -96,7 +95,7 @@ class Map extends React.Component {
   }
 
   render() {
-    const mapContainer = <div style={{height:'100%', width:'100%'}}></div>;
+    const mapContainer = <div style={{height:'100%', width:'100%'}} />;
 
     // TARGETS
     let markers = this.props.markers.map((venue) => {
