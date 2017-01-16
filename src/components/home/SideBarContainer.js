@@ -14,7 +14,7 @@ import targetIcon from '../../res/images/common/targetIcon.png';
 
 export const SideBarContainer = (props) => {
 
-  let logOut = () => {
+  const logOut = () => {
     props.actions.signOut();
     browserHistory.push('/sign-in');
   };
@@ -34,7 +34,7 @@ export const SideBarContainer = (props) => {
       <CustomAlert/>
       <Header title = {"CREATE TARGET"} style = "sidebarHeader" />
       <img className="target-icon" src={targetIcon} />
-      <br/>
+      <br />
       <SubHeader title = {"CREATE NEW TARGET"} />
       <TargetForm
         enabled={formEnabled}

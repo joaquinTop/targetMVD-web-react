@@ -19,7 +19,7 @@ class TargetForm extends React.Component{
   }
 
   onTopicChange(option) {
-    let index = getTopicId(option.label, this.props.topicsList);
+    const index = getTopicId(option.label, this.props.topicsList);
     this.props.updateTargetInfo("topic", index);
   }
 
@@ -30,7 +30,7 @@ class TargetForm extends React.Component{
       return;
     }
 
-    let targetJson = {
+    const targetJson = {
       target:
       {
         lat: this.props.currentTarget.lat,
@@ -57,7 +57,8 @@ class TargetForm extends React.Component{
     return (
       <div className="target-form-container">
         <form>
-          <label className="target-area-field" htmlFor="areaLength">SPECIFY AREA LENGTH</label><br/>
+          <label className="target-area-field" htmlFor="areaLength">SPECIFY AREA LENGTH</label>
+          <br />
           <TextInput
             id="areaLength"
             onChange={this.onFieldChange}
@@ -69,7 +70,8 @@ class TargetForm extends React.Component{
             autofocus={"true"}
           />
           <br />
-          <label className="target-form-field" htmlFor="targetTitle">TARGET TITLE</label><br/>
+          <label className="target-form-field" htmlFor="targetTitle">TARGET TITLE</label>
+          <br />
           <TextInput
             id="targetTitle"
             onChange={this.onFieldChange}
@@ -80,7 +82,8 @@ class TargetForm extends React.Component{
             required={"true"}
           />
           <br />
-          <label className="target-form-field">SELECT A TOPIC</label><br/>
+          <label className="target-form-field">SELECT A TOPIC</label>
+          <br />
           <Dropdown
             options={topicsName}
             onChange={this.onTopicChange}
@@ -92,7 +95,7 @@ class TargetForm extends React.Component{
             type="submit"
             value="SAVE TARGET"
             onClick={this.onTargetSubmit}
-          /><br/>
+          /><br />
           <img className="smilies-img-sidebar" src={smilies} alt="Smiley faces" />
         </form>
       </div>

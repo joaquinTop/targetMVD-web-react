@@ -54,7 +54,7 @@ class Map extends React.Component {
 
     let opts = {};
     if (icon !== '') {
-      opts['icon'] = {
+      opts.icon = {
         url: icon,
         origin: {
           x: 0,
