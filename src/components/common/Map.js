@@ -39,8 +39,6 @@ class Map extends React.Component {
     newState.locationCenter.lng = parseFloat(nextCenter.lng().toFixed(6));
     if (newState.locationCenter.lat === this.state.locationCenter.lat &&
       newState.locationCenter.lng === this.state.locationCenter.lng) {
-      // Notice: Check nextCenter equality here,
-      // or it will fire center_changed event infinitely
       return;
     }
     this.setState(newState);
