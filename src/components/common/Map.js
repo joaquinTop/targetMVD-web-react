@@ -39,6 +39,8 @@ class Map extends React.Component {
     newState.locationCenter.lng = parseFloat(nextCenter.lng().toFixed(6));
     if (newState.locationCenter.lat === this.state.locationCenter.lat &&
       newState.locationCenter.lng === this.state.locationCenter.lng) {
+      // Notice: Check nextCenter equality here,
+      // or it will fire center_changed event infinitely
       return;
     }
     this.setState(newState);
@@ -93,7 +95,7 @@ class Map extends React.Component {
   }
 
   render() {
-    const mapContainer = <div className="mapContainer" />;
+    const mapContainer = <div style={{height:'100%', width:'100%'}} />;
 
     // TARGETS
     let markers = this.props.markers.map((venue) => {
