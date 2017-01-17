@@ -1,7 +1,5 @@
 import React, {PropTypes} from 'react';
 import smilies from '../../res/images/common/smilies.png';
-// import Header from './Header';
-// import SubHeader from './SubHeader';
 import * as C from '../../res/strings/strings-en.js';
 
 export const HomeWelcome = (props) => {
