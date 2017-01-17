@@ -95,7 +95,7 @@ class Map extends React.Component {
   }
 
   render() {
-    const mapContainer = <div style={{height:'100%', width:'100%'}} />;
+    const mapContainer = <div className="mapContainer" />;
 
     // TARGETS
     let markers = this.props.markers.map((venue) => {
