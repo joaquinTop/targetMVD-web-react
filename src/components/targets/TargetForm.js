@@ -1,10 +1,9 @@
 import React, {PropTypes} from 'react';
 import {browserHistory} from 'react-router';
 import TextInput from '../common/TextInput';
-import Topics from '../../res/topics';
 import smilies from '../../res/images/common/smilies.png';
 import Dropdown from 'react-dropdown';
-import { getTopicId, getTopicName } from '../../utils/TopicsHelper';
+import { getTopicId } from '../../utils/TopicsHelper';
 
 class TargetForm extends React.Component{
   constructor(props, context){
@@ -20,8 +19,8 @@ class TargetForm extends React.Component{
   }
 
   onTopicChange(option) {
-    console.log('You selected ', option.label);
-    this.props.updateTargetInfo("topic", getTopicId(option.label));
+    const index = getTopicId(option.label, this.props.topicsList);
+    this.props.updateTargetInfo("topic", index);
   }
 
   onTargetSubmit(e){
@@ -31,16 +30,15 @@ class TargetForm extends React.Component{
       return;
     }
 
-    let targetJson = {
+    const targetJson = {
       target:
       {
         lat: this.props.currentTarget.lat,
         lng:  this.props.currentTarget.lng,
         radius: this.props.currentTarget.radius,
-        topic: this.props.currentTarget.topic
+        topic_id: this.props.currentTarget.topic
       }
     };
-
     this.props.createTargetAction(targetJson);
     this.redirect();
   }
@@ -50,12 +48,17 @@ class TargetForm extends React.Component{
   }
 
   render(){
-    const defaultOption = getTopicName(this.props.currentTarget.topic);
+    const defaultOption = this.props.currentTarget.topic.label;
     const topicPlaceholder = defaultOption || 'What do you want to talk about?';
+    const topicsName = this.props.topicsList.map(el => {
+      return el.label;
+    });
+
     return (
       <div className="target-form-container">
         <form>
-          <label className="target-area-field" htmlFor="areaLength">SPECIFY AREA LENGTH</label><br/>
+          <label className="target-area-field" htmlFor="areaLength">SPECIFY AREA LENGTH</label>
+          <br />
           <TextInput
             id="areaLength"
             onChange={this.onFieldChange}
@@ -67,7 +70,8 @@ class TargetForm extends React.Component{
             autofocus={"true"}
           />
           <br />
-          <label className="target-form-field" htmlFor="targetTitle">TARGET TITLE</label><br/>
+          <label className="target-form-field" htmlFor="targetTitle">TARGET TITLE</label>
+          <br />
           <TextInput
             id="targetTitle"
             onChange={this.onFieldChange}
@@ -78,9 +82,10 @@ class TargetForm extends React.Component{
             required={"true"}
           />
           <br />
-          <label className="target-form-field">SELECT A TOPIC</label><br/>
+          <label className="target-form-field">SELECT A TOPIC</label>
+          <br />
           <Dropdown
-            options={Topics}
+            options={topicsName}
             onChange={this.onTopicChange}
             value={defaultOption}
             placeholder={topicPlaceholder}
@@ -90,7 +95,7 @@ class TargetForm extends React.Component{
             type="submit"
             value="SAVE TARGET"
             onClick={this.onTargetSubmit}
-          /><br/>
+          /><br />
           <img className="smilies-img-sidebar" src={smilies} alt="Smiley faces" />
         </form>
       </div>
@@ -103,7 +108,8 @@ TargetForm.propTypes = {
   updateTargetInfo:PropTypes.func.isRequired,
   createTargetAction:PropTypes.func.isRequired,
   currentTarget:PropTypes.object.isRequired,
-  createAlertAction:PropTypes.func.isRequired
+  createAlertAction:PropTypes.func.isRequired,
+  topicsList:PropTypes.array.isRequired
 };
 
 export default TargetForm;

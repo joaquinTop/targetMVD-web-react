@@ -4,12 +4,14 @@ import targets from './targetReducer';
 import newTarget from './newTargetReducer';
 import session from './sessionReducer';
 import alert from './alertReducer';
+import topics from './topicsReducer';
 
 const rootReducer = combineReducers({
   targets,
   session,
   newTarget,
-  alert
+  alert,
+  topics
 });
 
 export default rootReducer;

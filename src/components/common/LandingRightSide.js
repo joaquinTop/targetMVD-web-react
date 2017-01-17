@@ -5,7 +5,7 @@ const LandingRightSide = () => {
   return (
     <div>
       <div className="column-right-media">
-        <img className="rectangle" src={image}></img>
+        <img className="rectangle" src={image} />
       </div>
     </div>
   );

@@ -18,9 +18,9 @@ export const HomePage = (props) => {
     props.actions.loadTargets();
 
     return (
-      <div className='outer'>
+      <div className="outer">
         <SideBar
-          className="sidebar"/>
+        className="sidebar"/>
         <GoogleMap/>
       </div>
     );
@@ -36,7 +36,7 @@ const mapStateToProps = ({ session }) => {
   return {
     session
   };
-}
+};
 
 function mapDispatchToProps(dispatch) {
   return {

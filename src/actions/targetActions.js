@@ -13,7 +13,7 @@ export const createTarget = (target) => {
       dispatch(createAlert("SideBarContainer", "Target created successfully", "success"));
       dispatch(createTargetSuccess(data.target));
     }).catch(error => {
-      console.log(error);
+      dispatch(createAlert("SideBarContainer", error, "error"));
     });
   };
 };

@@ -3,6 +3,18 @@ import AlertContainer from 'react-alert';
 import * as constants from '../../constants/constants';
 
 export default class CustomAlert extends React.Component {
+
+  static showAlert(text, type){
+    if (global.msg === null) {
+      return;
+    }
+
+    global.msg.show(text, {
+      time: constants.ALERT_TIME,
+      type: type
+    });
+  }
+
   constructor(props){
     super(props);
     this.alertOptions = {
@@ -12,17 +24,6 @@ export default class CustomAlert extends React.Component {
       time: 5000,
       transition: 'scale'
     };
-  }
-
-  static showAlert(text, type){
-    if (global.msg === null) {
-      return;
-    }
-    
-    global.msg.show(text, {
-      time: constants.ALERT_TIME,
-      type: type
-    });
   }
 
   render(){

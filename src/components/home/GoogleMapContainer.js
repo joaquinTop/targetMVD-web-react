@@ -6,34 +6,32 @@ import * as newTargetActions from '../../actions/newTargetActions';
 
 export const GoogleMapContainer = (props) => {
   const location = {
-    lat: -34.906501,
-    lng: -56.185295
+    lat: -34.306501,
+    lng: -56.585295
   };
 
   let markers = props.targets;
-  if (props.newTarget.isVisible) {
-    markers.push(props.newTarget);
-  }
-
   return (
     <div className="map">
-      <Map center={location} markers={markers} updateTargetInfo={props.actions.updateFreeTarget} newTarget={props.newTarget}/>
+      <Map center={location} markers={markers} updateTargetInfo={props.actions.updateFreeTarget} newTarget={props.newTarget} topicsList={props.topics}/>
     </div>
   );
 };
 
 GoogleMapContainer.propTypes = {
   targets: PropTypes.array.isRequired,
+  topics: PropTypes.array.isRequired,
   newTarget: PropTypes.object.isRequired,
   actions: PropTypes.object.isRequired
 };
 
-const mapStateToProps = ({ targets, newTarget }) => {
+const mapStateToProps = ({ targets, newTarget, topics }) => {
   return {
     targets,
-    newTarget
+    newTarget,
+    topics
   };
-}
+};
 
 function mapDispatchToProps(dispatch) {
   return {

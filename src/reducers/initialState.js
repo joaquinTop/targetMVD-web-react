@@ -1,5 +1,6 @@
 export default {
   targets: [],
+  topics: [],
   newTarget: {
     id: 0,
     title: "",
