@@ -17,9 +17,9 @@ export const HomeWelcome = (props) => {
       <br />
       <br />
       <ul className="listCustom">
-        <li><i></i> {C.HOME_WELCOME_TEXT1}</li>
+        <li>{C.HOME_WELCOME_TEXT1}</li>
         <br />
-        <li><strong>TARGET</strong><i></i> {C.HOME_WELCOME_TEXT2}</li>
+        <li><strong>TARGET</strong>{C.HOME_WELCOME_TEXT2}</li>
       </ul>
       <br />
       <button onClick={contentChanged} className="btn-sign-up">OK; GOT IT!</button>

@@ -72,23 +72,23 @@ class SignInForm extends React.Component{
           <form>
             <label className="sign-in-email-field" htmlFor="inputEmail">EMAIL</label><br />
             <TextInput
-            id="inputEmail"
-            onChange={this.onFieldChange}
-            name="email"
-            type={"email"}
-            value={user.email}
-            required={"true"}
-            autofocus={"true"}
+              id="inputEmail"
+              onChange={this.onFieldChange}
+              name="email"
+              type={"email"}
+              value={user.email}
+              required={"true"}
+              autofocus={"true"}
             />
             <br />
             <label className="sign-in-field" htmlFor="inputPassword">PASSWORD</label><br />
             <TextInput
-            id="inputPassword"
-            onChange={this.onFieldChange}
-            name="password"
-            type={"password"}
-            value={user.password}
-            required={"true"}
+              id="inputPassword"
+              onChange={this.onFieldChange}
+              name="password"
+              type={"password"}
+              value={user.password}
+              required={"true"}
             />
             <br />
             <input className="btn-sign-in" type="submit" value="SIGN IN" onClick={this.signIn} />

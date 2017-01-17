@@ -30,7 +30,7 @@ export const SideBarContainer = (props) => {
     return (
       <div className="sidebar">
         <CustomAlert />
-        <HomeWelcome switchContentAction={props.actions.switchContent}/>
+        <HomeWelcome switchContentAction={props.actions.switchContent} />
       </div>
       );
 
