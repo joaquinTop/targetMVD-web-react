@@ -3,10 +3,7 @@ import { Circle } from 'react-google-maps';
 
 export const getCircle = (radius, center, options) => {
   return (
-    <Circle
-    options={options}
-    center={center}
-    radius={radius}/>
+    <Circle  {...{options, center, radius}} />
   );
 };
 
