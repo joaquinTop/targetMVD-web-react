@@ -48,10 +48,10 @@ export const SideBarContainer = (props) => {
       return (
         <div className="sidebar">
           <CustomAlert />
-          <Header title = {"CREATE TARGET"} style = "sidebarHeader" />
+          <Header title={"CREATE TARGET"} style="sidebarHeader" />
             <img className="target-icon" src={targetIcon} />
             <br />
-            <SubHeader title = {"CREATE NEW TARGET"} />
+            <SubHeader title={"CREATE NEW TARGET"} />
             <TargetForm
             enabled={formEnabled}
             updateTargetInfo={props.actions.updateFreeTarget}

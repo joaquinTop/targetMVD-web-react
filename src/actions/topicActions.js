@@ -3,7 +3,7 @@ import topicClient from '../client/TopicsServerClient';
 
 
 export function loadTopicsSuccess(topics){
-  return {type: types.LOAD_TOPICS, topics};
+  return { type: types.LOAD_TOPICS, topics };
 }
 
 export const loadTopics = () => {

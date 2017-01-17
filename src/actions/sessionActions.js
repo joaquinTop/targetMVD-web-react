@@ -8,11 +8,11 @@ import { loadTopics } from '../actions/topicActions';
 import { createAlert } from './alertActions';
 
 export function updateSessionInformation(fieldName, value){
-  return {type: types.UPDATE_SESSION, fieldName, value};
+  return { type: types.UPDATE_SESSION, fieldName, value };
 }
 
 export function resetSession(){
-  return {type: types.RESET_SESSION};
+  return { type: types.RESET_SESSION };
 }
 
 export function configureSession(data, firstTime){
