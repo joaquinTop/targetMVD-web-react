@@ -1,0 +1,54 @@
+.home-title {
+  width: 100%;
+  margin: 17px 0 0 0;
+  font-family: sans-serif;
+  font-size: 20px;
+	font-weight: 600;
+  letter-spacing: 3px;
+	text-align: center;
+  display: inline-block;
+  color: $text-primary-color;
+	background-color: $background-primary-color;
+}
+
+.home-username {
+  width: 100%;
+  margin: 14px 0 0 0;
+  font-family: sans-serif;
+  font-size: 14px;
+	font-weight: 600;
+  letter-spacing: 2.1px;
+	text-align: center;
+  display: inline-block;
+  color: $text-primary-color;
+	background-color: $background-primary-color;
+}
+
+.home-options {
+  width: 100%;
+  margin: 14px 0 0 0;
+  font-family: sans-serif;
+  font-size: 12px;
+	font-weight: 600;
+  letter-spacing: 1.8px;
+	text-align: center;
+  display: inline-block;
+  color: $text-primary-color;
+	background-color: $background-primary-color;
+}
+
+.user-img{
+  width: 83px;
+  height: 83px;
+  margin-top: 16.5px;
+}
+
+.user-img-background{
+  width: 125px;
+  height: 124px;
+  margin-top: 11px;
+  background: url('../res/images/profile/placeholder-background.png');
+  background-size: 125px 123px;
+  margin-left: auto;
+  margin-right: auto;
+}

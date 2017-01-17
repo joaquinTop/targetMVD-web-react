@@ -13,6 +13,7 @@ import SubHeader from '../common/SubHeader';
 import TargetForm from '../targets/TargetForm';
 import targetIcon from '../../res/images/common/targetIcon.png';
 import HomeWelcome from '../common/HomeWelcome';
+import Home from '../contents/Home';
 
 export const SideBarContainer = (props) => {
 
@@ -65,6 +66,13 @@ export const SideBarContainer = (props) => {
       );
     }
 
+    case "Home":
+      return (
+        <div className="sidebar">
+          <CustomAlert />
+          <Home  />
+        </div>
+        );
     default:
       return null;
 
