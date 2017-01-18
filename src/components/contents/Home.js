@@ -1,8 +1,15 @@
 import React, {PropTypes} from 'react';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import * as matchesActions from '../../actions/matchesActions';
 import userPlaceholder from '../../res/images/profile/placeholder-user.png';
 import ConversationsComponent from '../common/ConversationsComponent';
 
 export const Home = (props) => {
+
+  const contentChanged = () => {
+    props.switchContentAction("TargetForm");
+  };
 
   return (
     <div>
@@ -12,14 +19,32 @@ export const Home = (props) => {
       </div>
       <h4 className="home-username">@nickname</h4>
       <h5 className="home-options">{'Edit / Logout'}</h5>
-      <hr className="custom-line" />
-      <ConversationsComponent converastions={props.converastions} />
+      <hr className="custom-line-home" />
+      <ConversationsComponent converastions={props.matches} />
+      <button onClick={contentChanged} className="btn-sign-up">NEW TARGET</button>
     </div>
     );
 };
 
 Home.propTypes = {
-  converastions: PropTypes.array.isRequired
+  actions: PropTypes.object.isRequired,
+  matches: PropTypes.array.isRequired,
+  switchContentAction: PropTypes.func.isRequired
 };
 
-export default Home;
+const mapStateToProps = ({ matches }) => {
+  return {
+    matches
+  };
+};
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(Object.assign({}, matchesActions), dispatch)
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Home);

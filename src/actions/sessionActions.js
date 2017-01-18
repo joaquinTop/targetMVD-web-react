@@ -2,9 +2,11 @@ import * as types from './actionTypes';
 import userClient from '../client/UsersServerClient';
 import targetClient from '../client/TargetsServerClient';
 import topicClient from '../client/TopicsServerClient';
+import matchesClient from '../client/MatchesServerClient';
 import { resetTargets } from './targetActions';
 import { setUser, removeUser } from '../utils/sessionHelper';
 import { loadTopics } from '../actions/topicActions';
+import { loadMatches } from '../actions/matchesActions';
 import { createAlert } from './alertActions';
 
 export function updateSessionInformation(fieldName, value){
@@ -19,11 +21,13 @@ export function configureSession(data, firstTime){
   return dispatch => {
     targetClient.setUserInfo(data.token, data.user_id);
     topicClient.setUserInfo(data.token);
+    matchesClient.setUserInfo(data.token, data.user_id);
     dispatch(updateSessionInformation("user_id", data.user_id));
     dispatch(updateSessionInformation("user_token", data.token));
     dispatch(updateSessionInformation("isLoggedIn", true));
     dispatch(updateSessionInformation("firstTime", firstTime));
     dispatch(loadTopics());
+    dispatch(loadMatches());
   };
 }
 

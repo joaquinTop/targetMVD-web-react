@@ -27,13 +27,14 @@ export const SideBarContainer = (props) => {
   }
 
   switch (props.content) {
+
     case "HomeWelcome":
-    return (
-      <div className="sidebar">
-        <CustomAlert />
-        <HomeWelcome switchContentAction={props.actions.switchContent} />
-      </div>
-      );
+      return (
+        <div className="sidebar">
+          <CustomAlert />
+          <HomeWelcome switchContentAction={props.actions.switchContent} />
+        </div>
+        );
 
     case "TargetForm":{
       const logOut = () => {
@@ -46,6 +47,10 @@ export const SideBarContainer = (props) => {
         formEnabled = false;
       }
 
+      const contentChanged = () => {
+        props.actions.switchContent("Home");
+      };
+
       return (
         <div className="sidebar">
           <CustomAlert />
@@ -54,13 +59,15 @@ export const SideBarContainer = (props) => {
             <br />
             <SubHeader title={"CREATE NEW TARGET"} />
             <TargetForm
-            enabled={formEnabled}
-            updateTargetInfo={props.actions.updateFreeTarget}
-            currentTarget={props.newTarget}
-            createTargetAction={props.actions.createTarget}
-            createAlertAction={props.actions.createAlert}
-            topicsList={props.topics}
+              enabled={formEnabled}
+              updateTargetInfo={props.actions.updateFreeTarget}
+              currentTarget={props.newTarget}
+              createTargetAction={props.actions.createTarget}
+              createAlertAction={props.actions.createAlert}
+              topicsList={props.topics}
             />
+          <button onClick={contentChanged} className="btn-sign-up">MATCHES</button>
+          <br />
           <button onClick={logOut} type="button" className="btn btn-danger btn-sign-out">Sign out</button>
         </div>
       );
@@ -70,7 +77,7 @@ export const SideBarContainer = (props) => {
       return (
         <div className="sidebar">
           <CustomAlert />
-          <Home  />
+          <Home switchContentAction={props.actions.switchContent} />
         </div>
         );
     default:
