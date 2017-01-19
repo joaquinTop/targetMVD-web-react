@@ -1,6 +1,7 @@
 export default {
   targets: [],
   topics: [],
+  content: "HomeWelcome",
   newTarget: {
     id: 0,
     title: "",
@@ -15,6 +16,7 @@ export default {
     user_id: '',
     user_token: '',
     isLoggedIn: false,
+    firstTime: true,
     currentPage: 'SignUpPage'
   },
   alert: {

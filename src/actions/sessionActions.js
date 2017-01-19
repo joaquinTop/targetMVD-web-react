@@ -8,20 +8,21 @@ import { loadTopics } from '../actions/topicActions';
 import { createAlert } from './alertActions';
 
 export function updateSessionInformation(fieldName, value){
-  return {type: types.UPDATE_SESSION, fieldName, value};
+  return { type: types.UPDATE_SESSION, fieldName, value };
 }
 
 export function resetSession(){
-  return {type: types.RESET_SESSION};
+  return { type: types.RESET_SESSION };
 }
 
-export function configureSession(data){
+export function configureSession(data, firstTime){
   return dispatch => {
     targetClient.setUserInfo(data.token, data.user_id);
     topicClient.setUserInfo(data.token);
     dispatch(updateSessionInformation("user_id", data.user_id));
     dispatch(updateSessionInformation("user_token", data.token));
     dispatch(updateSessionInformation("isLoggedIn", true));
+    dispatch(updateSessionInformation("firstTime", firstTime));
     dispatch(loadTopics());
   };
 }
@@ -29,7 +30,7 @@ export function configureSession(data){
 export const signIn = (userJson) => {
   return dispatch => {
     return userClient.signIn(userJson).then(data => {
-      dispatch(configureSession(data));
+      dispatch(configureSession(data, false));
       setUser(userJson);
     }).catch(error => {
       dispatch(createAlert("SignInPage", error, "error"));
@@ -40,7 +41,7 @@ export const signIn = (userJson) => {
 export const signInWithFB = (accessToken) => {
   return dispatch => {
     return userClient.signInWithFB(accessToken).then(data => {
-      dispatch(configureSession(data));
+      dispatch(configureSession(data, true));
     }).catch(error => {
       dispatch(createAlert("SignInPage", error, "error"));
     });
@@ -50,7 +51,7 @@ export const signInWithFB = (accessToken) => {
 export const signUp = (userJson) => {
   return dispatch => {
     return userClient.signUp(userJson).then(data => {
-      dispatch(configureSession(data));
+      dispatch(configureSession(data, true));
     }).catch(error => {
       dispatch(createAlert("SignInPage", error, "error"));
     });

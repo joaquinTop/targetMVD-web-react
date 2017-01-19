@@ -5,13 +5,15 @@ import newTarget from './newTargetReducer';
 import session from './sessionReducer';
 import alert from './alertReducer';
 import topics from './topicsReducer';
+import content from './contentReducer';
 
 const rootReducer = combineReducers({
   targets,
   session,
   newTarget,
   alert,
-  topics
+  topics,
+  content
 });
 
 export default rootReducer;

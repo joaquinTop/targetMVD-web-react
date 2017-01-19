@@ -18,3 +18,6 @@ export const DELETE_ALERT = 'DELETE_ALERT';
 
 // topics
 export const LOAD_TOPICS = 'LOAD_TOPICS';
+
+// sidebar content
+export const SWITCH_CONTENT = 'SWITCH_CONTENT';
