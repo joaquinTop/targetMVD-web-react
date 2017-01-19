@@ -4,6 +4,7 @@ import {bindActionCreators} from 'redux';
 import * as matchesActions from '../../actions/matchesActions';
 import userPlaceholder from '../../res/images/profile/placeholder-user.png';
 import ConversationsComponent from '../common/ConversationsComponent';
+import smilies from '../../res/images/common/smilies.png';
 
 export const Home = (props) => {
 
@@ -18,10 +19,13 @@ export const Home = (props) => {
         <img className="user-img" src={userPlaceholder} />
       </div>
       <h4 className="home-username">@nickname</h4>
-      <h5 className="home-options">{'Edit / Logout'}</h5>
+      <h5 className="home-options">Edit / Logout</h5>
       <hr className="custom-line-home" />
+      <button onClick={contentChanged} className="button-new-target">NEW TARGET</button>
+      <br />
       <ConversationsComponent converastions={props.matches} />
-      <button onClick={contentChanged} className="btn-sign-up">NEW TARGET</button>
+      <br />
+      <img className="smilies-home" src={smilies} />
     </div>
     );
 };

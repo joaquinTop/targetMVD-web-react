@@ -5,7 +5,7 @@ import newTarget from './newTargetReducer';
 import session from './sessionReducer';
 import alert from './alertReducer';
 import topics from './topicsReducer';
-import content from './contentReducer'
+import content from './contentReducer';
 import matches from './matchesReducer';
 
 const rootReducer = combineReducers({
