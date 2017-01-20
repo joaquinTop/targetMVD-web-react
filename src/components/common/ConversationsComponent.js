@@ -15,17 +15,20 @@ export const ConversationsComponent = (props) => {
     return (
       <div>
         <h4 className="home-chat">Chat</h4>
-        <h1>{ matchesCount }</h1>
         <hr className="custom-line-chats" />
         <ul className="people">
           {props.converastions.map((item) => {
-            return (<li className="person" key={item.match_id}>
-              <img className="img-user" src="http://s13.postimg.org/ih41k9tqr/img1.jpg" alt="" />
-              <span className="name">{item.user.name}</span>
-              <span className="preview">howdoyoudoaspace</span>
-              <img className="img-topic" src="http://s16.postimg.org/ete1l89z5/img5.jpg" alt="" />
-              <img className="img-count-unread" src={imgCount} alt="" />
-            </li>);
+            return (
+              <div>
+                <li className="person" key={item.match_id}>
+                <img className="img-user" src="http://s13.postimg.org/ih41k9tqr/img1.jpg" alt="" />
+                <span className="name">{item.user.name}</span>
+                <span className="preview">¡Hola! A dónde querés viajar?</span>
+                <img className="img-topic" src={item.topic.icon || "http://s16.postimg.org/ete1l89z5/img5.jpg"} alt="" />
+                <img className="img-count-unread" src={imgCount} alt="" />
+                </li>
+                <hr className="custom-line-chats" />
+              </div>);
           })}
         </ul>
       </div>

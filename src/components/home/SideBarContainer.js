@@ -21,7 +21,6 @@ export const SideBarContainer = (props) => {
     CustomAlert.showAlert(props.alert.text, props.alert.alertType);
     props.actions.deleteAlert();
   }
-
   if (!props.session.firstTime && props.content === "HomeWelcome") {
       props.actions.switchContent("TargetForm");
   }

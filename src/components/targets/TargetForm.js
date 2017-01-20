@@ -3,7 +3,7 @@ import {browserHistory} from 'react-router';
 import TextInput from '../common/TextInput';
 import smilies from '../../res/images/common/smilies.png';
 import Dropdown from 'react-dropdown';
-import { getTopicId } from '../../utils/TopicsHelper';
+import { getTopicId, getTopicName } from '../../utils/TopicsHelper';
 
 class TargetForm extends React.Component{
   constructor(props, context){
@@ -48,7 +48,7 @@ class TargetForm extends React.Component{
   }
 
   render(){
-    const defaultOption = this.props.currentTarget.topic.label;
+    const defaultOption = getTopicName(this.props.currentTarget.topic, this.props.topicsList);
     const topicPlaceholder = defaultOption || 'What do you want to talk about?';
     const topicsName = this.props.topicsList.map(el => {
       return el.label;

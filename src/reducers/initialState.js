@@ -2,7 +2,7 @@ export default {
   targets: [],
   topics: [],
   matches: [],
-  content: "Home",
+  content: "HomeWelcome",
   newTarget: {
     id: 0,
     title: "",
