@@ -4,7 +4,6 @@ import { BASE_URL } from '../constants/constants';
 let instance = axios.create({
   baseURL: BASE_URL,
   // timeout can be overriden in those cases where the answer might take a while
-  // target-mvd-api.herokuapp.com
   timeout: 10000,
   headers: {'Content-Type': 'application/json', 'Accept': 'application/json'}
 });

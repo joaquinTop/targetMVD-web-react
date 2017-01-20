@@ -4,7 +4,7 @@ import targetClient from '../client/TargetsServerClient';
 import topicClient from '../client/TopicsServerClient';
 import matchesClient from '../client/MatchesServerClient';
 import { resetTargets } from './targetActions';
-import { setUser, removeUser } from '../utils/sessionHelper';
+import { setUser, removeUser } from '../utils/SessionHelper';
 import { loadTopics } from '../actions/topicActions';
 import { loadMatches } from '../actions/matchesActions';
 import { createAlert } from './alertActions';
