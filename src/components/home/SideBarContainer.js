@@ -14,6 +14,7 @@ import TargetForm from '../targets/TargetForm';
 import targetIcon from '../../res/images/common/targetIcon.png';
 import HomeWelcome from '../common/HomeWelcome';
 import Home from '../contents/Home';
+import Chat from '../contents/Chat';
 
 export const SideBarContainer = (props) => {
 
@@ -82,6 +83,14 @@ export const SideBarContainer = (props) => {
         <div className="sidebarContainer">
           <CustomAlert />
           <Home switchContentAction={props.actions.switchContent} />
+        </div>
+        );
+
+    case "Chat":
+      return (
+        <div className="sidebar">
+          <CustomAlert />
+          <Chat />
         </div>
         );
 

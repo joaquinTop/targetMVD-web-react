@@ -3,6 +3,7 @@ import userClient from '../client/UsersServerClient';
 import targetClient from '../client/TargetsServerClient';
 import topicClient from '../client/TopicsServerClient';
 import matchesClient from '../client/MatchesServerClient';
+import messagesClient from '../client/MessagesServerClient';
 import { resetTargets } from './targetActions';
 import { setUser, removeUser } from '../utils/SessionHelper';
 import { loadTopics } from '../actions/topicActions';
@@ -22,6 +23,7 @@ export function configureSession(data, firstTime){
     targetClient.setUserInfo(data.token, data.user_id);
     topicClient.setUserInfo(data.token);
     matchesClient.setUserInfo(data.token, data.user_id);
+    messagesClient.setUserInfo(data.token, data.user_id);
     dispatch(updateSessionInformation("user_id", data.user_id));
     dispatch(updateSessionInformation("user_token", data.token));
     dispatch(updateSessionInformation("isLoggedIn", true));

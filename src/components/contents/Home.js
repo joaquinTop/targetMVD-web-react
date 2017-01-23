@@ -2,6 +2,8 @@ import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as matchesActions from '../../actions/matchesActions';
+import * as currentConversationActions from '../../actions/currentConversationActions';
+import * as messagesActions from '../../actions/messagesActions';
 import userPlaceholder from '../../res/images/profile/placeholder-user.png';
 import ConversationsComponent from '../common/ConversationsComponent';
 import smilies from '../../res/images/common/smilies.png';
@@ -11,7 +13,7 @@ export const Home = (props) => {
   const contentChanged = () => {
     props.switchContentAction("TargetForm");
   };
-  
+
   return (
     <div>
       <h3 className="home-title">TARGET</h3>
@@ -23,7 +25,12 @@ export const Home = (props) => {
       <hr className="custom-line-home" />
       <button onClick={contentChanged} className="button-new-target">NEW TARGET</button>
       <br />
-      <ConversationsComponent converastions={props.matches} />
+      <ConversationsComponent
+        converastions={props.matches}
+        updateCurrentConversationAction={props.actions.updateCurrentConversation}
+        switchContent={props.switchContentAction}
+        getMessagesAction={props.actions.loadMessages}
+      />
       <br />
       <img className="smilies-home" src={smilies} />
     </div>
@@ -42,7 +49,7 @@ const mapStateToProps = ({ matches }) => {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(matchesActions, dispatch)
+    actions: bindActionCreators(Object.assign({}, matchesActions, currentConversationActions, messagesActions), dispatch)
   };
 }
 
