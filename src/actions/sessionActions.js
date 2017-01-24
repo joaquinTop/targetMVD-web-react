@@ -35,7 +35,7 @@ export const signIn = (userJson) => {
   return dispatch => {
     return userClient.signIn(userJson).then(data => {
       dispatch(configureSession(data, false));
-      setUser(userJson);
+      setUser(userJson, false);
     }).catch(error => {
       dispatch(createAlert("SignInPage", error, "error"));
     });
@@ -46,6 +46,7 @@ export const signInWithFB = (accessToken) => {
   return dispatch => {
     return userClient.signInWithFB(accessToken).then(data => {
       dispatch(configureSession(data, true));
+      setUser(accessToken, true);
     }).catch(error => {
       dispatch(createAlert("SignInPage", error, "error"));
     });
@@ -56,6 +57,7 @@ export const signUp = (userJson) => {
   return dispatch => {
     return userClient.signUp(userJson).then(data => {
       dispatch(configureSession(data, true));
+      setUser(userJson, false);
     }).catch(error => {
       dispatch(createAlert("SignInPage", error, "error"));
     });

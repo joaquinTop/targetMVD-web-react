@@ -13,7 +13,11 @@ export const SignInPage = (props) => {
   const user = getUser();
 
   if (user) {
-    props.actions.signIn(user);
+    if (user.facebook) {
+      props.actions.signInWithFB(user.user);
+    }else {
+      props.actions.signIn(user.user);
+    }
   }
 
   if (props.session.isLoggedIn) {
