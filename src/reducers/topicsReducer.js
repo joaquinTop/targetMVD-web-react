@@ -1,7 +1,7 @@
 import * as types from '../actions/actionTypes';
 import initialState from './initialState';
 
-export default function targetReducer(state = initialState.topics, action){
+export default function topicsReducer(state = initialState.topics, action){
   let newState;
   switch(action.type){
     case types.LOAD_TOPICS:

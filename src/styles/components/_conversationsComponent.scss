@@ -1,0 +1,132 @@
+.noTargets{
+  width: 292px;
+  height: 96px;
+  margin: 175.5px 0 0 0;
+  font-family: sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.8;
+  color: $text-header-color;
+}
+
+.home-chat{
+  width: 100%;
+  margin: 78.5px 0 14px 0;
+  font-family: sans-serif;
+  font-size: 14px;
+  font-weight: 550;
+  letter-spacing: 2px;
+  text-align: center;
+  display: inline-block;
+  color: $text-primary-color;
+  background-color: $background-primary-color;
+}
+
+.custom-line-chats{
+  width: 300px;
+	height: 0.2px;
+  margin: 0 0 0 6px;
+	opacity: 0.2;
+	border: solid 0.2px $background-secondary-color;
+}
+
+.chats-list{
+  padding: 0;
+  list-style-type: none;
+}
+
+.converastion-item-header{
+  color: $tint-color;
+}
+
+.people {
+  margin: 0 0 0 -1px;
+  border-right: 1px solid $tint-color;
+  border-left: 1px solid $tint-color;
+  width: calc(100% + 2px);
+  padding: 0;
+  list-style-type: none;
+
+  .person {
+    position: relative;
+    width: 100%;
+    height: 65px;
+    padding: 12px 10% 16px;
+    cursor: pointer;
+    background-color: $background-primary-color;
+
+    .img-user {
+      float: left;
+      width: 40px;
+      height: 40px;
+      margin: 0 12px 0 0;
+      border-radius: 50%;
+    }
+
+    .img-topic {
+      position: absolute;
+      right: 10%;
+      top: 24px;
+      width: 21px;
+    	height: 21px;
+    }
+
+    .img-count-unread {
+      position: absolute;
+      top: 6px;
+      right: 8%;
+      width: 18px;
+    	height: 18px;
+      padding: 0 0 5px 5px;
+    }
+
+    .name {
+      font-size: 12.5px;
+      display: inline-block;
+      overflow: hidden !important;
+      font-weight: 600;
+      text-align: left;
+      width: 70%;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      color: $text-primary-color;
+    }
+
+    .time {
+      font-size: 14px;
+      position: absolute;
+      top: 16px;
+      right: 10%;
+      padding: 0 0 5px 5px;
+      color: $text-secondary-color;
+      background-color: $background-primary-color;
+    }
+
+    .preview {
+      font-size: 11.5px;
+      display: inline-block;
+      overflow: hidden !important;
+      text-align: left;
+      width: 70%;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      color: $text-primary-color;
+    }
+    
+    &.active, &:hover {
+      margin: -1px 0 0 -1px;
+      padding-top: 13px;
+      border: 0;
+      background-color: $tint-color;
+      width: calc(100% + 2px);
+      padding-left: calc(10% + 1px);
+      span {
+        color: $background-primary-color;
+        background: transparent;
+      }
+      &:after {
+        display: none;
+      }
+    }
+  }
+}

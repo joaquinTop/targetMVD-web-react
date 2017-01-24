@@ -6,8 +6,8 @@ import * as newTargetActions from '../../actions/newTargetActions';
 
 export const GoogleMapContainer = (props) => {
   const location = {
-    lat: -34.306501,
-    lng: -56.585295
+    lat: -34.906498,
+    lng: -56.185258
   };
 
   let markers = props.targets;

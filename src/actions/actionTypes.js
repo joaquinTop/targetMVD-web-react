@@ -19,5 +19,8 @@ export const DELETE_ALERT = 'DELETE_ALERT';
 // topics
 export const LOAD_TOPICS = 'LOAD_TOPICS';
 
+// matches
+export const LOAD_MATCHES = 'LOAD_MATCHES';
+
 // sidebar content
 export const SWITCH_CONTENT = 'SWITCH_CONTENT';

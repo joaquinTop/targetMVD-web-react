@@ -7,7 +7,7 @@ import * as alertActions from '../actions/alertActions';
 import CustomAlert from '../utils/uiHelper/CustomAlert';
 import SignInForm from '../components/signin/SignInForm';
 import LandingRightSide from '../components/common/LandingRightSide';
-import { getUser } from '../utils/sessionHelper';
+import { getUser } from '../utils/SessionHelper';
 
 export const SignInPage = (props) => {
   const user = getUser();

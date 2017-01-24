@@ -13,6 +13,7 @@ import SubHeader from '../common/SubHeader';
 import TargetForm from '../targets/TargetForm';
 import targetIcon from '../../res/images/common/targetIcon.png';
 import HomeWelcome from '../common/HomeWelcome';
+import Home from '../contents/Home';
 
 export const SideBarContainer = (props) => {
 
@@ -20,19 +21,19 @@ export const SideBarContainer = (props) => {
     CustomAlert.showAlert(props.alert.text, props.alert.alertType);
     props.actions.deleteAlert();
   }
-
   if (!props.session.firstTime && props.content === "HomeWelcome") {
       props.actions.switchContent("TargetForm");
   }
 
   switch (props.content) {
+
     case "HomeWelcome":
-    return (
-      <div className="sidebar">
-        <CustomAlert />
-        <HomeWelcome switchContentAction={props.actions.switchContent} />
-      </div>
-      );
+      return (
+        <div className="sidebar">
+          <CustomAlert />
+          <HomeWelcome switchContentAction={props.actions.switchContent} />
+        </div>
+        );
 
     case "TargetForm":{
       const logOut = () => {
@@ -45,6 +46,10 @@ export const SideBarContainer = (props) => {
         formEnabled = false;
       }
 
+      const contentChanged = () => {
+        props.actions.switchContent("Home");
+      };
+
       return (
         <div className="sidebar">
           <CustomAlert />
@@ -53,18 +58,27 @@ export const SideBarContainer = (props) => {
             <br />
             <SubHeader title={"CREATE NEW TARGET"} />
             <TargetForm
-            enabled={formEnabled}
-            updateTargetInfo={props.actions.updateFreeTarget}
-            currentTarget={props.newTarget}
-            createTargetAction={props.actions.createTarget}
-            createAlertAction={props.actions.createAlert}
-            topicsList={props.topics}
+              enabled={formEnabled}
+              updateTargetInfo={props.actions.updateFreeTarget}
+              currentTarget={props.newTarget}
+              createTargetAction={props.actions.createTarget}
+              createAlertAction={props.actions.createAlert}
+              topicsList={props.topics}
             />
+          <button onClick={contentChanged} className="btn-sign-up">MATCHES</button>
+          <br />
           <button onClick={logOut} type="button" className="btn btn-danger btn-sign-out">Sign out</button>
         </div>
       );
     }
 
+    case "Home":
+      return (
+        <div className="sidebar">
+          <CustomAlert />
+          <Home switchContentAction={props.actions.switchContent} />
+        </div>
+        );
     default:
       return null;
 

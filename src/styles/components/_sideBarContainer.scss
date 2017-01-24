@@ -16,6 +16,9 @@
   width: 318px;
 	height: inherit;
 	text-align: center;
+  position: relative;
+  z-index:1;
+  box-shadow: 2px 0px 0px 0px $border-secondary-color; 
   background-color: $background-primary-color;
 }
 

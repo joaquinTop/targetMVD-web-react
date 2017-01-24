@@ -3,19 +3,19 @@ import { BASE_URL } from '../constants/constants';
 
 let instance;
 
-class TopicClient {
+class MatchesClient {
 
-  static setUserInfo(userToken){
+  static setUserInfo(userToken, userIdentifier){
     instance = axios.create({
-      baseURL: BASE_URL,
+      baseURL: BASE_URL + '/users/' + userIdentifier,
       timeout: 2000,
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json', 'X-USER-TOKEN': userToken }
     });
   }
 
-  static getTopics() {
+  static getMatches() {
     return new Promise((resolve, reject) => {
-      instance.get('/topics').then((res => {
+      instance.get('/match_conversations').then((res => {
         const { data } = res;
         resolve(data);
       })).catch(error => {
@@ -25,4 +25,4 @@ class TopicClient {
   }
 }
 
-export default TopicClient;
+export default MatchesClient;

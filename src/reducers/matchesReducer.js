@@ -1,11 +1,10 @@
 import * as types from '../actions/actionTypes';
 import initialState from './initialState';
 
-export default function contentReducer(state = initialState.content, action){
-
+export default function matchesReducer(state = initialState.matches, action){
   switch(action.type){
-    case types.SWITCH_CONTENT:
-      return action.nextContent;
+    case types.LOAD_MATCHES:
+      return action.matches;
 
     default:
       return state;
