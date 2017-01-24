@@ -44,6 +44,9 @@
   border-right: 1px solid $tint-color;
   border-left: 1px solid $tint-color;
   width: calc(100% + 2px);
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: 205px;
   padding: 0;
   list-style-type: none;
 
