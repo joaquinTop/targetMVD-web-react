@@ -1,6 +1,7 @@
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
+import Header from '../common/Header';
 import * as messagesActions from '../../actions/messagesActions';
 import * as currentConversationActions from '../../actions/currentConversationActions';
 import * as contentActions from '../../actions/contentActions';
@@ -13,9 +14,10 @@ export const Chat = (props) => {
 
   return (
     <div>
-      <h3 className="home-title">CHAT</h3>
+      <Header title={"CHAT"} style="sidebarHeader" />
       <h4 className="home-title">{props.currentConversation.user.name}</h4>
       <h4 className="home-username">{props.messages.length}</h4>
+      <hr className="custom-line-chats" />
       <button onClick={contentChanged} className="btn-sign-up">BACK</button>
     </div>
     );
