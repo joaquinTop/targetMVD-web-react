@@ -29,8 +29,8 @@ class ConversationsComponent extends React.Component{
           <ul className="people">
             {this.props.converastions.map((item) => {
               return (
-                <div >
-                  <li className="person" key={item.match_id} onClick={this.conversationSelected.bind(this, item)}>
+                <div key={item.match_id}>
+                  <li className="person" onClick={this.conversationSelected.bind(this, item)}>
                   <img className="img-user" src="http://s13.postimg.org/ih41k9tqr/img1.jpg" alt="" />
                   <span className="name">{item.user.name}</span>
                   <span className="preview">¡Hola! A dónde querés viajar?</span>
