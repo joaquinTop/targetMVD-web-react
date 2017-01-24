@@ -36,14 +36,12 @@ Home.propTypes = {
 };
 
 const mapStateToProps = ({ matches }) => {
-  return {
-    matches
-  };
+  return { matches };
 };
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(Object.assign({}, matchesActions), dispatch)
+    actions: bindActionCreators(matchesActions, dispatch)
   };
 }
 

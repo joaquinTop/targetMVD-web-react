@@ -3,7 +3,7 @@ import matchesClient from '../client/MatchesServerClient';
 
 
 export function loadMatchesSuccess(matches){
-  return {type: types.LOAD_MATCHES, matches};
+  return { type: types.LOAD_MATCHES, matches };
 }
 
 export const loadMatches = () => {

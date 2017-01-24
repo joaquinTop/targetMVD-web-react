@@ -1,8 +1,7 @@
 import React, {PropTypes} from 'react';
 import * as C from '../../res/strings/strings-en';
 import imgCount from '../../res/images/common/yellow-circle.png';
-// IDEA: http://www.bypeople.com/sliding-css-chat-bubbles/ nice page
-export const ConversationsComponent = (props) => {
+export const ConversationsComponent = ({ converastions }) => {
 
   const matchesCount = props.converastions.length;
   if (matchesCount === 0) {
@@ -17,7 +16,7 @@ export const ConversationsComponent = (props) => {
         <h4 className="home-chat">Chat</h4>
         <hr className="custom-line-chats" />
         <ul className="people">
-          {props.converastions.map((item) => {
+          {converastions.map((item) => {
             return (
               <div>
                 <li className="person" key={item.match_id}>

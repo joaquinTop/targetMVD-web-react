@@ -40,28 +40,26 @@
 .user-img{
   width: 83px;
   height: 83px;
-  margin-top: 16.5px;
+  margin: 16.5px 0 0 0;
 }
 
 .user-img-background{
   width: 125px;
   height: 124px;
-  margin-top: 11px;
   background: url('../res/images/profile/placeholder-background.png');
   background-size: 125px 123px;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 11px auto 0 auto;
 }
 
 .custom-line-home{
   width: 121px;
   height: 0.5px;
-  margin-top: 30px;
+  margin: 30px 0 0 0;
   background-color: $background-secondary-color;
 }
 
 .smilies-home{
-  margin-top: 20px;
+  margin: 20px 0 0 0;
   width: 48px;
 	height: 28px;
 }
@@ -75,6 +73,6 @@
   font-size: 11px;
   letter-spacing: 1.6px;
   display: inline-block;
-  margin-top: 10px;
+  margin: 10px 0 0 0;
   box-shadow: 0 2px 4px 0 $box-shadow-color;
 }

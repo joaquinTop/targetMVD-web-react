@@ -1,7 +1,7 @@
 .noTargets{
   width: 292px;
   height: 96px;
-  margin-top: 175.5px;
+  margin: 175.5px 0 0 0;
   font-family: sans-serif;
   font-size: 18px;
   font-weight: 500;
@@ -40,12 +40,13 @@
 }
 
 .people {
-  margin-left: -1px;
+  margin: 0 0 0 -1px;
   border-right: 1px solid $tint-color;
   border-left: 1px solid $tint-color;
   width: calc(100% + 2px);
   padding: 0;
   list-style-type: none;
+
   .person {
     position: relative;
     width: 100%;
@@ -53,13 +54,15 @@
     padding: 12px 10% 16px;
     cursor: pointer;
     background-color: $background-primary-color;
+
     .img-user {
       float: left;
       width: 40px;
       height: 40px;
-      margin-right: 12px;
+      margin: 0 12px 0 0;
       border-radius: 50%;
     }
+
     .img-topic {
       position: absolute;
       right: 10%;
@@ -67,6 +70,7 @@
       width: 21px;
     	height: 21px;
     }
+
     .img-count-unread {
       position: absolute;
       top: 6px;
@@ -75,6 +79,7 @@
     	height: 18px;
       padding: 0 0 5px 5px;
     }
+
     .name {
       font-size: 12.5px;
       display: inline-block;
@@ -86,6 +91,7 @@
       text-overflow: ellipsis;
       color: $text-primary-color;
     }
+
     .time {
       font-size: 14px;
       position: absolute;
@@ -95,6 +101,7 @@
       color: $text-secondary-color;
       background-color: $background-primary-color;
     }
+
     .preview {
       font-size: 11.5px;
       display: inline-block;
@@ -105,9 +112,9 @@
       text-overflow: ellipsis;
       color: $text-primary-color;
     }
+    
     &.active, &:hover {
-      margin-top: -1px;
-      margin-left: -1px;
+      margin: -1px 0 0 -1px;
       padding-top: 13px;
       border: 0;
       background-color: $tint-color;
