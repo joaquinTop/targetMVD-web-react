@@ -3,7 +3,7 @@ import * as C from '../../res/strings/strings-en';
 import imgCount from '../../res/images/common/yellow-circle.png';
 export const ConversationsComponent = ({ converastions }) => {
 
-  const matchesCount = props.converastions.length;
+  const matchesCount = converastions.length;
   if (matchesCount === 0) {
     return (
       <div>
