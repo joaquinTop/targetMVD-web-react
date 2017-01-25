@@ -12,8 +12,8 @@ export const SignUpPage = (props) => {
   const user = getUser();
 
   if (user) {
-    const {signIn, signInWithFB} = props.actions;
-    user.facebook ? signInWithFB(user.user, false): signIn(user.user);
+    const { signIn, signInWithFB } = props.actions;
+    user.facebook ? signInWithFB(user.user, false) : signIn(user.user);
   }
 
   if (props.session.isLoggedIn) {
