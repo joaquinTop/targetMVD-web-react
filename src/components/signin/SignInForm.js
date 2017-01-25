@@ -21,7 +21,7 @@ class SignInForm extends React.Component{
   }
 
   responseFacebook (response) {
-    this.props.signInWithFBAction(response.accessToken);
+    this.props.signInWithFBAction(response.accessToken, true);
   }
 
   onFieldChange(fieldName, value) {

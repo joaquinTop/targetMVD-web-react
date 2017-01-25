@@ -42,10 +42,10 @@ export const signIn = (userJson) => {
   };
 };
 
-export const signInWithFB = (accessToken) => {
+export const signInWithFB = (accessToken, firstTime) => {
   return dispatch => {
     return userClient.signInWithFB(accessToken).then(data => {
-      dispatch(configureSession(data, true));
+      dispatch(configureSession(data, firstTime));
       setUser(accessToken, true);
     }).catch(error => {
       dispatch(createAlert("SignInPage", error, "error"));
