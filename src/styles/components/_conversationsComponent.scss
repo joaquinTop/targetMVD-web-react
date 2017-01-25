@@ -23,9 +23,9 @@
 }
 
 .custom-line-chats{
-  width: 300px;
+  width: 95%;
 	height: 0.2px;
-  margin: 0 0 0 6px;
+  margin: 0 auto 0 auto;
 	opacity: 0.2;
 	border: solid 0.2px $background-secondary-color;
 }
@@ -112,7 +112,7 @@
       text-overflow: ellipsis;
       color: $text-primary-color;
     }
-    
+
     &.active, &:hover {
       margin: -1px 0 0 -1px;
       padding-top: 13px;

@@ -7,6 +7,9 @@
   letter-spacing: 3px;
 	text-align: center;
   display: inline-block;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
   color: $text-primary-color;
 	background-color: $background-primary-color;
 }
@@ -20,6 +23,9 @@
   letter-spacing: 2.1px;
 	text-align: center;
   display: inline-block;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
   color: $text-primary-color;
 	background-color: $background-primary-color;
 }
@@ -32,40 +38,47 @@
 	font-weight: 500;
   letter-spacing: 1.8px;
 	text-align: center;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
   display: inline-block;
   color: $text-primary-color;
 	background-color: $background-primary-color;
 }
 
 .user-img{
-  width: 83px;
-  height: 83px;
-  margin: 16.5px 0 0 0;
+  width: 40%;
+  height: auto;
 }
 
 .user-img-background{
-  width: 125px;
-  height: 124px;
-  background: url('../res/images/profile/placeholder-background.png');
-  background-size: 125px 123px;
-  margin: 11px auto 0 auto;
+  width: 100%;
+  height: 100%;
+  background-image: url('../res/images/profile/placeholder-background.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 40% auto;
+  margin: 0 auto 0 auto;
 }
 
 .custom-line-home{
-  width: 121px;
+  width: 30%;
   height: 0.5px;
-  margin: 30px 0 0 0;
+  margin: 30px auto 0 auto;
   background-color: $background-secondary-color;
 }
 
 .smilies-home{
   margin: 20px 0 0 0;
-  width: 48px;
+  width: 25%;
+  max-width: 48px;
+  min-width: 40px;
 	height: 28px;
 }
 
 .button-new-target{
-  width: 180px;
+  width: 80%;
+  max-width: 180px;
   height: 37px;
   background-color: $text-primary-color;
   color: #ffffff;

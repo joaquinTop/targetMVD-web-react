@@ -6,7 +6,10 @@
   width: 80%;
   height: 39px;
   text-align: center;
+  white-space: nowrap;
+  text-overflow: ellipsis;
   vertical-align: middle;
+  overflow: hidden;
   line-height: 39px;
   display: inline-block;
   border: solid 0.5px $border-primary-color;

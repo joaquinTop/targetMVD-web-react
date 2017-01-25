@@ -65,7 +65,7 @@ export const SideBarContainer = (props) => {
               createAlertAction={props.actions.createAlert}
               topicsList={props.topics}
             />
-          <button onClick={contentChanged} className="btn-sign-up">MATCHES</button>
+          <button onClick={contentChanged} className="btn-matches">MATCHES</button>
           <br />
           <button onClick={logOut} type="button" className="btn btn-danger btn-sign-out">Sign out</button>
         </div>

@@ -4,7 +4,6 @@
 		height: 100%;
 		min-height: 768px;
 		display: inline-block;
-		margin-bottom: 20px;
 		float: left;
 	}
 }
@@ -13,10 +12,13 @@
 	height: 100%;
 	width: 100%;
 	min-height: 768px;
+	display: flex;
+  align-items: center;
 	background-color: $tint-color;
 	position: absolute;
-	display: inline-block;
 	@media (min-width: 1224px) {
 		width: 50%;
+		display: inline-block;
+		position: relative;
 	}
 }
