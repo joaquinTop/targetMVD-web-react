@@ -11,9 +11,9 @@ export const HomePage = (props) => {
 
   if (props.session.isLoggedIn === false) {
     browserHistory.push('/sign-in');
+
     return null;
   }else{
-
     props.actions.resetFreeTarget();
     props.actions.loadTargets();
 

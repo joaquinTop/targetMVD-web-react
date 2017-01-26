@@ -3,9 +3,9 @@
 	height: auto;
 	margin: auto;
 	@media (min-width: 1224px) {
-		top:0;
-    bottom:0;
-    margin:auto;
-		position: absolute;
+		height: 768px;
+		width: 683px;
+		display: block;
+		margin: auto;
 	}
 }
