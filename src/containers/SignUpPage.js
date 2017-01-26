@@ -5,8 +5,16 @@ import {bindActionCreators} from 'redux';
 import * as sessionActions from '../actions/sessionActions';
 import SignUpForm from '../components/signup/SignUpForm';
 import LandingRightSide from '../components/common/LandingRightSide';
+import { getUser } from '../utils/SessionHelper';
 
 export const SignUpPage = (props) => {
+
+  const user = getUser();
+
+  if (user) {
+    const { signIn, signInWithFB } = props.actions;
+    user.facebook ? signInWithFB(user.user, false) : signIn(user.user);
+  }
 
   if (props.session.isLoggedIn) {
     browserHistory.push('/home');

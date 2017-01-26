@@ -146,7 +146,7 @@ class Map extends React.Component {
 
     // TARGETS RADIUS
     let circles = this.props.markers.map((venue) => {
-      return getCircle(venue.radius * 10, {
+      return getCircle(parseInt(venue.radius), {
         lat: venue.lat,
         lng: venue.lng
       }, {
@@ -157,7 +157,7 @@ class Map extends React.Component {
     });
 
     // FREE TARGET RADIUS
-    let newTargetRadius = getCircle(this.props.newTarget.radius * 10, {
+    let newTargetRadius = getCircle(parseInt(this.props.newTarget.radius), {
       lat: this.props.newTarget.lat,
       lng: this.props.newTarget.lng
     }, {

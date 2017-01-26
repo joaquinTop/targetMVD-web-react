@@ -1,6 +1,9 @@
-export const setUser = (user) => {
+export const setUser = (user, withFb) => {
   if (typeof(Storage) !== "undefined") {
-    localStorage.setItem('user', JSON.stringify(user));
+    let session = {};
+    session.user = user;
+    session.facebook = withFb;
+    localStorage.setItem('user', JSON.stringify(session));
   }
 };
 

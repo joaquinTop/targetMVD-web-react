@@ -10,10 +10,12 @@ import LandingRightSide from '../components/common/LandingRightSide';
 import { getUser } from '../utils/SessionHelper';
 
 export const SignInPage = (props) => {
-  const user = getUser();
 
+  const user = getUser();
+  
   if (user) {
-    props.actions.signIn(user);
+    const { signIn, signInWithFB } = props.actions;
+    user.facebook ? signInWithFB(user.user, false) : signIn(user.user);
   }
 
   if (props.session.isLoggedIn) {

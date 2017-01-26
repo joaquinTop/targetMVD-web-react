@@ -35,17 +35,18 @@ export const signIn = (userJson) => {
   return dispatch => {
     return userClient.signIn(userJson).then(data => {
       dispatch(configureSession(data, false));
-      setUser(userJson);
+      setUser(userJson, false);
     }).catch(error => {
       dispatch(createAlert("SignInPage", error, "error"));
     });
   };
 };
 
-export const signInWithFB = (accessToken) => {
+export const signInWithFB = (accessToken, firstTime) => {
   return dispatch => {
     return userClient.signInWithFB(accessToken).then(data => {
-      dispatch(configureSession(data, true));
+      dispatch(configureSession(data, firstTime));
+      setUser(accessToken, true);
     }).catch(error => {
       dispatch(createAlert("SignInPage", error, "error"));
     });
@@ -56,6 +57,7 @@ export const signUp = (userJson) => {
   return dispatch => {
     return userClient.signUp(userJson).then(data => {
       dispatch(configureSession(data, true));
+      setUser(userJson, false);
     }).catch(error => {
       dispatch(createAlert("SignInPage", error, "error"));
     });
