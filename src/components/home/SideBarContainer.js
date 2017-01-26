@@ -29,7 +29,7 @@ export const SideBarContainer = (props) => {
 
     case "HomeWelcome":
       return (
-        <div className="sidebar">
+        <div className="sidebarContainer">
           <CustomAlert />
           <HomeWelcome switchContentAction={props.actions.switchContent} />
         </div>
@@ -51,9 +51,10 @@ export const SideBarContainer = (props) => {
       };
 
       return (
-        <div className="sidebar">
+        <div className="sidebarContainer">
           <CustomAlert />
           <Header title={"CREATE TARGET"} style="sidebarHeader" />
+          <div className="sidebar">
             <img className="target-icon" src={targetIcon} />
             <br />
             <SubHeader title={"CREATE NEW TARGET"} />
@@ -65,20 +66,22 @@ export const SideBarContainer = (props) => {
               createAlertAction={props.actions.createAlert}
               topicsList={props.topics}
             />
-          <button onClick={contentChanged} className="btn-matches">MATCHES</button>
-          <br />
-          <button onClick={logOut} type="button" className="btn btn-danger btn-sign-out">Sign out</button>
+            <button onClick={contentChanged} className="btn-matches">MATCHES</button>
+            <br />
+            <button onClick={logOut} type="button" className="btn btn-danger btn-sign-out">Sign out</button>
+          </div>
         </div>
       );
     }
 
     case "Home":
       return (
-        <div className="sidebar">
+        <div className="sidebarContainer">
           <CustomAlert />
           <Home switchContentAction={props.actions.switchContent} />
         </div>
         );
+        
     default:
       return null;
 

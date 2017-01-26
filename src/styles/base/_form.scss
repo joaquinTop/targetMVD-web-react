@@ -1,10 +1,10 @@
-.form{
+.form {
 	text-align: center;
 }
 
-.btn-sign-out{
+.btn-sign-out {
 	width: 35%;
-  margin-top: 15px;
+  margin: 15px 0 15px 0;
 }
 
 .headerTitle {
@@ -21,14 +21,14 @@
 	vertical-align: middle;
 }
 
-.custom-input{
+.custom-input {
 	width: 180px;
 	height: 37px;
 	border: solid 0.5px $border-primary-color;
 	display: inline-block;
 }
 
-.custom-select{
+.custom-select {
 	width: 180px;
 	height: 37px;
 	border: solid 0.5px $border-primary-color;

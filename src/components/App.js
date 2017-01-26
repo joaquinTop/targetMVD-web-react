@@ -4,7 +4,7 @@ import React, {PropTypes} from 'react';
 class App extends React.Component{
   render(){
     return (
-      <div className="full">
+      <div >
         {this.props.children}
       </div>
     );

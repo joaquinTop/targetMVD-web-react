@@ -14,7 +14,7 @@ export const GoogleMapContainer = (props) => {
   let markers = props.targets;
   return (
     <div className="map">
-      <Map center={location} markers={markers} updateTargetInfo={props.actions.updateFreeTarget} newTarget={props.newTarget} topicsList={props.topics}/>
+      <Map center={location} markers={markers} updateTargetInfo={props.actions.updateFreeTarget} newTarget={props.newTarget} topicsList={props.topics} />
     </div>
   );
 };
