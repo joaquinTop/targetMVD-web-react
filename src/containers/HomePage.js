@@ -1,9 +1,10 @@
-import React, {PropTypes} from 'react';
-import {browserHistory} from 'react-router';
+import React, { PropTypes } from 'react';
+import { browserHistory } from 'react-router';
 import GoogleMap from '../components/home/GoogleMapContainer';
 import SideBar from '../components/home/SideBarContainer';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { MediaQuery } from 'react-responsive';
 import * as targetActions from '../actions/targetActions';
 import * as newTargetActions from '../actions/newTargetActions';
 
@@ -21,7 +22,7 @@ export const HomePage = (props) => {
       <div className="outer">
         <SideBar />
         <GoogleMap />
-      </div>  
+      </div>
     );
   }
 };

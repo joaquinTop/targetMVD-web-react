@@ -4,7 +4,6 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as newTargetActions from '../../actions/newTargetActions';
 
-
 export const GoogleMapContainer = (props) => {
   const location = {
     lat: -34.906498,
