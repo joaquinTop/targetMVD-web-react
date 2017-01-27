@@ -15,6 +15,7 @@ import targetIcon from '../../res/images/common/targetIcon.png';
 import HomeWelcome from '../common/HomeWelcome';
 import Home from '../contents/Home';
 import Chat from '../contents/Chat';
+import ChatAux from '../contents/ChatAux';
 
 export const SideBarContainer = (props) => {
 
@@ -93,6 +94,13 @@ export const SideBarContainer = (props) => {
         <div className="sidebar">
           <CustomAlert />
           <Chat />
+        </div>
+        );
+
+    case "ChatAux":
+      return (
+        <div className="sidebar">
+          <ChatAux />
         </div>
         );
 
