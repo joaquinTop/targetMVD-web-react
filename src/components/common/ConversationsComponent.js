@@ -9,7 +9,7 @@ class ConversationsComponent extends React.Component{
 
   conversationSelected = (match) => {
     this.props.getMessagesAction(match.match_id);
-    this.props.updateCurrentConversationAction(match)
+    this.props.updateCurrentConversationAction(match);
     this.props.switchContent("Chat");
   };
 
@@ -25,8 +25,8 @@ class ConversationsComponent extends React.Component{
       return (
         <div>
           <h4 className="home-chat">Chat</h4>
-          <hr className="custom-line-chats" />
           <ul className="people">
+            <hr className="custom-line-chats" />
             {this.props.converastions.map((item) => {
               return (
                 <div key={item.match_id}>
