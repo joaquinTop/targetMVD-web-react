@@ -11,6 +11,7 @@ export const Home = (props) => {
   const contentChanged = () => {
     props.switchContentAction("TargetForm");
   };
+  
   return (
     <div>
       <h3 className="home-title">TARGET</h3>

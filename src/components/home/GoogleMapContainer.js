@@ -4,16 +4,22 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as newTargetActions from '../../actions/newTargetActions';
 
-export const GoogleMapContainer = (props) => {
+export const GoogleMapContainer = ({ targets, actions, newTarget, topics }) => {
   const location = {
     lat: -34.906498,
     lng: -56.185258
   };
 
-  let markers = props.targets;
+  let markers = targets;
   return (
     <div className="map">
-      <Map center={location} markers={markers} updateTargetInfo={props.actions.updateFreeTarget} newTarget={props.newTarget} topicsList={props.topics}/>
+      <Map
+        center={location}
+        markers={markers}
+        updateTargetInfo={actions.updateFreeTarget}
+        newTarget={newTarget}
+        topicsList={topics}
+      />
     </div>
   );
 };

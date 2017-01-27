@@ -1,8 +1,8 @@
-.target-form-container{
-  margin-top: 0px;
+.target-form-container {
+  margin-top: 0;
 }
 
-.target-area-field{
+.target-area-field {
 	font-family: sans-serif;
   margin-top: 16px;
 	font-size: 11px;
@@ -11,8 +11,8 @@
 	color: $text-primary-color;
 }
 
-.custom-target-input{
-  width: 257px;
+.custom-target-input {
+  width: 80%;
   height: 30px;
   border: solid 0.5px $text-primary-color;
   text-align: center;
@@ -20,7 +20,7 @@
   display: inline-block;
 }
 
-.target-form-field{
+.target-form-field {
 	font-family: sans-serif;
   margin-top: 11px;
 	font-size: 11px;
@@ -29,7 +29,7 @@
 	color: $text-primary-color;
 }
 
-.target-form-input{
+.target-form-input {
 	font-family: sans-serif;
   margin-top: 26px;
 	font-size: 11px;
@@ -38,19 +38,19 @@
 	color: $text-primary-color;
 }
 
-.btn-save-target{
-  width: 113.5px;
+.btn-save-target {
+  width: 40%;
   height: 39px;
 	background-color: $text-primary-color;
 	color: $background-primary-color;
-	font-family: sans-serif;;
+	font-family: sans-serif;
 	font-size: 11px;
 	letter-spacing: 1.6px;
 	margin-top: 6px;
 	box-shadow: 0 2px 4px 0 $box-shadow-color;
 }
 
-.target-form-firstItem{
+.target-form-firstItem {
   width: 257px;
   height: 39px;
   text-align: center;
@@ -60,7 +60,7 @@
   border: solid 0.5px $text-primary-color;
 }
 
-.target-form-listItem{
+.target-form-listItem {
   width: 257px;
   height: 30px;
   text-align: center;

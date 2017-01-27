@@ -1,9 +1,9 @@
-import React, {PropTypes} from 'react';
-import {browserHistory} from 'react-router';
+import React, { PropTypes } from 'react';
+import { browserHistory } from 'react-router';
 import GoogleMap from '../components/home/GoogleMapContainer';
 import SideBar from '../components/home/SideBarContainer';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import * as targetActions from '../actions/targetActions';
 import * as newTargetActions from '../actions/newTargetActions';
 
@@ -11,17 +11,16 @@ export const HomePage = (props) => {
 
   if (props.session.isLoggedIn === false) {
     browserHistory.push('/sign-in');
+
     return null;
   }else{
-
     props.actions.resetFreeTarget();
     props.actions.loadTargets();
 
     return (
       <div className="outer">
-        <SideBar
-        className="sidebar"/>
-        <GoogleMap/>
+        <SideBar />
+        <GoogleMap />
       </div>
     );
   }
