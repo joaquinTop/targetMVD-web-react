@@ -68,7 +68,10 @@ export const SideBarContainer = (props) => {
             />
             <button onClick={contentChanged} className="btn-matches">MATCHES</button>
             <br />
-            <button onClick={logOut} type="button" className="btn btn-danger btn-sign-out">Sign out</button>
+            <button
+              onClick={logOut}
+              type="button"
+              className="btn btn-danger btn-sign-out">Sign out</button>
           </div>
         </div>
       );
@@ -81,7 +84,7 @@ export const SideBarContainer = (props) => {
           <Home switchContentAction={props.actions.switchContent} />
         </div>
         );
-        
+
     default:
       return null;
 
