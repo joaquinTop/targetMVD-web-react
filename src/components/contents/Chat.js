@@ -22,9 +22,11 @@ export const Chat = (props) => {
       </div>
       <hr className="custom-line-chats" />
       <button onClick={contentChanged} className="btn-back-chat">BACK</button>
-      <div className="chatContainer">
-        <div className="conversation-start">
-          <span>Today, 6:48 AM</span>
+      <div>
+        <div className="chatContainer">
+          <div className="conversation-start">
+            <span>Today, 6:48 AM</span>
+          </div>
         </div>
       </div>
     </div>
