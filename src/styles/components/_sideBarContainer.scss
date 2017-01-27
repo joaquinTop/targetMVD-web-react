@@ -30,9 +30,9 @@
 
 .sidebar {
   width: auto;
-	height: calc(100% - $sidebar-header-height);
-	text-align: center;
+  height: calc(100% - 50px);
   overflow-y: scroll;
+	text-align: center;
 }
 
 .sidebarContainer {
