@@ -13,37 +13,68 @@ export const Chat = (props) => {
   };
 
   return (
-    <div>
+    <div className="chat-sidebar-container">
       <Header title={"CHAT"} style="sidebarHeader" withBackButton />
-      <div className="chatHeader">
-        <img className="topicImg" src={"http://s16.postimg.org/ete1l89z5/img5.jpg"} alt="" />
-        <h4 className="name">{props.currentConversation.user.name}</h4>
-        <h4 className="chatSubHeader">{props.messages.length}</h4>
+
+      <div className="chat-inside-container1">
+        <div className="chatHeader">
+          <img className="topicImg" src={"http://s16.postimg.org/ete1l89z5/img5.jpg"} alt="" />
+          <h4 className="name">{props.currentConversation.user.name}</h4>
+          <h4 className="chatSubHeader">{props.messages.length}</h4>
+        </div>
+        <hr className="custom-line-chats" />
+        <button onClick={contentChanged} className="btn-back-chat">BACK</button>
       </div>
-      <hr className="custom-line-chats" />
-      <button onClick={contentChanged} className="btn-back-chat">BACK</button>
-      
-      <div className="container-chat">
-        <div className="right">
-          <div className="chat">
-            <div className="conversation-start">
-              <span>Today, 6:48 AM</span>
-            </div>
-            <div className="bubbleme">
-              Hola!, a donde quieres viajar?
-            </div>
-            <div className="bubbleyou">
-              Estoy buscando companero de viaje
-            </div>
-            <div className="bubbleyou">
-              I was wondering...
-            </div>
-          </div>
-          <div className="write">
-            <input type="text" />
+
+      <div className="chat-inside-container">
+        <div className="container-chat">
+          <div className="left">
+            <ul className="chat">
+              <div className="bubbleme">
+                Hola!, a donde quieres viajar?
+              </div>
+              <div className="bubbleyou">
+                Estoy buscando companero de viaje
+              </div>
+              <div className="bubbleyou">
+                I was wondering...
+              </div>
+              <div className="bubbleme">
+                Hola!, a donde quieres viajar?
+              </div>
+              <div className="bubbleyou">
+                Estoy buscando companero de viaje
+              </div>
+              <div className="bubbleyou">
+                I was wondering...
+              </div>
+              <div className="bubbleme">
+                Hola!, a donde quieres viajar?
+              </div>
+              <div className="bubbleyou">
+                Estoy buscando companero de viaje
+              </div>
+              <div className="bubbleyou">
+                I was wondering...
+              </div>
+              <div className="bubbleme">
+                Hola!, a donde quieres viajar?
+              </div>
+              <div className="bubbleyou">
+                Estoy buscando companero de viaje
+              </div>
+              <div className="bubbleyou">
+                I was wondering...
+              </div>
+            </ul>
           </div>
         </div>
+
+        <div className="write">
+          <input type="text" />
+        </div>
       </div>
+
     </div>
     );
 };

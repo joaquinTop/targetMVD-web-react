@@ -15,7 +15,6 @@ import targetIcon from '../../res/images/common/targetIcon.png';
 import HomeWelcome from '../common/HomeWelcome';
 import Home from '../contents/Home';
 import Chat from '../contents/Chat';
-import ChatAux from '../contents/ChatAux';
 
 export const SideBarContainer = (props) => {
 
@@ -56,7 +55,6 @@ export const SideBarContainer = (props) => {
         <div className="sidebarContainer">
           <CustomAlert />
           <Header title={"CREATE TARGET"} style="sidebarHeader" withBackButton={false}/>
-          <img className="target-icon" src={targetIcon} />
           <br />
           <div className="sidebar">
             <img className="target-icon" src={targetIcon} />
@@ -91,16 +89,9 @@ export const SideBarContainer = (props) => {
 
     case "Chat":
       return (
-        <div className="sidebar">
+        <div className="sidebarContainer">
           <CustomAlert />
           <Chat />
-        </div>
-        );
-
-    case "ChatAux":
-      return (
-        <div className="sidebar">
-          <ChatAux />
         </div>
         );
 

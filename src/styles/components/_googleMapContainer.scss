@@ -1,4 +1,8 @@
-.mapContainer{
+.mapContainer {
   height: 100%;
-  width: 100%;
+  width: auto;
+}
+
+.mapHiding {
+  @media (max-width: 240px) { display: none; }
 }
