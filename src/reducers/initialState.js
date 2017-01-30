@@ -3,7 +3,7 @@ export default {
   topics: [],
   matches: [],
   messages: [],
-  content: "ChatAux",
+  content: "HomeWelcome",
   currentConversation: {},
   newTarget: {
     id: 0,

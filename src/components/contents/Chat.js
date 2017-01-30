@@ -22,10 +22,25 @@ export const Chat = (props) => {
       </div>
       <hr className="custom-line-chats" />
       <button onClick={contentChanged} className="btn-back-chat">BACK</button>
-      <div>
-        <div className="chatContainer">
-          <div className="conversation-start">
-            <span>Today, 6:48 AM</span>
+      
+      <div className="container-chat">
+        <div className="right">
+          <div className="chat">
+            <div className="conversation-start">
+              <span>Today, 6:48 AM</span>
+            </div>
+            <div className="bubbleme">
+              Hola!, a donde quieres viajar?
+            </div>
+            <div className="bubbleyou">
+              Estoy buscando companero de viaje
+            </div>
+            <div className="bubbleyou">
+              I was wondering...
+            </div>
+          </div>
+          <div className="write">
+            <input type="text" />
           </div>
         </div>
       </div>
