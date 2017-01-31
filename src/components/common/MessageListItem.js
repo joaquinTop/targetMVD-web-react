@@ -17,7 +17,6 @@ const MessageListItem = (props) => {
       {message.text}
     </div>
   );
-
 };
 
 MessageListItem.propTypes = {

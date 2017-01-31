@@ -12,7 +12,7 @@ export const Chat = (props) => {
   const contentChanged = () => {
     props.actions.switchContent("Home");
   };
-
+  
   const messagesAux = [{text:"Hola!, a donde quieres viajar?", id:1, itsme:true}, {text:"Estoy buscando companero de viaje", id:2, itsme:false}, {text:"I was wondering...", id:3, itsme:true},
                       {text:"Hola!, a donde quieres viajar?", id:4, itsme:false}, {text:"Estoy buscando companero de viaje", id:5, itsme:true}, {text:"I was wondering...", id:6, itsme:false}];
 
