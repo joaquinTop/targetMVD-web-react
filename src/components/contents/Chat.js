@@ -7,34 +7,29 @@ import * as messagesActions from '../../actions/messagesActions';
 import * as currentConversationActions from '../../actions/currentConversationActions';
 import * as contentActions from '../../actions/contentActions';
 
-export const Chat = (props) => {
+export const Chat = ({ currentConversation, messages, actions }) => {
 
   const contentChanged = () => {
-    props.actions.switchContent("Home");
+    actions.switchContent("Home");
   };
-  
-  const messagesAux = [{text:"Hola!, a donde quieres viajar?", id:1, itsme:true}, {text:"Estoy buscando companero de viaje", id:2, itsme:false}, {text:"I was wondering...", id:3, itsme:true},
-                      {text:"Hola!, a donde quieres viajar?", id:4, itsme:false}, {text:"Estoy buscando companero de viaje", id:5, itsme:true}, {text:"I was wondering...", id:6, itsme:false}];
 
   return (
     <div className="chat-sidebar-container">
       <Header title={"CHAT"} style="sidebarHeader" withBackButton />
-
       <div className="chat-inside-container-up">
         <div className="chatHeader">
           <img className="topicImg" src={"http://s16.postimg.org/ete1l89z5/img5.jpg"} alt="" />
-          <h4 className="name">{props.currentConversation.user.name}</h4>
-          <h4 className="chatSubHeader">{props.messages.length}</h4>
+          <h4 className="name">{currentConversation.user.name}</h4>
+          <h4 className="chatSubHeader">{messages.length}</h4>
         </div>
         <hr className="custom-line-chats" />
         <button onClick={contentChanged} className="btn-back-chat">BACK</button>
       </div>
-
       <div className="chat-inside-container">
         <div className="container-chat">
           <div className="left">
             <ul className="chat">
-              {messagesAux.map((item) => {
+              {messages.map((item) => {
                 return(
                   <div key={item.id}>
                     <MessageListItem message={item} />
@@ -43,12 +38,10 @@ export const Chat = (props) => {
             </ul>
           </div>
         </div>
-
         <div className="write">
           <input type="text" />
         </div>
       </div>
-
     </div>
     );
 };

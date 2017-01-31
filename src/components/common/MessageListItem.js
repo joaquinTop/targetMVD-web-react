@@ -1,9 +1,8 @@
 import React, {PropTypes} from 'react';
 import { isMyMessage } from '../../utils/uiHelper/ChatHelper';
 
-const MessageListItem = (props) => {
+const MessageListItem = ({ message }) => {
 
-  const { message } = props;
   if (isMyMessage(message)) {
     return (
       <div className="bubbleme">
