@@ -3,14 +3,14 @@
 	height: 100%;
 }
 
+.chat-inside-container-up {
+  @media (max-height: 280px) { display: none; }
+}
+
 .chat-inside-container {
   width: 100%;
 	height: calc(100% - 190px);
   @media (max-height: 280px) { height: calc(100% - 60px); }
-}
-
-.chat-inside-container1 {
-  @media (max-height: 280px) { display: none; }
 }
 
 .header-button-back {

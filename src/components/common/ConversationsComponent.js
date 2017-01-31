@@ -23,7 +23,7 @@ class ConversationsComponent extends React.Component{
       );
     } else {
       return (
-        <div>
+        <div className="conversations-container">
           <h4 className="home-chat">Chat</h4>
           <ul className="people">
             <hr className="custom-line-chats" />

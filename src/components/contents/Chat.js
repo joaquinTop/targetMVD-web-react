@@ -16,7 +16,7 @@ export const Chat = (props) => {
     <div className="chat-sidebar-container">
       <Header title={"CHAT"} style="sidebarHeader" withBackButton />
 
-      <div className="chat-inside-container1">
+      <div className="chat-inside-container-up">
         <div className="chatHeader">
           <img className="topicImg" src={"http://s16.postimg.org/ete1l89z5/img5.jpg"} alt="" />
           <h4 className="name">{props.currentConversation.user.name}</h4>
