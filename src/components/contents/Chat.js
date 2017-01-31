@@ -3,6 +3,9 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import Header from '../common/Header';
 import MessageListItem from '../common/MessageListItem';
+import MessageComposer from '../common/MessageComposer';
+import * as messagesActions from '../../actions/messagesActions';
+import * as currentConversationActions from '../../actions/currentConversationActions';
 import * as contentActions from '../../actions/contentActions';
 
 export const Chat = ({ currentConversation, messages, actions: { switchContent } }) => {
@@ -16,7 +19,7 @@ export const Chat = ({ currentConversation, messages, actions: { switchContent }
       <Header title={"CHAT"} style="sidebarHeader" withBackButton />
       <div className="chat-inside-container-up">
         <div className="chatHeader">
-          <img className="topicImg" src={"http://s16.postimg.org/ete1l89z5/img5.jpg"} alt="" />
+          <img className="topicImg" src={(currentConversation.topic && currentConversation.topic.icon) || "http://s16.postimg.org/ete1l89z5/img5.jpg"} alt="" />
           <h4 className="name">{currentConversation.user.name}</h4>
           <h4 className="chatSubHeader">{messages.length}</h4>
         </div>
@@ -35,9 +38,7 @@ export const Chat = ({ currentConversation, messages, actions: { switchContent }
             </ul>
           </div>
         </div>
-        <div className="write">
-          <input type="text" />
-        </div>
+        <MessageComposer />
       </div>
     </div>
     );
