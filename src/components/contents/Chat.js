@@ -2,6 +2,7 @@ import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import Header from '../common/Header';
+import MessageListItem from '../common/MessageListItem';
 import * as messagesActions from '../../actions/messagesActions';
 import * as currentConversationActions from '../../actions/currentConversationActions';
 import * as contentActions from '../../actions/contentActions';
@@ -11,6 +12,9 @@ export const Chat = (props) => {
   const contentChanged = () => {
     props.actions.switchContent("Home");
   };
+
+  const messagesAux = [{text:"Hola!, a donde quieres viajar?", id:1, itsme:true}, {text:"Estoy buscando companero de viaje", id:2, itsme:false}, {text:"I was wondering...", id:3, itsme:true},
+                      {text:"Hola!, a donde quieres viajar?", id:4, itsme:false}, {text:"Estoy buscando companero de viaje", id:5, itsme:true}, {text:"I was wondering...", id:6, itsme:false}];
 
   return (
     <div className="chat-sidebar-container">
@@ -30,42 +34,12 @@ export const Chat = (props) => {
         <div className="container-chat">
           <div className="left">
             <ul className="chat">
-              <div className="bubbleme">
-                Hola!, a donde quieres viajar?
-              </div>
-              <div className="bubbleyou">
-                Estoy buscando companero de viaje
-              </div>
-              <div className="bubbleyou">
-                I was wondering...
-              </div>
-              <div className="bubbleme">
-                Hola!, a donde quieres viajar?
-              </div>
-              <div className="bubbleyou">
-                Estoy buscando companero de viaje
-              </div>
-              <div className="bubbleyou">
-                I was wondering...
-              </div>
-              <div className="bubbleme">
-                Hola!, a donde quieres viajar?
-              </div>
-              <div className="bubbleyou">
-                Estoy buscando companero de viaje
-              </div>
-              <div className="bubbleyou">
-                I was wondering...
-              </div>
-              <div className="bubbleme">
-                Hola!, a donde quieres viajar?
-              </div>
-              <div className="bubbleyou">
-                Estoy buscando companero de viaje
-              </div>
-              <div className="bubbleyou">
-                I was wondering...
-              </div>
+              {messagesAux.map((item) => {
+                return(
+                  <div key={item.id}>
+                    <MessageListItem message={item} />
+                  </div>)
+              })}
             </ul>
           </div>
         </div>
