@@ -1,9 +1,9 @@
 import * as types from './actionTypes';
 
-export function updateCurrentConversation(conversation){
+export const updateCurrentConversation = (conversation) => {
   return { type: types.UPDATE_CURRENT_CONVERSATION, conversation };
 }
 
-export function resetCurrentConversation(){
+export const resetCurrentConversation = () => {
   return { type: types.RESET_CURRENT_CONVERSATION };
 }

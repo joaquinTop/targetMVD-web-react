@@ -1,25 +1,24 @@
-import React, {PropTypes} from 'react';
+import React, { Component, PropTypes} from 'react';
 import * as C from '../../res/strings/strings-en';
 import imgCount from '../../res/images/common/yellow-circle.png';
 
-class ConversationsComponent extends React.Component{
+class ConversationsComponent extends Component{
   constructor(props, context){
     super(props, context);
   }
 
   conversationSelected = (match) => {
-    this.props.getMessagesAction(match.match_id);
-    this.props.updateCurrentConversationAction(match);
-    this.props.switchContent("Chat");
+    const { getMessagesAction, updateCurrentConversationAction, switchContent } = this.props;
+    getMessagesAction(match.match_id);
+    updateCurrentConversationAction(match);
+    switchContent("Chat");
   };
 
-  render(){
+  render() {
     const matchesCount = this.props.converastions.length;
     if (matchesCount === 0) {
       return (
-        <div>
-          <h3 className="noTargets">{ C.TEXT_NO_TARGETS_YET }</h3>
-        </div>
+        <h3 className="noTargets">{ C.TEXT_NO_TARGETS_YET }</h3>
       );
     } else {
       return (

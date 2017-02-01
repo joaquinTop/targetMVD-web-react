@@ -3,16 +3,8 @@ import { isMyMessage } from '../../utils/uiHelper/ChatHelper';
 
 const MessageListItem = ({ message }) => {
 
-  if (isMyMessage(message)) {
-    return (
-      <div className="bubbleme">
-        {message.text}
-      </div>
-    );
-  }
-
   return (
-    <div className="bubbleyou">
+    <div className={isMyMessage(message) ? "bubbleme" : "bubbleyou"}>
       {message.text}
     </div>
   );

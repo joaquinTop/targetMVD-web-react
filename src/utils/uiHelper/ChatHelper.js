@@ -1,3 +1,1 @@
-export const isMyMessage = (message) => {
-  return message.itsme;
-};
+export const isMyMessage = (message) => message.itsme;

@@ -1,7 +1,7 @@
 import * as types from './actionTypes';
 import messagesClient from '../client/MessagesServerClient';
 
-export function loadMessagesSuccess(messages){
+export const loadMessagesSuccess = (messages) => {
   return { type: types.LOAD_MESSAGES, messages };
 }
 

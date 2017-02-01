@@ -15,8 +15,7 @@ class MessagesClient {
 
   static getMessages(matchId) {
     return new Promise((resolve, reject) => {
-      instance.get('/match_conversations/' + matchId + '/messages').then((res => {
-        const { data } = res;
+      instance.get('/match_conversations/' + matchId + '/messages').then((({ data }) => {
         resolve(data);
       })).catch(error => {
         reject(error.message);

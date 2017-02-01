@@ -3,14 +3,12 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import Header from '../common/Header';
 import MessageListItem from '../common/MessageListItem';
-import * as messagesActions from '../../actions/messagesActions';
-import * as currentConversationActions from '../../actions/currentConversationActions';
 import * as contentActions from '../../actions/contentActions';
 
-export const Chat = ({ currentConversation, messages, actions }) => {
+export const Chat = ({ currentConversation, messages, actions: { switchContent } }) => {
 
   const contentChanged = () => {
-    actions.switchContent("Home");
+    switchContent("Home");
   };
 
   return (
@@ -30,10 +28,9 @@ export const Chat = ({ currentConversation, messages, actions }) => {
           <div className="left">
             <ul className="chat">
               {messages.map((item) => {
-                return(
-                  <div key={item.id}>
-                    <MessageListItem message={item} />
-                  </div>)
+                <div key={item.id}>
+                  <MessageListItem message={item} />
+                </div>
               })}
             </ul>
           </div>
@@ -61,7 +58,7 @@ const mapStateToProps = ({ messages, currentConversation }) => {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(Object.assign({}, messagesActions, currentConversationActions, contentActions), dispatch)
+    actions: bindActionCreators(contentActions, dispatch)
   };
 }
 
