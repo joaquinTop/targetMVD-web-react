@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import * as C from '../../constants/constants';
 
 class MessageComposer extends React.Component {
 
@@ -14,20 +15,21 @@ class MessageComposer extends React.Component {
   }
 
   handleSubmit(event) {
-    const text = event.target.value.trim();
-    if (event.which === 13) {
-      debugger;
+    const textContent = event.target.value.trim();
+    if (event.which === C.SUBMIT_KEY) {
       event.preventDefault();
-      // const newMessage = {
-      //   text: text
-      // };
-      // this.props.onSave(newMessage); HERE Should go action to create msg
+      const newMessage = {
+        message:
+        {
+          text: textContent
+        }
+      };
       this.setState({ text: '' });
+      this.props.sendMessageAction(newMessage, this.props.matchId);
     }
   }
 
   handleChange(event) {
-    debugger;
     this.setState({ text: event.target.value });
   }
 
@@ -48,7 +50,8 @@ class MessageComposer extends React.Component {
 }
 
 MessageComposer.propTypes = {
-  createMessageAction: PropTypes.func.isRequired
+  sendMessageAction: PropTypes.func.isRequired,
+  matchId: PropTypes.number.isRequired
 };
 
 export default MessageComposer;

@@ -8,12 +8,12 @@ import * as messagesActions from '../../actions/messagesActions';
 import * as currentConversationActions from '../../actions/currentConversationActions';
 import * as contentActions from '../../actions/contentActions';
 
-export const Chat = ({ currentConversation, messages, actions: { switchContent } }) => {
+export const Chat = ({ currentConversation, messages, actions: { switchContent, closeCurrentConversation, sendMessage }, session }) => {
 
   const contentChanged = () => {
+    closeCurrentConversation(currentConversation.match_id);
     switchContent("Home");
   };
-
   return (
     <div className="chat-sidebar-container">
       <Header title={"CHAT"} style="sidebarHeader" withBackButton />
@@ -32,13 +32,13 @@ export const Chat = ({ currentConversation, messages, actions: { switchContent }
             <ul className="chat">
               {messages.map((item) => {
                 <div key={item.id}>
-                  <MessageListItem message={item} />
+                  <MessageListItem message={item} itsMine={item.sender === session.user_id} />
                 </div>
               })}
             </ul>
           </div>
         </div>
-        <MessageComposer />
+        <MessageComposer sendMessageAction={sendMessage} matchId={currentConversation.match_id}/>
       </div>
     </div>
     );
@@ -47,19 +47,21 @@ export const Chat = ({ currentConversation, messages, actions: { switchContent }
 Chat.propTypes = {
   actions: PropTypes.object.isRequired,
   messages: PropTypes.array.isRequired,
+  session: PropTypes.object.isRequired,
   currentConversation: PropTypes.object.isRequired
 };
 
-const mapStateToProps = ({ messages, currentConversation }) => {
+const mapStateToProps = ({ messages, currentConversation, session }) => {
   return {
     messages,
-    currentConversation
+    currentConversation,
+    session
   };
 };
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(contentActions, dispatch)
+    actions: bindActionCreators(Object.assign({}, contentActions, currentConversationActions, messagesActions), dispatch)
   };
 }
 

@@ -32,7 +32,7 @@ class ConversationsComponent extends Component{
                   <li className="person" onClick={this.conversationSelected.bind(this, item)}>
                     <img className="img-user" src="http://s13.postimg.org/ih41k9tqr/img1.jpg" alt="" />
                     <span className="name">{item.user.name}</span>
-                    <span className="preview">¡Hola! A dónde querés viajar?</span>
+                    <span className="preview">{item.last_message.text || "Start conversation"}</span>
                     <img className="img-topic" src={(item.topic && item.topic.icon) || "http://s16.postimg.org/ete1l89z5/img5.jpg"} alt="" />
                     <img className="img-count-unread" src={imgCount} alt="" />
                   </li>

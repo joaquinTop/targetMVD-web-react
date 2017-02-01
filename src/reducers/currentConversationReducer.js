@@ -8,7 +8,7 @@ export default function targetReducer(state = initialState.currentConversation, 
       return action.conversation;
     }
 
-    case types.RESET_CURRENT_CONVERSATION:{
+    case types.CLOSE_CURRENT_CONVERSATION:{
       return initialState.currentConversation;
     }
 
