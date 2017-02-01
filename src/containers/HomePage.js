@@ -19,8 +19,8 @@ export const HomePage = (props) => {
 
     return (
       <div className="outer">
-        <SideBar />
-        <GoogleMap />
+        <SideBar className="sidebar" />
+        <GoogleMap className="mapHiding" />
       </div>
     );
   }

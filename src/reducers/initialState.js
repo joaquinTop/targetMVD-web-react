@@ -2,7 +2,9 @@ export default {
   targets: [],
   topics: [],
   matches: [],
+  messages: [],
   content: "HomeWelcome",
+  currentConversation: {},
   newTarget: {
     id: 0,
     title: "",

@@ -2,30 +2,39 @@ import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as matchesActions from '../../actions/matchesActions';
+import * as currentConversationActions from '../../actions/currentConversationActions';
+import * as messagesActions from '../../actions/messagesActions';
 import userPlaceholder from '../../res/images/profile/placeholder-user.png';
 import ConversationsComponent from '../common/ConversationsComponent';
-import smilies from '../../res/images/common/smilies.png';
 
-export const Home = (props) => {
+export const Home = ({ switchContentAction, matches, actions }) => {
 
   const contentChanged = () => {
-    props.switchContentAction("TargetForm");
+    switchContentAction("TargetForm");
   };
-  
+
   return (
-    <div>
-      <h3 className="home-title">TARGET</h3>
-      <div className="user-img-background">
-        <img className="user-img" src={userPlaceholder} />
+    <div className="home-sidebar-container">
+      <div className="home-inside-container-up">
+        <div className="home-hiding-content">
+          <h3 className="home-title">TARGET</h3>
+          <div className="user-img-background">
+            <img className="user-img" src={userPlaceholder} />
+          </div>
+          <h4 className="home-username">@nickname</h4>
+          <h5 className="home-options">Edit / Logout</h5>
+          <hr className="custom-line-home" />
+        </div>
       </div>
-      <h4 className="home-username">@nickname</h4>
-      <h5 className="home-options">Edit / Logout</h5>
-      <hr className="custom-line-home" />
+      <div className="home-inside-container">
+        <ConversationsComponent
+          converastions={matches}
+          updateCurrentConversationAction={actions.updateCurrentConversation}
+          switchContent={switchContentAction}
+          getMessagesAction={actions.loadMessages}
+        />
+      </div>
       <button onClick={contentChanged} className="button-new-target">NEW TARGET</button>
-      <br />
-      <ConversationsComponent converastions={props.matches} />
-      <br />
-      <img className="smilies-home" src={smilies} />
     </div>
     );
 };
@@ -42,7 +51,7 @@ const mapStateToProps = ({ matches }) => {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(matchesActions, dispatch)
+    actions: bindActionCreators(Object.assign({}, matchesActions, currentConversationActions, messagesActions), dispatch)
   };
 }
 

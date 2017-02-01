@@ -1,16 +1,17 @@
 import React, {PropTypes} from 'react';
 
-export const Header = (props) => {
+export const Header = ({ style, title }) => {
   return(
-    <div className={props.style}>
-      <h3 className="sidebarHeaderTitle">{props.title}</h3>
+    <div className={style}>
+      <h3 className="sidebarHeaderTitle">{title}</h3>
     </div>
   );
 };
 
 Header.propTypes = {
   title: PropTypes.string.isRequired,
-  style: PropTypes.string.isRequired
+  style: PropTypes.string.isRequired,
+  withBackButton: PropTypes.bool.isRequired
 };
 
 export default Header;

@@ -22,5 +22,12 @@ export const LOAD_TOPICS = 'LOAD_TOPICS';
 // matches
 export const LOAD_MATCHES = 'LOAD_MATCHES';
 
+// messages
+export const LOAD_MESSAGES = 'LOAD_MESSAGES';
+
 // sidebar content
 export const SWITCH_CONTENT = 'SWITCH_CONTENT';
+
+// new converastion
+export const UPDATE_CURRENT_CONVERSATION = 'UPDATE_CURRENT_CONVERSATION';
+export const RESET_CURRENT_CONVERSATION = 'RESET_CURRENT_CONVERSATION';
