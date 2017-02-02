@@ -15,6 +15,9 @@ import targetIcon from '../../res/images/common/targetIcon.png';
 import HomeWelcome from '../common/HomeWelcome';
 import Home from '../contents/Home';
 import Chat from '../contents/Chat';
+import { setPusherClient } from 'react-pusher';
+import Pusher from 'pusher-js';
+import * as C from '../../constants/constants';
 
 export const SideBarContainer = (props) => {
 
@@ -25,6 +28,15 @@ export const SideBarContainer = (props) => {
   if (!props.session.firstTime && props.content === "HomeWelcome") {
       props.actions.switchContent("TargetForm");
   }
+
+  const pusherClient = new Pusher(C.PUSHER_KEY, {
+    app_id: C.PUSHER_APP_ID,
+    key: C.PUSHER_KEY,
+    secret: C.PUSHER_SECRET,
+    encrypted: true
+  });
+
+  setPusherClient(pusherClient);
 
   switch (props.content) {
 

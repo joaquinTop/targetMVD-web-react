@@ -28,3 +28,9 @@ export const sendMessage = (message, matchId) => {
     });
   };
 };
+
+export const onMessageReceived = (message) => {
+  return dispatch => {
+    dispatch(addMessage(message));
+  };
+};

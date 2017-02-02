@@ -7,8 +7,9 @@ import MessageComposer from '../common/MessageComposer';
 import * as messagesActions from '../../actions/messagesActions';
 import * as currentConversationActions from '../../actions/currentConversationActions';
 import * as contentActions from '../../actions/contentActions';
+import Pusher from 'react-pusher';
 
-export const Chat = ({ currentConversation, messages, actions: { switchContent, closeCurrentConversation, sendMessage }, session }) => {
+export const Chat = ({ currentConversation, messages, actions: { switchContent, closeCurrentConversation, sendMessage, onMessageReceived}, session }) => {
 
   const contentChanged = () => {
     closeCurrentConversation(currentConversation.match_id);
@@ -16,6 +17,11 @@ export const Chat = ({ currentConversation, messages, actions: { switchContent, 
   };
   return (
     <div className="chat-sidebar-container">
+      <Pusher
+        channel={currentConversation.channel_id}
+        event="new_message"
+        onUpdate={onMessageReceived}
+      />
       <Header title={"CHAT"} style="sidebarHeader" withBackButton />
       <div className="chat-inside-container-up">
         <div className="chatHeader">
@@ -30,11 +36,11 @@ export const Chat = ({ currentConversation, messages, actions: { switchContent, 
         <div className="container-chat">
           <div className="left">
             <ul className="chat">
-              {messages.map((item) => {
+              {messages.map((item) =>
                 <div key={item.id}>
                   <MessageListItem message={item} itsMine={item.sender === session.user_id} />
                 </div>
-              })}
+              )}
             </ul>
           </div>
         </div>
