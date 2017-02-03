@@ -25,7 +25,11 @@ export const Chat = ({ currentConversation, messages, actions: { switchContent, 
       <Header title={"CHAT"} style="sidebarHeader" withBackButton />
       <div className="chat-inside-container-up">
         <div className="chatHeader">
-          <img className="topicImg" src={(currentConversation.topic && currentConversation.topic.icon) || "http://s16.postimg.org/ete1l89z5/img5.jpg"} alt="" />
+          <img
+            className="topicImg"
+            src={(currentConversation.topic && currentConversation.topic.icon) || "http://s16.postimg.org/ete1l89z5/img5.jpg"}
+            alt=""
+          />
           <h4 className="name">{currentConversation.user.name}</h4>
           <h4 className="chatSubHeader">{messages.length}</h4>
         </div>
@@ -37,8 +41,12 @@ export const Chat = ({ currentConversation, messages, actions: { switchContent, 
           <div className="left">
             <ul className="chat">
               {messages.map((item) =>
-                <div key={item.id}>
+                <div key={item.id} className="bubbleContainer">
                   <MessageListItem message={item} itsMine={item.sender === session.user_id} />
+                  <span
+                    className={(item.sender === session.user_id) ? "message-item-time-me" : "message-item-time-you"}>
+                    {`${item.time.hour}:${item.time.min}`}
+                  </span>
                 </div>
               )}
             </ul>
