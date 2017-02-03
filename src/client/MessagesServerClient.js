@@ -22,6 +22,26 @@ class MessagesClient {
       });
     });
   }
+
+  static sendMessage(messsage, matchId) {
+    return new Promise((resolve, reject) => {
+      instance.post('/match_conversations/' + matchId + '/messages', messsage).then((({ data }) => {
+        resolve(data);
+      })).catch(error => {
+        reject(error.message);
+      });
+    });
+  }
+
+  static closeConversation(matchId) {
+    return new Promise((resolve, reject) => {
+      instance.post('/match_conversations/' + matchId + '/close').then((({ data }) => {
+        resolve(data);
+      })).catch(error => {
+        reject(error.message);
+      });
+    });
+  }
 }
 
 export default MessagesClient;

@@ -17,7 +17,7 @@
   float: left;
   width: 15px;
   cursor: pointer;
-  display:flex;
+  display: flex;
   margin: 15px 0 15px 12px;
   color: $background-primary-color;
   align-items: center;
@@ -44,6 +44,49 @@
   display: inline-block;
   margin-top: 14px;
   box-shadow: 0 2px 4px 0 $box-shadow-color;
+}
+
+.bubbleContainer{
+  height: auto;
+  width: auto;
+  position: relative;
+}
+
+.message-item-time-me {
+  float: right;
+  margin: 8px 10px 0 0;
+  font-size: 9px;
+  width: auto;
+	height: inherit;
+  color: $chat-time-color;
+}
+
+.message-item-time-you {
+  float: left;
+  margin: 8px 0 0 10px;
+  font-size: 9px;
+  width: auto;
+	height: inherit;
+  color: $chat-time-color;
+}
+
+.time {
+  font-size: 14px;
+  position: absolute;
+  top: 16px;
+  right: 10%;
+  padding: 0 0 5px 5px;
+  color: $text-secondary-color;
+  background-color: $background-primary-color;
+}
+
+
+.img-user {
+  float: left;
+  width: 40px;
+  height: 40px;
+  margin: 0 12px 0 0;
+  border-radius: 50%;
 }
 
 .chatHeader {
@@ -215,8 +258,10 @@
     }
 
     .bubbleme {
+      max-width: 155px;
       font-size: 12px;
       font-family: sans-serif;
+      text-align: right;
       position: relative;
       display: inline-block;
       clear: both;
@@ -244,8 +289,10 @@
     }
 
     .bubbleyou {
+      max-width: 155px;
 	    font-size: 12px;
       font-family: sans-serif;
+      text-align: left;
       position: relative;
       display: inline-block;
       clear: both;
