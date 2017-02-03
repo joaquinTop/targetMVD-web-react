@@ -29,14 +29,14 @@ export const SideBarContainer = (props) => {
       props.actions.switchContent("TargetForm");
   }
 
-  const pusherClient = new Pusher(C.PUSHER_KEY, {
-    app_id: C.PUSHER_APP_ID,
-    key: C.PUSHER_KEY,
-    secret: C.PUSHER_SECRET,
-    encrypted: true
-  });
-
-  setPusherClient(pusherClient);
+  if (props.session.firstTime) {
+    const pusherClient = new Pusher(C.PUSHER_KEY, {
+      app_id: C.PUSHER_APP_ID,
+      secret: C.PUSHER_SECRET,
+      encrypted: true
+    });
+    setPusherClient(pusherClient);
+  }
 
   switch (props.content) {
 
