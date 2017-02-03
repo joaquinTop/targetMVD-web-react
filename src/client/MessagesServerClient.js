@@ -25,8 +25,7 @@ class MessagesClient {
 
   static sendMessage(messsage, matchId) {
     return new Promise((resolve, reject) => {
-      instance.post('/match_conversations/' + matchId + '/messages', messsage).then((res => {
-        const { data } = res;
+      instance.post('/match_conversations/' + matchId + '/messages', messsage).then((({ data }) => {
         resolve(data);
       })).catch(error => {
         reject(error.message);
@@ -36,8 +35,7 @@ class MessagesClient {
 
   static closeConversation(matchId) {
     return new Promise((resolve, reject) => {
-      instance.post('/match_conversations/' + matchId + '/close').then((res => {
-        const { data } = res;
+      instance.post('/match_conversations/' + matchId + '/close').then((({ data }) => {
         resolve(data);
       })).catch(error => {
         reject(error.message);

@@ -5,7 +5,7 @@ export const loadMessagesSuccess = (messages) => {
   return { type: types.LOAD_MESSAGES, messages };
 }
 
-export function addMessage(message){
+export const addMessage = (message) => {
   return { type: types.ADD_MESSAGE, message };
 }
 

@@ -9,7 +9,7 @@ import * as currentConversationActions from '../../actions/currentConversationAc
 import * as contentActions from '../../actions/contentActions';
 import Pusher from 'react-pusher';
 
-export const Chat = ({ currentConversation, messages, actions: { switchContent, closeCurrentConversation, sendMessage, onMessageReceived}, session }) => {
+export const Chat = ({ currentConversation, messages, session, actions: { switchContent, closeCurrentConversation, sendMessage, onMessageReceived} }) => {
 
   const contentChanged = () => {
     closeCurrentConversation(currentConversation.match_id);
