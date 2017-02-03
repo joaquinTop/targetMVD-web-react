@@ -3,11 +3,11 @@ import messagesClient from '../client/MessagesServerClient';
 
 export const loadMessagesSuccess = (messages) => {
   return { type: types.LOAD_MESSAGES, messages };
-}
+};
 
 export const addMessage = (message) => {
   return { type: types.ADD_MESSAGE, message };
-}
+};
 
 export const loadMessages = (matchId) => {
   return dispatch => {

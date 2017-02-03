@@ -15,8 +15,8 @@ class MessageComposer extends React.Component {
   }
 
   handleSubmit(event) {
-    const textContent = event.target.value.trim();
     if (event.which === C.SUBMIT_KEY) {
+      const textContent = event.target.value.trim();
       event.preventDefault();
       const newMessage = {
         message:
