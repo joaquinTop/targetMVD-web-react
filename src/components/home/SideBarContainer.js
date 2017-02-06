@@ -18,6 +18,7 @@ import Chat from '../contents/Chat';
 import { setPusherClient } from 'react-pusher';
 import Pusher from 'pusher-js';
 import * as C from '../../constants/constants';
+import { Pushwoosh } from 'web-push-notifications';
 
 export const SideBarContainer = (props) => {
 
@@ -30,6 +31,17 @@ export const SideBarContainer = (props) => {
   }
 
   if (props.session.firstTime) {
+
+    // Pushwoosh
+    const pwInstance = new Pushwoosh();
+    pwInstance.push(['init', {
+        logLevel: 'info', // or debug
+        applicationCode: C.PUSHWOOSH_APP_CODE,
+        defaultNotificationTitle: 'Pushwoosh',
+        defaultNotificationImage: 'https://cp.pushwoosh.com/img/logo-medium.png'
+    }]);
+
+    // Pusher
     const pusherClient = new Pusher(C.PUSHER_KEY, {
       app_id: C.PUSHER_APP_ID,
       secret: C.PUSHER_SECRET,

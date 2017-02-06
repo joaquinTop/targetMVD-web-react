@@ -32,6 +32,17 @@ class UserClient {
     });
   }
 
+  static sendPushToken(token, user_id) {
+    return new Promise((resolve, reject) => {
+        instance.post('/users/' + user_id + '/push_tokens', token).then(((res) => {
+          const {data} = res;
+          resolve(data);
+        })).catch(error => {
+          reject(error.message);
+        });
+    });
+  }
+
   static signInWithFB(accessToken) {
     const infoJson = {
       type: 'facebook',

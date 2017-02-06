@@ -10,12 +10,27 @@
     This is an example of how to add features to index.html for only one environment.
     To track JavaScript errors via TrackJS, sign up for a free trial at TrackJS.com and enter your token in /webpack.config.prod.js on line 55.
    -->
-   <script type="text/javascript"
-     src="https://maps.googleapis.com/maps/api/js?libraries=visualization&key=AIzaSyB-U6Gw1USZvOGJWTlD9yjrM46HpaZu-3Q">
-   </script>
+  <link rel="manifest" href="/manifest.json">
+  <script type="text/javascript"
+    src="https://maps.googleapis.com/maps/api/js?libraries=visualization&key=AIzaSyB-U6Gw1USZvOGJWTlD9yjrM46HpaZu-3Q">
+  </script>
   <% if (htmlWebpackPlugin.options.trackJSToken) { %>
   <script>window._trackJs = {token: '<%= htmlWebpackPlugin.options.trackJSToken %>'};</script>
   <script src="https://d2zah9y47r7bi2.cloudfront.net/releases/current/tracker.js"></script>
+
+  <script src="https://www.gstatic.com/firebasejs/3.6.8/firebase.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyDeWz7yKFIdTOGYe-xGxxzx8bmt0gvzm64",
+      authDomain: "target-17fc5.firebaseapp.com",
+      databaseURL: "https://target-17fc5.firebaseio.com",
+      storageBucket: "target-17fc5.appspot.com",
+      messagingSenderId: "196006152865"
+    };
+    firebase.initializeApp(config);
+  </script>
+
   <% } %>
 
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
