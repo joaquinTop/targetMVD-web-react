@@ -33,6 +33,7 @@
     "babel-polyfill": "6.8.0",
     "bootstrap": "3.3.6",
     "jquery": "2.2.3",
+    "js-md5": "0.4.2",
     "object-assign": "4.1.0",
     "pusher-js": "4.0.0",
     "react": "15.3.2",
@@ -51,6 +52,7 @@
     "redux": "3.6.0",
     "redux-thunk": "2.1.0",
     "toastr": "2.1.2",
+    "uuid": "3.0.1",
     "validator": "^6.2.0",
     "web-push-notifications": "2.10.1"
   },

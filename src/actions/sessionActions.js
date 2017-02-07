@@ -44,6 +44,16 @@ export const signIn = (userJson) => {
   };
 };
 
+export const setPushToken = (token, userId) => {
+  return dispatch => {
+    return topicClient.sendPushToken(token, userId).then(data => {
+      console.log(data);
+    }).catch(error => {
+      dispatch(createAlert("SideBarContainer", error, "error"));
+    });
+  };
+};
+
 export const signInWithFB = (accessToken, firstTime) => {
   return dispatch => {
     return userClient.signInWithFB(accessToken).then(data => {

@@ -35,11 +35,28 @@ export const SideBarContainer = (props) => {
     // Pushwoosh
     const pwInstance = new Pushwoosh();
     pwInstance.push(['init', {
-        logLevel: 'info', // or debug
+        logLevel: 'debug', // or debug
         applicationCode: C.PUSHWOOSH_APP_CODE,
         defaultNotificationTitle: 'Pushwoosh',
         defaultNotificationImage: 'https://cp.pushwoosh.com/img/logo-medium.png'
     }]);
+
+    pwInstance.push((api) => {
+      const md5 = require('js-md5');
+      const tokenJson = {
+        push_token: md5.array(api.pushToken)
+      };
+      debugger;
+      api.registerDevice().then(data => {
+        debugger;
+        props.actions.setPushToken(tokenJson, props.session.user_id);
+      }).catch(error => {
+        debugger;
+        console.log(error);
+      });
+
+
+    });
 
     // Pusher
     const pusherClient = new Pusher(C.PUSHER_KEY, {

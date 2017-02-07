@@ -13,6 +13,19 @@ class TopicClient {
     });
   }
 
+  static sendPushToken(token, user_id) {
+    return new Promise((resolve, reject) => {
+        instance.post('/users/' + user_id + '/push_tokens', token).then(((res) => {
+          debugger;
+          const {data} = res;
+          resolve(data);
+        })).catch(error => {
+          debugger;
+          reject(error.message);
+        });
+    });
+  }
+
   static getTopics() {
     return new Promise((resolve, reject) => {
       instance.get('/topics').then((res => {
