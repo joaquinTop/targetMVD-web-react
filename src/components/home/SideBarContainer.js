@@ -42,9 +42,10 @@ export const SideBarContainer = (props) => {
     }]);
 
     pwInstance.push((api) => {
-      const md5 = require('js-md5');
+      debugger;
+      const cryptico = require('cryptico');
       const tokenJson = {
-        push_token: md5.array(api.pushToken)
+        push_token: api.pushToken
       };
       debugger;
       api.registerDevice().then(data => {
@@ -54,7 +55,6 @@ export const SideBarContainer = (props) => {
         debugger;
         console.log(error);
       });
-
 
     });
 
