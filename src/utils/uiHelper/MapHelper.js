@@ -14,3 +14,14 @@ export const getMyPosition = (success, error) => {
     maximumAge: 0
   });
 };
+
+export const mapMarkerToTarget = (marker, targetList) => {
+  let targetFound;
+  targetList.forEach((target) => {
+    if ((target.lat === marker.latitude) &&
+    (target.lng === marker.longitude)) {
+      targetFound = target;
+    }
+  });
+  return targetFound;
+};

@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react';
 import {GoogleMapLoader, GoogleMap, Marker} from 'react-google-maps';
-import { getCircle, getMyPosition } from '../../utils/uiHelper/MapHelper';
+import { getCircle, getMyPosition, mapMarkerToTarget } from '../../utils/uiHelper/MapHelper';
 import markerIcon from '../../res/images/targets/myPosition.png';
 import { getTopicIcon } from '../../utils/TopicsHelper';
 
@@ -88,14 +88,22 @@ class Map extends React.Component {
   }
 
   onMapClick(e) {
-    let lat = parseFloat(e.latLng.lat().toFixed(6));
-    let lng = parseFloat(e.latLng.lng().toFixed(6));
+    const lat = parseFloat(e.latLng.lat().toFixed(6));
+    const lng = parseFloat(e.latLng.lng().toFixed(6));
     this.props.updateTargetInfo("lat", lat);
     this.props.updateTargetInfo("lng", lng);
     this.props.updateTargetInfo("isVisible", true);
   }
 
   onMarkerClick(e) {
+    const lat = parseFloat(e.latLng.lat().toFixed(6));
+    const lng = parseFloat(e.latLng.lng().toFixed(6));
+    const marker = {
+      latitude: lat,
+      longitude: lng
+    };
+    debugger;
+    const targetFound = mapMarkerToTarget(marker, this.props.markers);
     debugger;
   }
 
