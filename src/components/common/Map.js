@@ -9,6 +9,7 @@ class Map extends React.Component {
     super(props, context);
 
     this.onMapClick = this.onMapClick.bind(this);
+    this.onMarkerClick = this.onMarkerClick.bind(this);
     this.success = this.success.bind(this);
     this.error = this.error.bind(this);
     this.getOpts = this.getOpts.bind(this);
@@ -94,6 +95,10 @@ class Map extends React.Component {
     this.props.updateTargetInfo("isVisible", true);
   }
 
+  onMarkerClick(e) {
+    debugger;
+  }
+
   render() {
     const mapContainer = <div className="mapContainer" />;
 
@@ -106,7 +111,7 @@ class Map extends React.Component {
         }
       };
       const opts = this.getOpts(venue);
-      return <Marker {...opts} key={venue.id} {...marker}/>;
+      return <Marker {...opts} onClick={this.onMarkerClick} key={venue.id} {...marker} />;
     });
 
     // FREE TARGET

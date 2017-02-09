@@ -14,17 +14,6 @@ class TargetClient {
     });
   }
 
-  static createTarget(target) {
-    return new Promise((resolve, reject)=> {
-      instance.post('/targets', target).then((res=> {
-        const {data} = res;
-        resolve(data);
-      })).catch(error => {
-        reject(error.message);
-      });
-    });
-  }
-
   static getMyTargets() {
     return new Promise((resolve, reject) => {
       instance.get('/targets').then((res=> {
@@ -36,17 +25,37 @@ class TargetClient {
     });
   }
 
-  // static deleteTarget(target) {
-  //   return new Promise((resolve, reject)=> {
-  //
-  //   });
-  // }
-  //
-  // static getCompatibleTargets() {
-  //   return new Promise((resolve, reject) => {
-  //
-  //   });
-  // }
+  static createTarget(target) {
+    return new Promise((resolve, reject) => {
+      instance.post('/targets', target).then((res=> {
+        const {data} = res;
+        resolve(data);
+      })).catch(error => {
+        reject(error.message);
+      });
+    });
+  }
+
+  static updateTarget(target) {
+    return new Promise((resolve, reject) => {
+      instance.post('/targets', target).then((({ data })=> {
+        resolve(data);
+      })).catch(error => {
+        reject(error.message);
+      });
+    });
+  }
+
+  static deleteTarget(targetId) {
+    return new Promise((resolve, reject) => {
+      instance.delete('/targets/' + targetId).then((({ data })=> {
+        resolve(data);
+      })).catch(error => {
+        reject(error.message);
+      });
+    });
+  }
+
 }
 
 export default TargetClient;
