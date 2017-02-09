@@ -7,12 +7,12 @@ import * as alertActions from '../actions/alertActions';
 import CustomAlert from '../utils/uiHelper/CustomAlert';
 import SignInForm from '../components/signin/SignInForm';
 import LandingRightSide from '../components/common/LandingRightSide';
-import { getUser } from '../utils/SessionHelper';
+import { getUser } from '../utils/LocalStorageHelper';
 
 export const SignInPage = (props) => {
 
   const user = getUser();
-  
+
   if (user) {
     const { signIn, signInWithFB } = props.actions;
     user.facebook ? signInWithFB(user.user, false) : signIn(user.user);

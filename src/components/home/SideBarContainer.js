@@ -18,7 +18,8 @@ import Chat from '../contents/Chat';
 import { setPusherClient } from 'react-pusher';
 import Pusher from 'pusher-js';
 import * as C from '../../constants/constants';
-import { Pushwoosh } from 'web-push-notifications';
+import pushwooshService from '../../service/PushService';
+import { getToken } from '../../utils/LocalStorageHelper';
 
 export const SideBarContainer = (props) => {
 
@@ -33,30 +34,11 @@ export const SideBarContainer = (props) => {
   if (props.session.firstTime) {
 
     // Pushwoosh
-    const pwInstance = new Pushwoosh();
-    pwInstance.push(['init', {
-        logLevel: 'debug', // or debug
-        applicationCode: C.PUSHWOOSH_APP_CODE,
-        defaultNotificationTitle: 'Pushwoosh',
-        defaultNotificationImage: 'https://cp.pushwoosh.com/img/logo-medium.png'
-    }]);
-
-    pwInstance.push((api) => {
-      debugger;
-      const cryptico = require('cryptico');
-      const tokenJson = {
-        push_token: api.pushToken
-      };
-      debugger;
-      api.registerDevice().then(data => {
-        debugger;
-        props.actions.setPushToken(tokenJson, props.session.user_id);
-      }).catch(error => {
-        debugger;
-        console.log(error);
-      });
-
-    });
+    pushwooshService.initPushwoosh();
+    const pushToken = getToken();
+    const { user_id } = props.session;
+    const { setPushToken } = props.actions;
+    pushToken ? setPushToken(pushToken, user_id) : pushwooshService.registerDevice(setPushToken, user_id);
 
     // Pusher
     const pusherClient = new Pusher(C.PUSHER_KEY, {
@@ -79,6 +61,7 @@ export const SideBarContainer = (props) => {
 
     case "TargetForm":{
       const logOut = () => {
+        pushwooshService.unregisterDevice();
         props.actions.signOut();
         browserHistory.push('/sign-in');
       };
