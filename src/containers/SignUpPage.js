@@ -5,7 +5,7 @@ import {bindActionCreators} from 'redux';
 import * as sessionActions from '../actions/sessionActions';
 import SignUpForm from '../components/signup/SignUpForm';
 import LandingRightSide from '../components/common/LandingRightSide';
-import { getUser } from '../utils/SessionHelper';
+import { getUser } from '../utils/LocalStorageHelper';
 
 export const SignUpPage = (props) => {
 
@@ -23,10 +23,9 @@ export const SignUpPage = (props) => {
 
   return (
     <div>
-      <SignUpForm signUpAction={props.actions.signUp} style="column-half-media"/>
-      <LandingRightSide/>
+      <SignUpForm signUpAction={props.actions.signUp} style="column-half-media" />
+      <LandingRightSide />
     </div>
-
   );
 };
 

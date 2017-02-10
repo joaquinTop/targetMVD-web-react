@@ -3,7 +3,7 @@ import { BASE_URL } from '../constants/constants';
 
 let instance;
 
-class TopicClient {
+class PushClient {
 
   static setUserInfo(userToken){
     instance = axios.create({
@@ -12,17 +12,17 @@ class TopicClient {
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json', 'X-USER-TOKEN': userToken }
     });
   }
-  
-  static getTopics() {
+
+  static sendPushToken(token, user_id) {
     return new Promise((resolve, reject) => {
-      instance.get('/topics').then((res => {
-        const { data } = res;
-        resolve(data);
-      })).catch(error => {
-        reject(error.message);
-      });
+        instance.post('/users/' + user_id + '/push_tokens', token).then((({ data }) => {
+          resolve(data);
+        })).catch(error => {
+          reject(error.message);
+        });
     });
   }
+
 }
 
-export default TopicClient;
+export default PushClient;

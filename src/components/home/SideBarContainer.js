@@ -18,6 +18,8 @@ import Chat from '../contents/Chat';
 import { setPusherClient } from 'react-pusher';
 import Pusher from 'pusher-js';
 import * as C from '../../constants/constants';
+import pushwooshService from '../../service/PushService';
+import { getToken } from '../../utils/LocalStorageHelper';
 
 export const SideBarContainer = (props) => {
 
@@ -30,6 +32,16 @@ export const SideBarContainer = (props) => {
   }
 
   if (props.session.firstTime) {
+
+    // Pushwoosh
+    pushwooshService.initFirebase();
+    pushwooshService.initPushwoosh();
+    const pushToken = getToken();
+    const { user_id } = props.session;
+    const { setPushToken } = props.actions;
+    pushToken ? setPushToken(pushToken, user_id) : pushwooshService.registerDevice(setPushToken, user_id);
+
+    // Pusher
     const pusherClient = new Pusher(C.PUSHER_KEY, {
       app_id: C.PUSHER_APP_ID,
       secret: C.PUSHER_SECRET,
@@ -50,6 +62,7 @@ export const SideBarContainer = (props) => {
 
     case "TargetForm":{
       const logOut = () => {
+        pushwooshService.unregisterDevice();
         props.actions.signOut();
         browserHistory.push('/sign-in');
       };

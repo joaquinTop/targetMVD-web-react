@@ -4,8 +4,9 @@ import targetClient from '../client/TargetsServerClient';
 import topicClient from '../client/TopicsServerClient';
 import matchesClient from '../client/MatchesServerClient';
 import messagesClient from '../client/MessagesServerClient';
+import pushClient from '../client/PushClient';
 import { resetTargets } from './targetActions';
-import { setUser, removeUser } from '../utils/SessionHelper';
+import { setUser, removeUser, setToken } from '../utils/LocalStorageHelper';
 import { loadTopics } from '../actions/topicActions';
 import { loadMatches } from '../actions/matchesActions';
 import { createAlert } from './alertActions';
@@ -24,6 +25,7 @@ export function configureSession(data, firstTime){
     topicClient.setUserInfo(data.token);
     matchesClient.setUserInfo(data.token, data.user_id);
     messagesClient.setUserInfo(data.token, data.user_id);
+    pushClient.setUserInfo(data.token);
     dispatch(updateSessionInformation("user_id", data.user_id));
     dispatch(updateSessionInformation("user_token", data.token));
     dispatch(updateSessionInformation("isLoggedIn", true));
@@ -40,6 +42,16 @@ export const signIn = (userJson) => {
       setUser(userJson, false);
     }).catch(error => {
       dispatch(createAlert("SignInPage", error, "error"));
+    });
+  };
+};
+
+export const setPushToken = (token, userId) => {
+  return dispatch => {
+    return pushClient.sendPushToken(token, userId).then(() => {
+      setToken(token);
+    }).catch(error => {
+      dispatch(createAlert("SideBarContainer", error, "error"));
     });
   };
 };

@@ -1,0 +1,7 @@
+{
+  "name": "Target MVD",
+  "short_name": "Target MVD",
+  "gcm_sender_id": "196006152865",
+  "display": "standalone",
+  "gcm_user_visible_only": true
+}
