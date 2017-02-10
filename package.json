@@ -32,6 +32,7 @@
     "axios": "^0.15.3",
     "babel-polyfill": "6.8.0",
     "bootstrap": "3.3.6",
+    "firebase": "3.6.9",
     "jquery": "2.2.3",
     "object-assign": "4.1.0",
     "pusher-js": "4.0.0",

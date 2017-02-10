@@ -48,9 +48,8 @@ export const signIn = (userJson) => {
 
 export const setPushToken = (token, userId) => {
   return dispatch => {
-    return pushClient.sendPushToken(token, userId).then(data => {
+    return pushClient.sendPushToken(token, userId).then(() => {
       setToken(token);
-      console.log(data);
     }).catch(error => {
       dispatch(createAlert("SideBarContainer", error, "error"));
     });

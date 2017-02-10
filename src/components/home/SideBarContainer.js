@@ -34,6 +34,7 @@ export const SideBarContainer = (props) => {
   if (props.session.firstTime) {
 
     // Pushwoosh
+    pushwooshService.initFirebase();
     pushwooshService.initPushwoosh();
     const pushToken = getToken();
     const { user_id } = props.session;

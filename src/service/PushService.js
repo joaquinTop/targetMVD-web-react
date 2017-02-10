@@ -1,9 +1,22 @@
 import { Pushwoosh } from 'web-push-notifications';
+import * as firebase from 'firebase';
 import * as C from '../constants/constants';
 
 let pwInstance;
 
 class PushwooshService {
+
+  // Initialize Firebase
+  static initFirebase(){
+    const config = {
+      apiKey: "AIzaSyDeWz7yKFIdTOGYe-xGxxzx8bmt0gvzm64",
+      authDomain: "target-17fc5.firebaseapp.com",
+      databaseURL: "https://target-17fc5.firebaseio.com",
+      storageBucket: "target-17fc5.appspot.com",
+      messagingSenderId: "196006152865"
+    };
+    firebase.initializeApp(config);
+  }
 
   static initPushwoosh(){
     pwInstance = new Pushwoosh();
