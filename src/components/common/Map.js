@@ -33,13 +33,21 @@ class Map extends React.Component {
     this._map = map;
   }
 
-  handleCenterChanged() {
-    const nextCenter = this._map.getCenter();
+  handleCenterChanged(targetSelected) {
+    const mapMovement = this._map.getCenter();
+    let nextCenter = {
+      lat: parseFloat(mapMovement.lat().toFixed(6)),
+      lng: parseFloat(mapMovement.lng().toFixed(6))
+    }
+    if (targetSelected) {
+      nextCenter = targetSelected;
+    }
     let newState = Object.assign({}, this.state);
-    newState.locationCenter.lat = parseFloat(nextCenter.lat().toFixed(6));
-    newState.locationCenter.lng = parseFloat(nextCenter.lng().toFixed(6));
+    newState.locationCenter.lat = nextCenter.lat;
+    newState.locationCenter.lng = nextCenter.lng;
     if (newState.locationCenter.lat === this.state.locationCenter.lat &&
-      newState.locationCenter.lng === this.state.locationCenter.lng) {
+      newState.locationCenter.lng === this.state.locationCenter.lng &&
+      targetSelected === undefined) {
       // Notice: Check nextCenter equality here,
       // or it will fire center_changed event infinitely
       return;
@@ -102,9 +110,8 @@ class Map extends React.Component {
       latitude: lat,
       longitude: lng
     };
-    debugger;
     const targetFound = mapMarkerToTarget(marker, this.props.markers);
-    debugger;
+    this.handleCenterChanged(targetFound);
   }
 
   render() {
