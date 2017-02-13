@@ -1,7 +1,7 @@
 import * as types from '../actions/actionTypes';
 import initialState from './initialState';
 
-export default function targetReducer(state = initialState.newTarget, action){
+export default function newTargetReducer(state = initialState.newTarget, action){
   let newState;
   switch(action.type){
 

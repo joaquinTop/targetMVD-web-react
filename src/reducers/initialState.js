@@ -15,6 +15,7 @@ export default {
     isVisible: false,
     isActive: true
   },
+  selectedTarget: null,
   session: {
     user_id: '',
     user_token: '',
