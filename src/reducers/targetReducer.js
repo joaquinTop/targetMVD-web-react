@@ -26,8 +26,13 @@ export default function targetReducer(state = initialState.targets, action){
       });
     }
 
-    case types.DELETE_TARGET:
-      break;
+    case types.DELETE_TARGET:{
+      const index = state.findIndex((x) => x.id === action.target.id);
+      return [
+        ...state.slice(0, index),
+        ...state.slice(index + 1)
+      ];
+    }
 
     case types.RESET_TARGETS:
       return [];

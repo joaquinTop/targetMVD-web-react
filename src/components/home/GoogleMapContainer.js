@@ -3,6 +3,7 @@ import Map from '../common/Map';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as newTargetActions from '../../actions/newTargetActions';
+import * as contentActions from '../../actions/contentActions';
 import * as selectedTargetActions from '../../actions/selectedTargetActions';
 
 export const GoogleMapContainer = ({ targets, actions, newTarget, topics, selectedTarget }) => {
@@ -21,6 +22,7 @@ export const GoogleMapContainer = ({ targets, actions, newTarget, topics, select
         removeFreeTarget={actions.resetFreeTarget}
         selectTarget={actions.updateSelectedTarget}
         unselectTarget={actions.resetSelectedTarget}
+        changeContent={actions.switchContent}
         targetSelected={selectedTarget}
         newTarget={newTarget}
         topicsList={topics}
@@ -48,7 +50,7 @@ const mapStateToProps = ({ targets, newTarget, selectedTarget, topics }) => {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(Object.assign({}, newTargetActions, selectedTargetActions), dispatch)
+    actions: bindActionCreators(Object.assign({}, newTargetActions, selectedTargetActions, contentActions), dispatch)
   };
 }
 

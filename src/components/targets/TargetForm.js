@@ -26,8 +26,14 @@ class TargetForm extends React.Component{
 
   onTargetSubmit(e){
     e.preventDefault();
+
     if (!this.props.enabled) {
       this.props.createAlertAction("SideBarContainer", "Max of 10 targets reached", "error");
+      return;
+    }
+    
+    if (this.props.formMode === "Edit") {
+      this.props.deleteTargetAction(this.props.currentTarget);
       return;
     }
 
@@ -56,7 +62,7 @@ class TargetForm extends React.Component{
   }
 
   render(){
-    const defaultOption = getTopicName(this.props.currentTarget.topic, this.props.topicsList);
+    const defaultOption = this.props.currentTarget.topic.label || getTopicName(this.props.currentTarget.topic, this.props.topicsList);
     const topicPlaceholder = defaultOption || 'What do you want to talk about?';
     const topicsName = this.props.topicsList.map(el => {
       return el.label;
@@ -101,7 +107,7 @@ class TargetForm extends React.Component{
           <input
             className="btn-save-target"
             type="submit"
-            value="SAVE TARGET"
+            value={this.props.formMode === "Edit" ? "DELETE TARGET" : "SAVE TARGET"}
             onClick={this.onTargetSubmit}
           /><br />
           <img className="smilies-img-sidebar" src={smilies} alt="Smiley faces" />
@@ -113,8 +119,10 @@ class TargetForm extends React.Component{
 
 TargetForm.propTypes = {
   enabled:PropTypes.bool.isRequired,
+  formMode:PropTypes.string.isRequired,
   updateTargetInfo:PropTypes.func.isRequired,
   createTargetAction:PropTypes.func.isRequired,
+  deleteTargetAction:PropTypes.func.isRequired,
   currentTarget:PropTypes.object.isRequired,
   createAlertAction:PropTypes.func.isRequired,
   topicsList:PropTypes.array.isRequired

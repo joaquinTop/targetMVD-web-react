@@ -42,6 +42,7 @@ class Map extends React.Component {
     if (targetSelected) {
       nextCenter = targetSelected;
     }
+
     let newState = Object.assign({}, this.state);
     newState.locationCenter.lat = nextCenter.lat;
     newState.locationCenter.lng = nextCenter.lng;
@@ -98,11 +99,12 @@ class Map extends React.Component {
   onMapClick(e) {
     const lat = parseFloat(e.latLng.lat().toFixed(6));
     const lng = parseFloat(e.latLng.lng().toFixed(6));
-    const { updateTargetInfo, unselectTarget } = this.props;
+    const { updateTargetInfo, unselectTarget, changeContent } = this.props;
     unselectTarget();
     updateTargetInfo("lat", lat);
     updateTargetInfo("lng", lng);
     updateTargetInfo("isVisible", true);
+    changeContent("TargetForm");
   }
 
   onMarkerClick(e) {
@@ -113,9 +115,10 @@ class Map extends React.Component {
       longitude: lng
     };
     const targetFound = mapMarkerToTarget(marker, this.props.markers);
-    const { removeFreeTarget, selectTarget } = this.props;
+    const { removeFreeTarget, selectTarget, changeContent } = this.props;
     removeFreeTarget();
     selectTarget(targetFound);
+    changeContent("TargetForm");
     this.handleCenterChanged(targetFound);
   }
 
@@ -235,6 +238,7 @@ class Map extends React.Component {
 Map.propTypes = {
   center: PropTypes.object.isRequired,
   markers: PropTypes.array.isRequired,
+  changeContent: PropTypes.func.isRequired,
   updateTargetInfo: PropTypes.func.isRequired,
   removeFreeTarget: PropTypes.func.isRequired,
   selectTarget: PropTypes.func.isRequired,
