@@ -31,7 +31,7 @@ class TargetForm extends React.Component{
       this.props.createAlertAction("SideBarContainer", "Max of 10 targets reached", "error");
       return;
     }
-    
+
     if (this.props.formMode === "Edit") {
       this.props.deleteTargetAction(this.props.currentTarget);
       return;
@@ -62,7 +62,9 @@ class TargetForm extends React.Component{
   }
 
   render(){
-    const defaultOption = this.props.currentTarget.topic.label || getTopicName(this.props.currentTarget.topic, this.props.topicsList);
+    const defaultOption = this.props.currentTarget.topic.label ||
+      getTopicName(this.props.currentTarget.topic, this.props.topicsList);
+
     const topicPlaceholder = defaultOption || 'What do you want to talk about?';
     const topicsName = this.props.topicsList.map(el => {
       return el.label;

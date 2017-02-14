@@ -35,20 +35,17 @@ class Map extends React.Component {
 
   handleCenterChanged(targetSelected) {
     const mapMovement = this._map.getCenter();
-    let nextCenter = {
+    let nextCenter = targetSelected || {
       lat: parseFloat(mapMovement.lat().toFixed(6)),
       lng: parseFloat(mapMovement.lng().toFixed(6))
     };
-    if (targetSelected) {
-      nextCenter = targetSelected;
-    }
 
     let newState = Object.assign({}, this.state);
     newState.locationCenter.lat = nextCenter.lat;
     newState.locationCenter.lng = nextCenter.lng;
     if (newState.locationCenter.lat === this.state.locationCenter.lat &&
       newState.locationCenter.lng === this.state.locationCenter.lng &&
-      targetSelected === undefined) {
+      targetSelected === null) {
       // Notice: Check nextCenter equality here,
       // or it will fire center_changed event infinitely
       return;
@@ -175,7 +172,9 @@ class Map extends React.Component {
 
     // TARGETS RADIUS
     let circles = this.props.markers.map((venue) => {
-      const color = (this.props.targetSelected !== null && this.props.targetSelected === venue) ? 'rgb(48, 188, 247)' : 'rgb(239, 197, 55)';
+      const color = (this.props.targetSelected !== null &&
+        this.props.targetSelected === venue) ? 'rgb(48, 188, 247)' : 'rgb(239, 197, 55)';
+
       return getCircle(parseInt(venue.radius), {
         lat: venue.lat,
         lng: venue.lng

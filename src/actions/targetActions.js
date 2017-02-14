@@ -37,7 +37,7 @@ export const loadTargets = () => {
 
 export const deleteTargetSuccess = (target) => {
   return { type: types.DELETE_TARGET, target };
-}
+};
 
 export const deleteTarget = (target) => {
   return dispatch => {
@@ -50,10 +50,10 @@ export const deleteTarget = (target) => {
   };
 };
 
-export function updateTarget(index, fieldName, value){
+export const updateTarget = (index, fieldName, value) => {
   return { type: types.UPDATE_TARGET, index, fieldName, value };
-}
+};
 
-export function resetTargets(){
+export const resetTargets = () => {
   return { type: types.RESET_TARGETS };
-}
+};

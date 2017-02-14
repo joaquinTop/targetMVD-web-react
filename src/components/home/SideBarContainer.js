@@ -79,7 +79,11 @@ export const SideBarContainer = (props) => {
       return (
         <div className="sidebarContainer">
           <CustomAlert />
-          <Header title={props.selectedTarget ? "EDIT TARGET" : "CREATE TARGET"} style="sidebarHeader" withBackButton={false} />
+          <Header
+            title={props.selectedTarget ? "EDIT TARGET" : "CREATE TARGET"}
+            style="sidebarHeader"
+            withBackButton={false}
+          />
           <br />
           <div className="sidebar">
             <img className="target-icon" src={targetIcon} />
