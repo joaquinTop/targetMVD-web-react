@@ -11,12 +11,16 @@ export default function targetReducer(state = initialState.targets, action){
       return newState;
 
     case types.UPDATE_TARGET:{
-      const index = action.index;
-      let targetToUpdate = Object.assign({}, state[index]);
-      targetToUpdate[action.fieldName] = action.value;
-      newState = state.slice(0,index).concat(state.slice(index+1));
-      newState.splice(index, 0, targetToUpdate);
-      return newState;
+      const targetIndex = state.findIndex((x) => x.id === action.target.id);
+      return state.map( (item, index) => {
+        if(index !== targetIndex) {
+           return item;
+        }
+        return {
+          ...item,
+          ...action.target
+        };
+      });
     }
 
     case types.LOAD_TARGETS:{

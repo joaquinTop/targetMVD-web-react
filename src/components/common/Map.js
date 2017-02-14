@@ -113,8 +113,8 @@ class Map extends React.Component {
     const { removeFreeTarget, selectTarget, changeContent } = this.props;
     removeFreeTarget();
     selectTarget(targetFound);
-    changeContent("TargetForm");
     this.handleCenterChanged(targetFound);
+    changeContent("TargetForm");
   }
 
   render() {

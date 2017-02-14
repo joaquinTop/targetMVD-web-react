@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as targetActions from '../../actions/targetActions';
 import * as newTargetActions from '../../actions/newTargetActions';
+import * as selectedTargetActions from '../../actions/selectedTargetActions';
 import * as sessionActions from '../../actions/sessionActions';
 import * as alertActions from '../../actions/alertActions';
 import * as contentActions from '../../actions/contentActions';
@@ -61,11 +62,6 @@ export const SideBarContainer = (props) => {
         );
 
     case "TargetForm":{
-      const logOut = () => {
-        pushwooshService.unregisterDevice();
-        props.actions.signOut();
-        browserHistory.push('/sign-in');
-      };
 
       let formEnabled = true;
       if (!props.newTarget.isActive) {
@@ -91,9 +87,10 @@ export const SideBarContainer = (props) => {
             {!props.selectedTarget && <SubHeader title={"CREATE NEW TARGET"} />}
             <TargetForm
               enabled={formEnabled}
-              updateTargetInfo={props.actions.updateFreeTarget}
+              updateTargetInfo={props.selectedTarget ? props.actions.updateSelectedTargetField : props.actions.updateFreeTarget}
               currentTarget={props.selectedTarget || props.newTarget}
               createTargetAction={props.actions.createTarget}
+              updateTargetAction={props.actions.updateTarget}
               deleteTargetAction={props.actions.deleteTarget}
               createAlertAction={props.actions.createAlert}
               topicsList={props.topics}
@@ -101,22 +98,24 @@ export const SideBarContainer = (props) => {
             />
             <button onClick={contentChanged} className="btn-matches">MATCHES</button>
             <br />
-            <button
-              onClick={logOut}
-              type="button"
-              className="btn btn-danger btn-sign-out">Sign out</button>
           </div>
         </div>
       );
     }
 
-    case "Home":
+    case "Home":{
+      const logOut = () => {
+        pushwooshService.unregisterDevice();
+        props.actions.signOut();
+        browserHistory.push('/sign-in');
+      };
       return (
         <div className="sidebarContainer">
           <CustomAlert />
-          <Home switchContentAction={props.actions.switchContent} />
+          <Home switchContentAction={props.actions.switchContent} beginLogout={logOut} />
         </div>
         );
+    }
 
     case "Chat":
       return (
@@ -139,7 +138,7 @@ SideBarContainer.propTypes = {
   session: PropTypes.object.isRequired,
   alert: PropTypes.object.isRequired,
   content: PropTypes.string.isRequired,
-  targetSelected: PropTypes.object.isRequired
+  selectedTarget: PropTypes.object.isRequired
 };
 
 const mapStateToProps = ({ newTarget, session, alert, topics, content, selectedTarget }) => {
@@ -155,7 +154,8 @@ const mapStateToProps = ({ newTarget, session, alert, topics, content, selectedT
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(Object.assign({}, targetActions, newTargetActions, sessionActions, alertActions, contentActions), dispatch)
+    actions: bindActionCreators(Object.assign({}, targetActions, newTargetActions, selectedTargetActions,
+       sessionActions, alertActions, contentActions), dispatch)
   };
 }
 

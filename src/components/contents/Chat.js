@@ -15,6 +15,7 @@ export const Chat = ({ currentConversation, messages, session, actions: { switch
     closeCurrentConversation(currentConversation.match_id);
     switchContent("Home");
   };
+  
   return (
     <div className="chat-sidebar-container">
       <Pusher

@@ -7,7 +7,7 @@ import * as messagesActions from '../../actions/messagesActions';
 import userPlaceholder from '../../res/images/profile/placeholder-user.png';
 import ConversationsComponent from '../common/ConversationsComponent';
 
-export const Home = ({ switchContentAction, matches, actions }) => {
+export const Home = ({ switchContentAction, matches, actions, beginLogout }) => {
 
   const contentChanged = () => {
     switchContentAction("TargetForm");
@@ -22,7 +22,7 @@ export const Home = ({ switchContentAction, matches, actions }) => {
             <img className="user-img" src={userPlaceholder} />
           </div>
           <h4 className="home-username">@nickname</h4>
-          <h5 className="home-options">Edit / Logout</h5>
+          <h5 className="home-options">Edit / <a className="logoutButton" onClick={beginLogout} >Logout</a></h5>
           <hr className="custom-line-home" />
         </div>
       </div>
@@ -42,12 +42,11 @@ export const Home = ({ switchContentAction, matches, actions }) => {
 Home.propTypes = {
   actions: PropTypes.object.isRequired,
   matches: PropTypes.array.isRequired,
+  beginLogout: PropTypes.func.isRequired,
   switchContentAction: PropTypes.func.isRequired
 };
 
-const mapStateToProps = ({ matches }) => {
-  return { matches };
-};
+const mapStateToProps = ({ matches }) => matches;
 
 function mapDispatchToProps(dispatch) {
   return {

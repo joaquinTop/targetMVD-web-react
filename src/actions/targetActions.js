@@ -10,7 +10,7 @@ export function createTargetSuccess(target){
 export const createTarget = (target) => {
   return dispatch => {
     return targetClient.createTarget(target).then(data => {
-      dispatch(createAlert("SideBarContainer", "Target created successfully", "success"));
+      dispatch(createAlert("SideBarContainer", "Target successfully created", "success"));
       dispatch(createTargetSuccess(data.target));
     }).catch(error => {
       dispatch(createAlert("SideBarContainer", error, "error"));
@@ -50,8 +50,19 @@ export const deleteTarget = (targetId) => {
   };
 };
 
-export const updateTarget = (index, fieldName, value) => {
-  return { type: types.UPDATE_TARGET, index, fieldName, value };
+export const updateTargetSuccess = (target) => {
+  return { type: types.UPDATE_TARGET, target };
+};
+
+export const updateTarget = (targetJson, targetId) => {
+  return dispatch => {
+    return targetClient.updateTarget(targetJson, targetId).then(data => {
+      dispatch(createAlert("SideBarContainer", "Target successfully updated", "success"));
+      dispatch(updateTargetSuccess(data.target));
+    }).catch(error => {
+      dispatch(createAlert("SideBarContainer", error, "error"));
+    });
+  };
 };
 
 export const resetTargets = () => {
