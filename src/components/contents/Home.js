@@ -47,9 +47,7 @@ Home.propTypes = {
   switchContentAction: PropTypes.func.isRequired
 };
 
-const mapStateToProps = ({ matches }) => {
-  return { matches };
-};
+const mapStateToProps = ({ matches }) => matches;
 
 function mapDispatchToProps(dispatch) {
   return {
