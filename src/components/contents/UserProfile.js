@@ -1,7 +1,8 @@
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import userPlaceholder from '../../res/images/profile/placeholder-user.png';
+import userPlaceholder from '../../res/images/profile/placeholder-user.png'
+import smilies from '../../res/images/common/smilies.png';
 import TextInput from '../common/TextInput';
 import * as sessionActions from '../../actions/sessionActions';
 
@@ -51,7 +52,7 @@ class UserProfile extends React.Component{
             autofocus={"true"}
           />
           <br />
-          <label className="sign-in-field" htmlFor="inputPassword">CURRENT PASSWORD</label><br />
+          <label className="user-profile-field" htmlFor="inputPassword">CURRENT PASSWORD</label><br />
           <TextInput
             id="inputPassword"
             onChange={this.onFieldChange}
@@ -61,7 +62,7 @@ class UserProfile extends React.Component{
             required={"true"}
           />
           <br />
-          <label className="sign-in-field" htmlFor="inputPassword">NEW PASSWORD</label><br />
+          <label className="user-profile-field" htmlFor="inputPassword">NEW PASSWORD</label><br />
           <TextInput
             id="inputPassword"
             onChange={this.onFieldChange}
@@ -71,7 +72,7 @@ class UserProfile extends React.Component{
             required={"true"}
           />
           <br />
-          <label className="sign-in-field" htmlFor="inputPassword">CONFIRM PASSWORD</label><br />
+          <label className="user-profile-field" htmlFor="inputPassword">CONFIRM PASSWORD</label><br />
           <TextInput
             id="inputPassword"
             onChange={this.onFieldChange}
@@ -81,10 +82,11 @@ class UserProfile extends React.Component{
             required={"true"}
           />
           <br />
-          <input className="btn-sign-in" type="submit" value="SAVE CHANGES" onClick={this.onSettingsSubmit} />
+          <input className="btn-save-user-profile" type="submit" value="SAVE CHANGES" onClick={this.onSettingsSubmit} />
           <br />
-          <label className="forgot-your-password">Delete my TARGET account</label>
+          <label className="user-profile-forgot-your-password ">Delete my TARGET account</label>
           <br />
+          <img className="smilies-img-sidebar" src={smilies} alt="Smiley faces" />
         </form>
       </div>
     );
