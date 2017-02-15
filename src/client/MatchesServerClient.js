@@ -1,12 +1,12 @@
 import axios from 'axios';
 import { BASE_URL } from '../constants/constants';
 
-let instance;
+let axiosInstance;
 
 class MatchesClient {
 
   static setUserInfo(userToken, userIdentifier){
-    instance = axios.create({
+    axiosInstance = axios.create({
       baseURL: BASE_URL + '/users/' + userIdentifier,
       timeout: 2000,
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json', 'X-USER-TOKEN': userToken }
@@ -15,8 +15,7 @@ class MatchesClient {
 
   static getMatches() {
     return new Promise((resolve, reject) => {
-      instance.get('/match_conversations').then((res => {
-        const { data } = res;
+      axiosInstance.get('/match_conversations').then((({ data }) => {
         resolve(data);
       })).catch(error => {
         reject(error.message);

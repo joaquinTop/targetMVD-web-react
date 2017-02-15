@@ -1,12 +1,12 @@
 import axios from 'axios';
 import { BASE_URL } from '../constants/constants';
 
-let instance;
+let axiosInstance;
 
 class TargetClient {
 
   static setUserInfo(userToken, userIdentifier){
-    instance = axios.create({
+    axiosInstance = axios.create({
       baseURL: BASE_URL + '/users/' + userIdentifier,
       // timeout can be overriden in those cases where the answer might take a while (i.e. images)
       timeout: 2000,
@@ -16,7 +16,7 @@ class TargetClient {
 
   static getMyTargets() {
     return new Promise((resolve, reject) => {
-      instance.get('/targets').then((({ data })=> {
+      axiosInstance.get('/targets').then((({ data })=> {
         resolve(data);
       })).catch(error => {
         reject(error.message);
@@ -26,7 +26,7 @@ class TargetClient {
 
   static createTarget(target) {
     return new Promise((resolve, reject) => {
-      instance.post('/targets', target).then((({ data })=> {
+      axiosInstance.post('/targets', target).then((({ data })=> {
         resolve(data);
       })).catch(error => {
         reject(error.message);
@@ -36,7 +36,7 @@ class TargetClient {
 
   static updateTarget(target) {
     return new Promise((resolve, reject) => {
-      instance.post('/targets', target).then((({ data })=> {
+      axiosInstance.post('/targets', target).then((({ data })=> {
         resolve(data);
       })).catch(error => {
         reject(error.message);
@@ -46,7 +46,7 @@ class TargetClient {
 
   static deleteTarget(targetId) {
     return new Promise((resolve, reject) => {
-      instance.delete('/targets/' + targetId).then((({ data })=> {
+      axiosInstance.delete('/targets/' + targetId).then((({ data })=> {
         resolve(data);
       })).catch(error => {
         reject(error.message);
