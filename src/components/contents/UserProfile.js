@@ -1,0 +1,111 @@
+import React, {PropTypes} from 'react';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import userPlaceholder from '../../res/images/profile/placeholder-user.png';
+import TextInput from '../common/TextInput';
+import * as sessionActions from '../../actions/sessionActions';
+
+
+class UserProfile extends React.Component{
+  constructor(props, context){
+    super(props, context);
+
+    this.onSettingsSubmit = this.onSettingsSubmit.bind(this);
+    this.onFieldChange = this.onFieldChange.bind(this);
+    this.state = {
+      email: '',
+      currentPassword: '',
+      newPassword: '',
+      confirmPassword: ''
+    };
+  }
+
+  onSettingsSubmit(e){
+    e.preventDefault();
+  }
+
+  onFieldChange(fieldName, value){
+
+  }
+
+  render(){
+    return (
+      <div className="home-sidebar-container">
+        <div className="user-profile-inside-container-up">
+          <div className="home-hiding-content">
+            <div className="user-profile-img-background">
+              <img className="user-img" src={userPlaceholder} />
+            </div>
+            <h4 className="home-username">@nickname</h4>
+          </div>
+        </div>
+        <form>
+          <label className="user-profile-email-field" htmlFor="inputEmail">EMAIL</label><br />
+          <TextInput
+            id="inputEmail"
+            onChange={this.onFieldChange}
+            name="email"
+            type={"email"}
+            value={this.state.email}
+            required={"true"}
+            autofocus={"true"}
+          />
+          <br />
+          <label className="sign-in-field" htmlFor="inputPassword">CURRENT PASSWORD</label><br />
+          <TextInput
+            id="inputPassword"
+            onChange={this.onFieldChange}
+            name="password"
+            type={"password"}
+            value={this.state.currentPassword}
+            required={"true"}
+          />
+          <br />
+          <label className="sign-in-field" htmlFor="inputPassword">NEW PASSWORD</label><br />
+          <TextInput
+            id="inputPassword"
+            onChange={this.onFieldChange}
+            name="password"
+            type={"password"}
+            value={this.state.newPassword}
+            required={"true"}
+          />
+          <br />
+          <label className="sign-in-field" htmlFor="inputPassword">CONFIRM PASSWORD</label><br />
+          <TextInput
+            id="inputPassword"
+            onChange={this.onFieldChange}
+            name="password"
+            type={"password"}
+            value={this.state.confirmPassword}
+            required={"true"}
+          />
+          <br />
+          <input className="btn-sign-in" type="submit" value="SAVE CHANGES" onClick={this.onSettingsSubmit} />
+          <br />
+          <label className="forgot-your-password">Delete my TARGET account</label>
+          <br />
+        </form>
+      </div>
+    );
+  }
+}
+
+UserProfile.propTypes = {
+  session: PropTypes.object.isRequired
+};
+
+const mapStateToProps = ({ session }) => {
+  return { session };
+};
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(sessionActions, dispatch)
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(UserProfile);

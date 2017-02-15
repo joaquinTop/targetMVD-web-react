@@ -17,6 +17,7 @@ import targetIcon from '../../res/images/common/targetIcon.png';
 import HomeWelcome from '../common/HomeWelcome';
 import Home from '../contents/Home';
 import Chat from '../contents/Chat';
+import UserProfile from '../contents/UserProfile';
 import { setPusherClient } from 'react-pusher';
 import Pusher from 'pusher-js';
 import * as C from '../../constants/constants';
@@ -120,6 +121,19 @@ export const SideBarContainer = (props) => {
         <div className="sidebarContainer">
           <CustomAlert />
           <Chat />
+        </div>
+        );
+
+    case "UserProfile":
+      return (
+        <div className="sidebarContainer">
+          <CustomAlert />
+          <Header
+            title={"EDIT PROFILE"}
+            style="sidebarHeader"
+            withBackButton={false}
+          />
+          <UserProfile />
         </div>
         );
 
