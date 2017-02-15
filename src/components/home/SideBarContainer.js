@@ -79,19 +79,25 @@ export const SideBarContainer = (props) => {
       return (
         <div className="sidebarContainer">
           <CustomAlert />
-          <Header title={"CREATE TARGET"} style="sidebarHeader" withBackButton={false} />
+          <Header
+            title={props.selectedTarget ? "EDIT TARGET" : "CREATE TARGET"}
+            style="sidebarHeader"
+            withBackButton={false}
+          />
           <br />
           <div className="sidebar">
             <img className="target-icon" src={targetIcon} />
             <br />
-            <SubHeader title={"CREATE NEW TARGET"} />
+            {!props.selectedTarget && <SubHeader title={"CREATE NEW TARGET"} />}
             <TargetForm
               enabled={formEnabled}
               updateTargetInfo={props.actions.updateFreeTarget}
-              currentTarget={props.newTarget}
+              currentTarget={props.selectedTarget || props.newTarget}
               createTargetAction={props.actions.createTarget}
+              deleteTargetAction={props.actions.deleteTarget}
               createAlertAction={props.actions.createAlert}
               topicsList={props.topics}
+              formMode={props.selectedTarget ? "Edit" : "New"}
             />
             <button onClick={contentChanged} className="btn-matches">MATCHES</button>
             <br />
@@ -132,16 +138,18 @@ SideBarContainer.propTypes = {
   topics: PropTypes.array.isRequired,
   session: PropTypes.object.isRequired,
   alert: PropTypes.object.isRequired,
-  content: PropTypes.string.isRequired
+  content: PropTypes.string.isRequired,
+  targetSelected: PropTypes.object.isRequired
 };
 
-const mapStateToProps = ({ newTarget, session, alert, topics, content }) => {
+const mapStateToProps = ({ newTarget, session, alert, topics, content, selectedTarget }) => {
   return {
     newTarget,
     session,
     alert,
     topics,
-    content
+    content,
+    selectedTarget
   };
 };
 

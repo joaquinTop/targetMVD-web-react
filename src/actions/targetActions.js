@@ -35,14 +35,25 @@ export const loadTargets = () => {
   };
 };
 
-export function updateTarget(index, fieldName, value){
-  return { type: types.UPDATE_TARGET, index, fieldName, value };
-}
-
-export function resetTargets(){
-  return { type: types.RESET_TARGETS };
-}
-
-export function deleteTarget(target){
+export const deleteTargetSuccess = (target) => {
   return { type: types.DELETE_TARGET, target };
-}
+};
+
+export const deleteTarget = (targetId) => {
+  return dispatch => {
+    return targetClient.deleteTarget(targetId).then(data => {
+      dispatch(createAlert("SideBarContainer", "Target successfully deleted", "success"));
+      dispatch(deleteTargetSuccess(data.target));
+    }).catch(error => {
+      dispatch(createAlert("SideBarContainer", error, "error"));
+    });
+  };
+};
+
+export const updateTarget = (index, fieldName, value) => {
+  return { type: types.UPDATE_TARGET, index, fieldName, value };
+};
+
+export const resetTargets = () => {
+  return { type: types.RESET_TARGETS };
+};

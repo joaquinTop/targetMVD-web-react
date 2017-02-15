@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react';
 import {GoogleMapLoader, GoogleMap, Marker} from 'react-google-maps';
-import { getCircle, getMyPosition } from '../../utils/uiHelper/MapHelper';
+import { getCircle, getMyPosition, mapMarkerToTarget } from '../../utils/uiHelper/MapHelper';
 import markerIcon from '../../res/images/targets/myPosition.png';
 import { getTopicIcon } from '../../utils/TopicsHelper';
 
@@ -9,6 +9,7 @@ class Map extends React.Component {
     super(props, context);
 
     this.onMapClick = this.onMapClick.bind(this);
+    this.onMarkerClick = this.onMarkerClick.bind(this);
     this.success = this.success.bind(this);
     this.error = this.error.bind(this);
     this.getOpts = this.getOpts.bind(this);
@@ -32,13 +33,19 @@ class Map extends React.Component {
     this._map = map;
   }
 
-  handleCenterChanged() {
-    const nextCenter = this._map.getCenter();
+  handleCenterChanged(targetSelected) {
+    const mapMovement = this._map.getCenter();
+    let nextCenter = targetSelected || {
+      lat: parseFloat(mapMovement.lat().toFixed(6)),
+      lng: parseFloat(mapMovement.lng().toFixed(6))
+    };
+
     let newState = Object.assign({}, this.state);
-    newState.locationCenter.lat = parseFloat(nextCenter.lat().toFixed(6));
-    newState.locationCenter.lng = parseFloat(nextCenter.lng().toFixed(6));
+    newState.locationCenter.lat = nextCenter.lat;
+    newState.locationCenter.lng = nextCenter.lng;
     if (newState.locationCenter.lat === this.state.locationCenter.lat &&
-      newState.locationCenter.lng === this.state.locationCenter.lng) {
+      newState.locationCenter.lng === this.state.locationCenter.lng &&
+      targetSelected === null) {
       // Notice: Check nextCenter equality here,
       // or it will fire center_changed event infinitely
       return;
@@ -87,11 +94,27 @@ class Map extends React.Component {
   }
 
   onMapClick(e) {
-    let lat = parseFloat(e.latLng.lat().toFixed(6));
-    let lng = parseFloat(e.latLng.lng().toFixed(6));
-    this.props.updateTargetInfo("lat", lat);
-    this.props.updateTargetInfo("lng", lng);
-    this.props.updateTargetInfo("isVisible", true);
+    const lat = parseFloat(e.latLng.lat().toFixed(6));
+    const lng = parseFloat(e.latLng.lng().toFixed(6));
+    const { updateTargetInfo, unselectTarget, changeContent } = this.props;
+    unselectTarget();
+    updateTargetInfo({lat: lat, lng: lng, isVisible: true});
+    changeContent("TargetForm");
+  }
+
+  onMarkerClick(e) {
+    const lat = parseFloat(e.latLng.lat().toFixed(6));
+    const lng = parseFloat(e.latLng.lng().toFixed(6));
+    const marker = {
+      latitude: lat,
+      longitude: lng
+    };
+    const targetFound = mapMarkerToTarget(marker, this.props.markers);
+    const { removeFreeTarget, selectTarget, changeContent } = this.props;
+    removeFreeTarget();
+    selectTarget(targetFound);
+    changeContent("TargetForm");
+    this.handleCenterChanged(targetFound);
   }
 
   render() {
@@ -106,19 +129,20 @@ class Map extends React.Component {
         }
       };
       const opts = this.getOpts(venue);
-      return <Marker {...opts} key={venue.id} {...marker}/>;
+      return <Marker {...opts} onClick={this.onMarkerClick} key={venue.id} {...marker} />;
     });
 
     // FREE TARGET
-    if (this.props.newTarget.isVisible) {
+    const { newTarget } = this.props;
+    if (newTarget.isVisible) {
       const newTargetMarker = {
         position: {
-          lat: this.props.newTarget.lat,
-          lng: this.props.newTarget.lng
+          lat: newTarget.lat,
+          lng: newTarget.lng
         }
       };
 
-      const opts = this.getOpts(this.props.newTarget);
+      const opts = this.getOpts(newTarget);
       markers.push( <Marker {...opts} key={markers.length} {...newTargetMarker}/> );
     }
 
@@ -146,11 +170,13 @@ class Map extends React.Component {
 
     // TARGETS RADIUS
     let circles = this.props.markers.map((venue) => {
+      const color = (this.props.targetSelected === venue) ? 'rgb(48, 188, 247)' : 'rgb(239, 197, 55)';
+
       return getCircle(parseInt(venue.radius), {
         lat: venue.lat,
         lng: venue.lng
       }, {
-        fillColor: 'rgb(239, 197, 55)',
+        fillColor: color,
         fillOpacity: 0.70,
         strokeOpacity: 0
       });
@@ -158,8 +184,8 @@ class Map extends React.Component {
 
     // FREE TARGET RADIUS
     let newTargetRadius = getCircle(parseInt(this.props.newTarget.radius), {
-      lat: this.props.newTarget.lat,
-      lng: this.props.newTarget.lng
+      lat: newTarget.lat,
+      lng: newTarget.lng
     }, {
       fillColor: 'rgb(239, 197, 55)',
       fillOpacity: 0.70,
@@ -208,9 +234,14 @@ class Map extends React.Component {
 Map.propTypes = {
   center: PropTypes.object.isRequired,
   markers: PropTypes.array.isRequired,
+  changeContent: PropTypes.func.isRequired,
   updateTargetInfo: PropTypes.func.isRequired,
-  topicsList:PropTypes.array.isRequired,
-  newTarget:PropTypes.object.isRequired
+  removeFreeTarget: PropTypes.func.isRequired,
+  selectTarget: PropTypes.func.isRequired,
+  unselectTarget: PropTypes.func.isRequired,
+  targetSelected: PropTypes.object.isRequired,
+  topicsList: PropTypes.array.isRequired,
+  newTarget: PropTypes.object.isRequired
 };
 
 export default Map;

@@ -16,38 +16,47 @@ class TargetForm extends React.Component{
   }
 
   onFieldChange(fieldName, value) {
-    this.props.updateTargetInfo(fieldName, value);
+    let values = {};
+    values[fieldName] = value;
+    this.props.updateTargetInfo(values);
   }
 
   onTopicChange(option) {
-    const index = getTopicId(option.label, this.props.topicsList);
-    this.props.updateTargetInfo("topic", index);
+    const { topicsList, updateTargetInfo } = this.props;
+    const index = getTopicId(option.label, topicsList);
+    updateTargetInfo({topic: index});
   }
 
   onTargetSubmit(e){
     e.preventDefault();
-    if (!this.props.enabled) {
-      this.props.createAlertAction("SideBarContainer", "Max of 10 targets reached", "error");
+    const { enabled, formMode, currentTarget, createTargetAction, createAlertAction, deleteTargetAction } = this.props;
+    if (!enabled) {
+      createAlertAction("SideBarContainer", "Max of 10 targets reached", "error");
+      return;
+    }
+
+    if (formMode === "Edit") {
+      deleteTargetAction(currentTarget.id);
       return;
     }
 
     const targetJson = {
       target:
       {
-        lat: this.props.currentTarget.lat,
-        lng:  this.props.currentTarget.lng,
-        radius: this.props.currentTarget.radius,
-        topic_id: this.props.currentTarget.topic
+        lat: currentTarget.lat,
+        lng:  currentTarget.lng,
+        radius: currentTarget.radius,
+        topic_id: currentTarget.topic
       }
     };
 
     const error = validateTarget(targetJson.target);
     if (error) {
-      this.props.createAlertAction("SideBarContainer", error, "error");
+      createAlertAction("SideBarContainer", error, "error");
       return;
     }
 
-    this.props.createTargetAction(targetJson);
+    createTargetAction(targetJson);
     this.redirect();
   }
 
@@ -56,9 +65,12 @@ class TargetForm extends React.Component{
   }
 
   render(){
-    const defaultOption = getTopicName(this.props.currentTarget.topic, this.props.topicsList);
+    const { currentTarget, topicsList, formMode } = this.props;
+    const defaultOption = currentTarget.topic.label ||
+      getTopicName(currentTarget.topic, topicsList);
+
     const topicPlaceholder = defaultOption || 'What do you want to talk about?';
-    const topicsName = this.props.topicsList.map(el => {
+    const topicsName = topicsList.map(el => {
       return el.label;
     });
 
@@ -73,7 +85,7 @@ class TargetForm extends React.Component{
             style="custom-target-input"
             name="radius"
             areaLength={"number"}
-            value={this.props.currentTarget.radius}
+            value={currentTarget.radius}
             required={"true"}
             autofocus={"true"}
           />
@@ -86,7 +98,7 @@ class TargetForm extends React.Component{
             style="custom-target-input"
             name="title"
             type={"text"}
-            value={this.props.currentTarget.title}
+            value={currentTarget.title}
             required={"true"}
           />
           <br />
@@ -101,7 +113,7 @@ class TargetForm extends React.Component{
           <input
             className="btn-save-target"
             type="submit"
-            value="SAVE TARGET"
+            value={formMode === "Edit" ? "DELETE TARGET" : "SAVE TARGET"}
             onClick={this.onTargetSubmit}
           /><br />
           <img className="smilies-img-sidebar" src={smilies} alt="Smiley faces" />
@@ -113,8 +125,10 @@ class TargetForm extends React.Component{
 
 TargetForm.propTypes = {
   enabled:PropTypes.bool.isRequired,
+  formMode:PropTypes.string.isRequired,
   updateTargetInfo:PropTypes.func.isRequired,
   createTargetAction:PropTypes.func.isRequired,
+  deleteTargetAction:PropTypes.func.isRequired,
   currentTarget:PropTypes.object.isRequired,
   createAlertAction:PropTypes.func.isRequired,
   topicsList:PropTypes.array.isRequired
