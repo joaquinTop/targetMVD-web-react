@@ -62,10 +62,10 @@ export const SideBarContainer = (props) => {
         </div>
         );
 
+
     case CONTENTS.TargetForm:{
-
       const formEnabled = props.targets.length < 10;
-
+      
       const contentChanged = () => {
         props.actions.switchContent(CONTENTS.Home);
       };
