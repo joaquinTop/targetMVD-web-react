@@ -15,11 +15,10 @@ export const getMyPosition = (success, error) => {
   });
 };
 
-export const mapMarkerToTarget = (marker, targetList) => {
+export const mapMarkerToTarget = ({ latitude, longitude }, targetList) => {
   let targetFound;
   targetList.forEach((target) => {
-    if ((target.lat === marker.latitude) &&
-    (target.lng === marker.longitude)) {
+    if ((target.lat === latitude) && (target.lng === longitude)) {
       targetFound = target;
     }
   });

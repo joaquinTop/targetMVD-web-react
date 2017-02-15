@@ -39,9 +39,9 @@ export const deleteTargetSuccess = (target) => {
   return { type: types.DELETE_TARGET, target };
 };
 
-export const deleteTarget = (target) => {
+export const deleteTarget = (targetId) => {
   return dispatch => {
-    return targetClient.deleteTarget(target.id).then(data => {
+    return targetClient.deleteTarget(targetId).then(data => {
       dispatch(createAlert("SideBarContainer", "Target successfully deleted", "success"));
       dispatch(deleteTargetSuccess(data.target));
     }).catch(error => {

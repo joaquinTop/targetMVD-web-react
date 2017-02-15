@@ -170,8 +170,7 @@ class Map extends React.Component {
 
     // TARGETS RADIUS
     let circles = this.props.markers.map((venue) => {
-      const color = (this.props.targetSelected !== null &&
-        this.props.targetSelected === venue) ? 'rgb(48, 188, 247)' : 'rgb(239, 197, 55)';
+      const color = (this.props.targetSelected === venue) ? 'rgb(48, 188, 247)' : 'rgb(239, 197, 55)';
 
       return getCircle(parseInt(venue.radius), {
         lat: venue.lat,
