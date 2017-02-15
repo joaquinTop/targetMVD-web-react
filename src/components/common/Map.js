@@ -98,9 +98,7 @@ class Map extends React.Component {
     const lng = parseFloat(e.latLng.lng().toFixed(6));
     const { updateTargetInfo, unselectTarget, changeContent } = this.props;
     unselectTarget();
-    updateTargetInfo("lat", lat);
-    updateTargetInfo("lng", lng);
-    updateTargetInfo("isVisible", true);
+    updateTargetInfo({lat: lat, lng: lng, isVisible: true});
     changeContent("TargetForm");
   }
 

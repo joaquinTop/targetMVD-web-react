@@ -7,7 +7,9 @@ export default function newTargetReducer(state = initialState.newTarget, action)
 
     case types.UPDATE_FREE_TARGET:{
       newState = Object.assign({}, state);
-      newState[action.fieldName] = action.value;
+      Object.keys(action.values).forEach((key) => {
+        newState[key] = action.values[key];
+      });
       return newState;
     }
 

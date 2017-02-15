@@ -16,12 +16,14 @@ class TargetForm extends React.Component{
   }
 
   onFieldChange(fieldName, value) {
-    this.props.updateTargetInfo(fieldName, value);
+    let values = {}
+    values[fieldName] = value;
+    this.props.updateTargetInfo(values);
   }
 
   onTopicChange(option) {
     const index = getTopicId(option.label, this.props.topicsList);
-    this.props.updateTargetInfo("topic", index);
+    this.props.updateTargetInfo({topic: index});
   }
 
   onTargetSubmit(e){
