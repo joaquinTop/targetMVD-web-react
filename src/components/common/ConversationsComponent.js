@@ -15,7 +15,7 @@ class ConversationsComponent extends Component{
   };
 
   render() {
-    const matchesCount = this.props.converastions.length;
+    const matchesCount = this.props.converastions ? this.props.converastions.length : 0;
     if (matchesCount === 0) {
       return (
         <h3 className="noTargets">{ C.TEXT_NO_TARGETS_YET }</h3>

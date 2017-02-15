@@ -61,7 +61,6 @@ class TargetForm extends React.Component{
     }
 
     if (formMode === "Edit") {
-      debugger;
       updateTargetAction(targetJson, currentTarget.id);
       return;
     }

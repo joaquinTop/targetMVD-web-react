@@ -63,10 +63,7 @@ export const SideBarContainer = (props) => {
 
     case "TargetForm":{
 
-      let formEnabled = true;
-      if (!props.newTarget.isActive) {
-        formEnabled = false;
-      }
+      let formEnabled = props.targets.length <= 10;
 
       const contentChanged = () => {
         props.actions.switchContent("Home");
@@ -134,6 +131,7 @@ export const SideBarContainer = (props) => {
 SideBarContainer.propTypes = {
   actions: PropTypes.object.isRequired,
   newTarget: PropTypes.object.isRequired,
+  targets: PropTypes.array.isRequired,
   topics: PropTypes.array.isRequired,
   session: PropTypes.object.isRequired,
   alert: PropTypes.object.isRequired,
@@ -141,9 +139,10 @@ SideBarContainer.propTypes = {
   selectedTarget: PropTypes.object.isRequired
 };
 
-const mapStateToProps = ({ newTarget, session, alert, topics, content, selectedTarget }) => {
+const mapStateToProps = ({ newTarget, session, alert, topics, content, selectedTarget, targets }) => {
   return {
     newTarget,
+    targets,
     session,
     alert,
     topics,
