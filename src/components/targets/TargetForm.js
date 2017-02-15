@@ -119,6 +119,15 @@ class TargetForm extends React.Component{
             value={defaultOption}
             placeholder={topicPlaceholder}
           />
+          <br />
+          {this.props.formMode === "Edit" &&
+            <input
+              onClick={this.onTargetDelete}
+              type="submit"
+              value="DELETE TARGET"
+              className="btn-delete-target">
+            </input>
+          }
           <input
             className="btn-save-target"
             type="submit"

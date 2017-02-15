@@ -46,7 +46,19 @@
 	font-family: sans-serif;
 	font-size: 11px;
 	letter-spacing: 1.6px;
-	margin-top: 6px;
+	margin-top: 6px 0 0 6px;
+	box-shadow: 0 2px 4px 0 $box-shadow-color;
+}
+
+.btn-delete-target {
+  width: 40%;
+  height: 39px;
+	background-color: $button-danger-color;
+	color: $background-primary-color;
+	font-family: sans-serif;
+	font-size: 11px;
+	letter-spacing: 1.6px;
+	margin: 6px 6px 0 0;
 	box-shadow: 0 2px 4px 0 $box-shadow-color;
 }
 
