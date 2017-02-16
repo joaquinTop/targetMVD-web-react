@@ -124,18 +124,23 @@ export const SideBarContainer = (props) => {
         </div>
         );
 
-    case "UserProfile":
+    case "UserProfile":{
+      const onBackPressed = () => {
+        props.actions.switchContent("Home");
+      };
       return (
         <div className="sidebarContainer">
           <CustomAlert />
           <Header
             title={"EDIT PROFILE"}
             style="sidebarHeader"
-            withBackButton={false}
+            withBackButton={true}
+            backPressed={onBackPressed}
           />
           <UserProfile />
         </div>
         );
+    }
 
     default:
       return null;

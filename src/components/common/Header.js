@@ -11,7 +11,8 @@ export const Header = ({ style, title }) => {
 Header.propTypes = {
   title: PropTypes.string.isRequired,
   style: PropTypes.string.isRequired,
-  withBackButton: PropTypes.bool.isRequired
+  withBackButton: PropTypes.bool.isRequired,
+  onBackPressed: PropTypes.func
 };
 
 export default Header;

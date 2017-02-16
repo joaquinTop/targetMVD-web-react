@@ -1,21 +1,17 @@
-import axios from 'axios';
-import { BASE_URL } from '../constants/constants';
+import ApiClient from './ApiClient';
 
-let axiosInstance;
+let axiosInstance = new ApiClient();
+let matchesPath = '/users/';
 
 class MatchesClient {
 
-  static setUserInfo(userToken, userIdentifier){
-    axiosInstance = axios.create({
-      baseURL: BASE_URL + '/users/' + userIdentifier,
-      timeout: 2000,
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json', 'X-USER-TOKEN': userToken }
-    });
+  static setPath(userIdentifier){
+    matchesPath += (userIdentifier + '/match_conversations/');
   }
 
   static getMatches() {
     return new Promise((resolve, reject) => {
-      axiosInstance.get('/match_conversations').then((({ data }) => {
+      axiosInstance.get(matchesPath).then((({ data }) => {
         resolve(data);
       })).catch(error => {
         reject(error.message);
