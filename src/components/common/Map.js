@@ -174,7 +174,7 @@ class Map extends React.Component {
       const { targetSelected } = this.props;
       const isSelectedTarget = targetSelected && targetSelected.id === venue.id;
       const color = isSelectedTarget ? 'rgb(48, 188, 247)' : 'rgb(239, 197, 55)';
-      isSelectedTarget && (venue = this.props.targetSelected);
+      isSelectedTarget && (venue = targetSelected);
 
       return getCircle(parseInt(venue.radius), {
         lat: venue.lat,
@@ -187,7 +187,7 @@ class Map extends React.Component {
     });
 
     // FREE TARGET RADIUS
-    let newTargetRadius = getCircle(parseInt(this.props.newTarget.radius), {
+    let newTargetRadius = getCircle(parseInt(newTarget.radius), {
       lat: newTarget.lat,
       lng: newTarget.lng
     }, {
