@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react';
-// import {browserHistory} from 'react-router';
+import {browserHistory} from 'react-router';
 import TextInput from '../common/TextInput';
 import smilies from '../../res/images/common/smilies.png';
 import Dropdown from 'react-dropdown';
@@ -28,16 +28,18 @@ class TargetForm extends React.Component{
     updateTargetInfo({topic: index});
   }
 
-  const { enabled, formMode, currentTarget, createAlertAction, createTargetAction, updateTargetAction, deleteTargetAction } = this.props;
-
   onTargetDelete(e){
     e.preventDefault();
+
+    const { deleteTargetAction, currentTarget } = this.props;
 
     deleteTargetAction(currentTarget.id);
   }
 
   onTargetSubmit(e){
     e.preventDefault();
+
+    const { enabled, formMode, currentTarget, createAlertAction, createTargetAction, updateTargetAction } = this.props;
 
     if (!enabled && formMode === "New") {
       createAlertAction("SideBarContainer", "Max of 10 targets reached", "error");
@@ -66,15 +68,15 @@ class TargetForm extends React.Component{
     }
 
     createTargetAction(targetJson);
-    // this.redirect();
+    this.redirect();
   }
 
-  // redirect(){
-  //   browserHistory.push('/home');
-  // }
+  redirect(){
+    browserHistory.push('/home');
+  }
 
   render(){
-    const { topicsList } = this.props;
+    const { topicsList, currentTarget, formMode } = this.props;
     const defaultOption = currentTarget.topic.label ||
       getTopicName(currentTarget.topic, topicsList);
 
@@ -120,13 +122,13 @@ class TargetForm extends React.Component{
             placeholder={topicPlaceholder}
           />
           <br />
-          {this.props.formMode === "Edit" &&
+          {formMode === "Edit" &&
             <input
               onClick={this.onTargetDelete}
               type="submit"
               value="DELETE TARGET"
-              className="btn-delete-target">
-            </input>
+              className="btn-delete-target"
+            />
           }
           <input
             className="btn-save-target"
@@ -134,16 +136,6 @@ class TargetForm extends React.Component{
             value={formMode === "Edit" ? "EDIT TARGET" : "SAVE TARGET"}
             onClick={this.onTargetSubmit}
           /><br />
-          {formMode === "Edit" &&
-            <div>
-              <button
-                onClick={this.onTargetDelete}
-                type="button"
-                className="btn btn-danger btn-sign-out">Delete Target
-              </button>
-              <br />
-            </div>
-          }
           <img className="smilies-img-sidebar" src={smilies} alt="Smiley faces" />
         </form>
       </div>

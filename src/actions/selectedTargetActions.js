@@ -4,8 +4,8 @@ export const updateSelectedTarget = (selectedTarget) => {
   return { type: types.UPDATE_SELECTED_TARGET, selectedTarget } ;
 };
 
-export const updateSelectedTargetField = (fieldName, value) => {
-  return { type: types.UPDATE_SELECTED_TARGET_FIELD, fieldName, value} ;
+export const updateSelectedTargetField = (values) => {
+  return { type: types.UPDATE_SELECTED_TARGET_FIELD, values} ;
 };
 
 export const resetSelectedTarget = () => {

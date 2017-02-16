@@ -10,7 +10,9 @@ export default function selectedTargetReducer(state = initialState.selectedTarge
 
     case types.UPDATE_SELECTED_TARGET_FIELD:{
       let newState = Object.assign({}, state);
-      newState[action.fieldName] = action.value;
+      Object.keys(action.values).forEach((key) => {
+        newState[key] = action.values[key];
+      });
       return newState;
     }
 

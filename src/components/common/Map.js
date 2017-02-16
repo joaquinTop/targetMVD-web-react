@@ -171,7 +171,8 @@ class Map extends React.Component {
     // TARGETS RADIUS
     let circles = this.props.markers.map((venue) => {
 
-      const isSelectedTarget = this.props.targetSelected.id === venue.id;
+      const { targetSelected } = this.props;
+      const isSelectedTarget = targetSelected && targetSelected.id === venue.id;
       const color = isSelectedTarget ? 'rgb(48, 188, 247)' : 'rgb(239, 197, 55)';
       isSelectedTarget && (venue = this.props.targetSelected);
 
