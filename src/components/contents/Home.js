@@ -28,7 +28,7 @@ export const Home = ({ switchContentAction, matches, actions, beginLogout }) => 
       </div>
       <div className="home-inside-container">
         <ConversationsComponent
-          converastions={matches}
+          conversations={matches}
           updateCurrentConversationAction={actions.updateCurrentConversation}
           switchContent={switchContentAction}
           getMessagesAction={actions.loadMessages}

@@ -16,7 +16,7 @@ class ConversationsComponent extends Component{
 
   render() {
     const { conversations } = this.props;
-    const matchesCount = converastions ? converastions.length : 0;
+    const matchesCount = conversations ? conversations.length : 0;
     if (matchesCount === 0) {
       return (
         <h3 className="noTargets">{ C.TEXT_NO_TARGETS_YET }</h3>
@@ -27,7 +27,7 @@ class ConversationsComponent extends Component{
           <h4 className="home-chat">Chat</h4>
           <ul className="people">
             <hr className="custom-line-chats" />
-            {this.props.converastions.map((item) => {
+            {conversations.map((item) => {
               return (
                 <div key={item.match_id}>
                   <li className="person" onClick={this.conversationSelected.bind(this, item)}>
@@ -48,7 +48,7 @@ class ConversationsComponent extends Component{
 }
 
 ConversationsComponent.propTypes = {
-  converastions: PropTypes.array.isRequired,
+  conversations: PropTypes.array.isRequired,
   updateCurrentConversationAction: PropTypes.func.isRequired,
   switchContent: PropTypes.func.isRequired,
   getMessagesAction: PropTypes.func.isRequired

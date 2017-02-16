@@ -32,6 +32,6 @@ export const ADD_MESSAGE = 'ADD_MESSAGE';
 // sidebar content
 export const SWITCH_CONTENT = 'SWITCH_CONTENT';
 
-// new converastion
+// new conversation
 export const UPDATE_CURRENT_CONVERSATION = 'UPDATE_CURRENT_CONVERSATION';
 export const CLOSE_CURRENT_CONVERSATION = 'CLOSE_CURRENT_CONVERSATION';
