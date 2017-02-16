@@ -1,5 +1,6 @@
 import React, {PropTypes} from 'react';
 import {browserHistory} from 'react-router';
+import { ALERT_GOALS } from '../../enums/enums'
 import TextInput from '../common/TextInput';
 import smilies from '../../res/images/common/smilies.png';
 import Dropdown from 'react-dropdown';
@@ -41,7 +42,7 @@ class TargetForm extends React.Component{
 
     const { enabled, formMode, currentTarget, createAlertAction, createTargetAction, updateTargetAction } = this.props;
 
-    if (!enabled && formMode === "New") {
+    if (!enabled && formMode === ALERT_GOALS.New) {
       createAlertAction("SideBarContainer", "Max of 10 targets reached", "error");
       return;
     }
@@ -62,7 +63,7 @@ class TargetForm extends React.Component{
       return;
     }
 
-    if (formMode === "Edit") {
+    if (formMode === ALERT_GOALS.Edit) {
       updateTargetAction(targetJson, currentTarget.id);
       return;
     }
@@ -122,7 +123,7 @@ class TargetForm extends React.Component{
             placeholder={topicPlaceholder}
           />
           <br />
-          {formMode === "Edit" &&
+          {formMode === ALERT_GOALS.Edit &&
             <input
               onClick={this.onTargetDelete}
               type="submit"
@@ -133,7 +134,7 @@ class TargetForm extends React.Component{
           <input
             className="btn-save-target"
             type="submit"
-            value={formMode === "Edit" ? "EDIT TARGET" : "SAVE TARGET"}
+            value={formMode === ALERT_GOALS.Edit ? "EDIT TARGET" : "SAVE TARGET"}
             onClick={this.onTargetSubmit}
           /><br />
           <img className="smilies-img-sidebar" src={smilies} alt="Smiley faces" />

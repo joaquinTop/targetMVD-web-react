@@ -9,6 +9,7 @@ import * as sessionActions from '../../actions/sessionActions';
 import * as alertActions from '../../actions/alertActions';
 import * as contentActions from '../../actions/contentActions';
 import CustomAlert from '../../utils/uiHelper/CustomAlert';
+import { ALERT_GOALS } from '../../enums/enums'
 import Header from '../common/Header';
 import SubHeader from '../common/SubHeader';
 import TargetForm from '../targets/TargetForm';
@@ -24,7 +25,7 @@ import { getToken } from '../../utils/LocalStorageHelper';
 
 export const SideBarContainer = (props) => {
 
-  if (props.alert.goal === "SideBarContainer") {
+  if (props.alert.goal === ALERT_GOALS.SideBarContainer) {
     CustomAlert.showAlert(props.alert.text, props.alert.alertType);
     props.actions.deleteAlert();
   }
@@ -91,7 +92,7 @@ export const SideBarContainer = (props) => {
               deleteTargetAction={props.actions.deleteTarget}
               createAlertAction={props.actions.createAlert}
               topicsList={props.topics}
-              formMode={props.selectedTarget ? "Edit" : "New"}
+              formMode={props.selectedTarget ? ALERT_GOALS.Edit : ALERT_GOALS.New}
             />
             <button onClick={contentChanged} className="btn-matches">MATCHES</button>
             <br />

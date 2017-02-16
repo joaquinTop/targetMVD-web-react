@@ -1,7 +1,7 @@
 import * as types from './actionTypes';
 import targetClient from '../client/TargetsServerClient';
-import {updateFreeTarget} from './newTargetActions';
-import {createAlert} from './alertActions';
+import { updateFreeTarget } from './newTargetActions';
+import { createAlert } from './alertActions';
 
 export function createTargetSuccess(target){
   return { type: types.CREATE_TARGET, target };
