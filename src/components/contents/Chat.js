@@ -7,15 +7,16 @@ import MessageComposer from '../common/MessageComposer';
 import * as messagesActions from '../../actions/messagesActions';
 import * as currentConversationActions from '../../actions/currentConversationActions';
 import * as contentActions from '../../actions/contentActions';
+import { CONTENTS } from '../../enums/enums'
 import Pusher from 'react-pusher';
 
 export const Chat = ({ currentConversation, messages, session, actions: { switchContent, closeCurrentConversation, sendMessage, onMessageReceived} }) => {
 
   const contentChanged = () => {
     closeCurrentConversation(currentConversation.match_id);
-    switchContent("Home");
+    switchContent(CONTENTS.Home);
   };
-  
+
   return (
     <div className="chat-sidebar-container">
       <Pusher

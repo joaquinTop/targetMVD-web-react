@@ -6,11 +6,12 @@ import * as currentConversationActions from '../../actions/currentConversationAc
 import * as messagesActions from '../../actions/messagesActions';
 import userPlaceholder from '../../res/images/profile/placeholder-user.png';
 import ConversationsComponent from '../common/ConversationsComponent';
+import { CONTENTS } from '../../enums/enums'
 
 export const Home = ({ switchContentAction, matches, actions, beginLogout }) => {
 
   const contentChanged = () => {
-    switchContentAction("TargetForm");
+    switchContentAction(CONTENTS.TargetForm);
   };
 
   return (

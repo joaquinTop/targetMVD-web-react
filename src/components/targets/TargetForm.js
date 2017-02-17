@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react';
 import {browserHistory} from 'react-router';
-import { ALERT_GOALS } from '../../enums/enums'
+import { ALERT_GOALS, FORM_MODE } from '../../enums/enums'
 import TextInput from '../common/TextInput';
 import smilies from '../../res/images/common/smilies.png';
 import Dropdown from 'react-dropdown';
@@ -31,10 +31,8 @@ class TargetForm extends React.Component{
 
   onTargetDelete(e){
     e.preventDefault();
-
-    const { deleteTargetAction, currentTarget } = this.props;
-
-    deleteTargetAction(currentTarget.id);
+    const { deleteTargetAction, currentTarget: { id } } = this.props;
+    deleteTargetAction(id);
   }
 
   onTargetSubmit(e){
@@ -42,8 +40,8 @@ class TargetForm extends React.Component{
 
     const { enabled, formMode, currentTarget, createAlertAction, createTargetAction, updateTargetAction } = this.props;
 
-    if (!enabled && formMode === ALERT_GOALS.New) {
-      createAlertAction("SideBarContainer", "Max of 10 targets reached", "error");
+    if (!enabled && formMode === FORM_MODE.New) {
+      createAlertAction(ALERT_GOALS.SideBarContainer, "Max of 10 targets reached", "error");
       return;
     }
 
@@ -59,11 +57,11 @@ class TargetForm extends React.Component{
 
     const error = validateTarget(targetJson.target);
     if (error) {
-      createAlertAction("SideBarContainer", error, "error");
+      createAlertAction(ALERT_GOALS.SideBarContainer, error, "error");
       return;
     }
 
-    if (formMode === ALERT_GOALS.Edit) {
+    if (formMode === FORM_MODE.Edit) {
       updateTargetAction(targetJson, currentTarget.id);
       return;
     }
@@ -123,7 +121,7 @@ class TargetForm extends React.Component{
             placeholder={topicPlaceholder}
           />
           <br />
-          {formMode === ALERT_GOALS.Edit &&
+          {formMode === FORM_MODE.Edit &&
             <input
               onClick={this.onTargetDelete}
               type="submit"
@@ -134,7 +132,7 @@ class TargetForm extends React.Component{
           <input
             className="btn-save-target"
             type="submit"
-            value={formMode === ALERT_GOALS.Edit ? "EDIT TARGET" : "SAVE TARGET"}
+            value={formMode === FORM_MODE.Edit ? "EDIT TARGET" : "SAVE TARGET"}
             onClick={this.onTargetSubmit}
           /><br />
           <img className="smilies-img-sidebar" src={smilies} alt="Smiley faces" />

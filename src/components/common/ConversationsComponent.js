@@ -1,5 +1,6 @@
 import React, { Component, PropTypes} from 'react';
 import * as C from '../../res/strings/strings-en';
+import { CONTENTS } from '../../enums/enums'
 import imgCount from '../../res/images/common/yellow-circle.png';
 
 class ConversationsComponent extends Component{
@@ -11,7 +12,7 @@ class ConversationsComponent extends Component{
     const { getMessagesAction, updateCurrentConversationAction, switchContent } = this.props;
     getMessagesAction(match.match_id);
     updateCurrentConversationAction(match);
-    switchContent("Chat");
+    switchContent(CONTENTS.Chat);
   };
 
   render() {

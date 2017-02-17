@@ -9,7 +9,7 @@ import * as sessionActions from '../../actions/sessionActions';
 import * as alertActions from '../../actions/alertActions';
 import * as contentActions from '../../actions/contentActions';
 import CustomAlert from '../../utils/uiHelper/CustomAlert';
-import { ALERT_GOALS } from '../../enums/enums'
+import { ALERT_GOALS, CONTENTS, FORM_MODE } from '../../enums/enums'
 import Header from '../common/Header';
 import SubHeader from '../common/SubHeader';
 import TargetForm from '../targets/TargetForm';
@@ -30,7 +30,7 @@ export const SideBarContainer = (props) => {
     props.actions.deleteAlert();
   }
   if (!props.session.firstTime && props.content === "HomeWelcome") {
-      props.actions.switchContent("TargetForm");
+      props.actions.switchContent(CONTENTS.TargetForm);
   }
 
   if (props.session.firstTime) {
@@ -54,7 +54,7 @@ export const SideBarContainer = (props) => {
 
   switch (props.content) {
 
-    case "HomeWelcome":
+    case CONTENTS.HomeWelcome:
       return (
         <div className="sidebarContainer">
           <CustomAlert />
@@ -62,12 +62,12 @@ export const SideBarContainer = (props) => {
         </div>
         );
 
-    case "TargetForm":{
+    case CONTENTS.TargetForm:{
 
       const formEnabled = props.targets.length < 10;
 
       const contentChanged = () => {
-        props.actions.switchContent("Home");
+        props.actions.switchContent(CONTENTS.Home);
       };
 
       return (
@@ -92,7 +92,7 @@ export const SideBarContainer = (props) => {
               deleteTargetAction={props.actions.deleteTarget}
               createAlertAction={props.actions.createAlert}
               topicsList={props.topics}
-              formMode={props.selectedTarget ? ALERT_GOALS.Edit : ALERT_GOALS.New}
+              formMode={props.selectedTarget ? FORM_MODE.Edit : FORM_MODE.New}
             />
             <button onClick={contentChanged} className="btn-matches">MATCHES</button>
             <br />
@@ -101,7 +101,7 @@ export const SideBarContainer = (props) => {
       );
     }
 
-    case "Home":{
+    case CONTENTS.Home:{
       const logOut = () => {
         pushwooshService.unregisterDevice();
         props.actions.signOut();
@@ -115,7 +115,7 @@ export const SideBarContainer = (props) => {
         );
     }
 
-    case "Chat":
+    case CONTENTS.Chat:
       return (
         <div className="sidebarContainer">
           <CustomAlert />
