@@ -20,9 +20,6 @@ export const validateUserProfile = (settings) => {
   if (settings.email === 0) {
       errorMessage = "You must enter an email.";
   }
-  // if (settings.currentPassword === 0 || settings.currentPassword || currentUser.password) {
-  //   errorMessage = "You must enter your current password.";
-  // }
   if (settings.currentPassword === 0) {
     errorMessage = "You must enter your current password.";
   }
