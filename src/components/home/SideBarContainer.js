@@ -124,17 +124,14 @@ export const SideBarContainer = (props) => {
         );
 
     case CONTENTS.UserProfile:{
-      const onBackPressed = () => {
-        props.actions.switchContent("Home");
-      };
       return (
         <div className="sidebarContainer">
           <CustomAlert />
           <Header
             title={"EDIT PROFILE"}
             style="sidebarHeader"
-            withBackButton={true}
-            backPressed={onBackPressed}
+            withBackButton
+            onBackPressed={props.actions.switchContent}
           />
           <UserProfile />
         </div>
@@ -154,8 +151,8 @@ SideBarContainer.propTypes = {
   topics: PropTypes.array.isRequired,
   session: PropTypes.object.isRequired,
   alert: PropTypes.object.isRequired,
-  content: PropTypes.string.isRequired,
-  selectedTarget: PropTypes.object.isRequired
+  content: PropTypes.symbol.isRequired,
+  selectedTarget: PropTypes.object
 };
 
 const mapStateToProps = ({ newTarget, session, alert, topics, content, selectedTarget, targets }) => {

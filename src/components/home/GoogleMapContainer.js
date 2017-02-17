@@ -35,7 +35,7 @@ GoogleMapContainer.propTypes = {
   targets: PropTypes.array.isRequired,
   topics: PropTypes.array.isRequired,
   newTarget: PropTypes.object.isRequired,
-  selectedTarget: PropTypes.object.isRequired,
+  selectedTarget: PropTypes.object,
   actions: PropTypes.object.isRequired
 };
 

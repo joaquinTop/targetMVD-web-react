@@ -40,6 +40,16 @@ class UserClient {
     });
   }
 
+  static resetPassword(settings, userId) {
+    return new Promise((resolve, reject) => {
+        axiosInstance.put('/users/' + userId + '/password/change', settings).then((({ data }) => {
+          resolve(data);
+        })).catch(error => {
+          reject(error.message);
+        });
+    });
+  }
+
   static signOut() {
     return new Promise((resolve, reject) => {
       axiosInstance.delete('users/sign_out').then((() => {

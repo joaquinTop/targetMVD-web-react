@@ -5,7 +5,6 @@ let axiosInstance = new ApiClient();
 class PushClient {
 
   static sendPushToken(token, user_id) {
-    debugger;
     return new Promise((resolve, reject) => {
         axiosInstance.post('/users/' + user_id + '/push_tokens', token).then((({ data }) => {
           resolve(data);

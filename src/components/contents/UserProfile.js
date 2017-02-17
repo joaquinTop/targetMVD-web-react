@@ -1,10 +1,13 @@
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import userPlaceholder from '../../res/images/profile/placeholder-user.png'
+import userPlaceholder from '../../res/images/profile/placeholder-user.png';
 import smilies from '../../res/images/common/smilies.png';
 import TextInput from '../common/TextInput';
 import * as sessionActions from '../../actions/sessionActions';
+import * as alertActions from '../../actions/alertActions';
+import { ALERT_GOALS  } from '../../enums/enums';
+import { validateUserProfile } from '../../utils/ValidationHelper';
 
 
 class UserProfile extends React.Component{
@@ -14,7 +17,7 @@ class UserProfile extends React.Component{
     this.onSettingsSubmit = this.onSettingsSubmit.bind(this);
     this.onFieldChange = this.onFieldChange.bind(this);
     this.state = {
-      email: '',
+      email: this.props.session.user.email,
       currentPassword: '',
       newPassword: '',
       confirmPassword: ''
@@ -23,13 +26,35 @@ class UserProfile extends React.Component{
 
   onSettingsSubmit(e){
     e.preventDefault();
+
+    const newSettings = {
+      user: {
+        prev: this.state.currentPassword,
+        password: this.state.newPassword,
+        confirmation: this.state.confirmPassword,
+        email: this.state.email
+      }
+    };
+    const { session: { user_id }, actions: { createAlert, resetPasswordAction } } = this.props;
+
+    const error = validateUserProfile(newSettings.user);
+    if (error) {
+      createAlert(ALERT_GOALS.SideBarContainer, error, "error");
+      return;
+    }
+
+    delete newSettings.user.email;
+    resetPasswordAction(newSettings, user_id);
   }
 
   onFieldChange(fieldName, value){
-
+    let newState = Object.assign({}, this.state);
+    newState[fieldName] = value;
+    this.setState(newState);
   }
 
   render(){
+    const { name } = this.props.session.user;
     return (
       <div className="home-sidebar-container">
         <div className="user-profile-inside-container-up">
@@ -37,7 +62,7 @@ class UserProfile extends React.Component{
             <div className="user-profile-img-background">
               <img className="user-img" src={userPlaceholder} />
             </div>
-            <h4 className="home-username">@nickname</h4>
+            <h4 className="home-username">{name}</h4>
           </div>
         </div>
         <form>
@@ -56,7 +81,7 @@ class UserProfile extends React.Component{
           <TextInput
             id="inputPassword"
             onChange={this.onFieldChange}
-            name="password"
+            name="currentPassword"
             type={"password"}
             value={this.state.currentPassword}
             required={"true"}
@@ -66,7 +91,7 @@ class UserProfile extends React.Component{
           <TextInput
             id="inputPassword"
             onChange={this.onFieldChange}
-            name="password"
+            name="newPassword"
             type={"password"}
             value={this.state.newPassword}
             required={"true"}
@@ -76,7 +101,7 @@ class UserProfile extends React.Component{
           <TextInput
             id="inputPassword"
             onChange={this.onFieldChange}
-            name="password"
+            name="confirmPassword"
             type={"password"}
             value={this.state.confirmPassword}
             required={"true"}
@@ -94,7 +119,8 @@ class UserProfile extends React.Component{
 }
 
 UserProfile.propTypes = {
-  session: PropTypes.object.isRequired
+  session: PropTypes.object.isRequired,
+  actions: PropTypes.object.isRequired
 };
 
 const mapStateToProps = ({ session }) => {
@@ -103,7 +129,7 @@ const mapStateToProps = ({ session }) => {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(sessionActions, dispatch)
+    actions: bindActionCreators(Object.assign({}, sessionActions, alertActions), dispatch)
   };
 }
 
