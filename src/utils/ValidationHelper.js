@@ -14,3 +14,23 @@ export const validateTarget = (target) => {
   }
   return errorMessage;
 };
+
+export const validateUserProfile = (settings) => {
+  let errorMessage;
+  if (settings.email === 0) {
+      errorMessage = "You must enter an email.";
+  }
+  if (settings.currentPassword === 0) {
+    errorMessage = "You must enter your current password.";
+  }
+  if (settings.newPassword === 0) {
+    errorMessage = "You must enter a new Password.";
+  }
+  if (settings.confirmPassword === 0) {
+    errorMessage = "You must confirm the new Password.";
+  }
+  if (settings.newPassword !== settings.confirmPassword) {
+    errorMessage = "Password confirmation failed";
+  }
+  return errorMessage;
+};

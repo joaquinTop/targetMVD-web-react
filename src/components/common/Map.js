@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react';
 import {GoogleMapLoader, GoogleMap, Marker} from 'react-google-maps';
 import { getCircle, getMyPosition, mapMarkerToTarget } from '../../utils/uiHelper/MapHelper';
-import { ALERT_GOALS } from '../../enums/enums'
+import { CONTENTS } from '../../enums/enums'
 import markerIcon from '../../res/images/targets/myPosition.png';
 import * as Colors from '../../utils/Colors';
 import { getTopicIcon } from '../../utils/TopicsHelper';
@@ -101,7 +101,7 @@ class Map extends React.Component {
     const { updateTargetInfo, unselectTarget, changeContent } = this.props;
     unselectTarget();
     updateTargetInfo({lat: lat, lng: lng, isVisible: true});
-    changeContent(ALERT_GOALS.TargetForm);
+    changeContent(CONTENTS.TargetForm);
   }
 
   onMarkerClick(e) {
@@ -116,7 +116,7 @@ class Map extends React.Component {
     removeFreeTarget();
     selectTarget(targetFound);
     this.handleCenterChanged(targetFound);
-    changeContent(ALERT_GOALS.TargetForm);
+    changeContent(CONTENTS.TargetForm);
   }
 
   render() {
@@ -245,7 +245,7 @@ Map.propTypes = {
   removeFreeTarget: PropTypes.func.isRequired,
   selectTarget: PropTypes.func.isRequired,
   unselectTarget: PropTypes.func.isRequired,
-  targetSelected: PropTypes.object.isRequired,
+  targetSelected: PropTypes.object,
   topicsList: PropTypes.array.isRequired,
   newTarget: PropTypes.object.isRequired
 };

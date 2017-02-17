@@ -1,9 +1,11 @@
+import { CONTENTS } from '../enums/enums'
+
 export default {
   targets: [],
   topics: [],
   matches: [],
   messages: [],
-  content: "HomeWelcome",
+  content: CONTENTS.HomeWelcome,
   currentConversation: {},
   newTarget: {
     id: 0,
@@ -21,7 +23,7 @@ export default {
     user_token: '',
     isLoggedIn: false,
     firstTime: true,
-    currentPage: 'SignUpPage'
+    user: null
   },
   alert: {
     goal: "",

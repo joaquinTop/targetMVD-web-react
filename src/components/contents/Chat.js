@@ -24,7 +24,7 @@ export const Chat = ({ currentConversation, messages, session, actions: { switch
         event="new_message"
         onUpdate={onMessageReceived}
       />
-      <Header title={"CHAT"} style="sidebarHeader" withBackButton />
+      <Header title={"CHAT"} style="sidebarHeader" withBackButton onBackPressed={contentChanged}/>
       <div className="chat-inside-container-up">
         <div className="chatHeader">
           <img
@@ -36,7 +36,6 @@ export const Chat = ({ currentConversation, messages, session, actions: { switch
           <h4 className="chatSubHeader">{messages.length}</h4>
         </div>
         <hr className="custom-line-chats" />
-        <button onClick={contentChanged} className="btn-back-chat">BACK</button>
       </div>
       <div className="chat-inside-container">
         <div className="container-chat">

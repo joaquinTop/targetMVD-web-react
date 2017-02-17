@@ -1,18 +1,13 @@
-import axios from 'axios';
-import { BASE_URL } from '../constants/constants';
+import ApiClient from './ApiClient';
 
-let axiosInstance = axios.create({
-  baseURL: BASE_URL,
-  // timeout can be overriden in those cases where the answer might take a while
-  timeout: 10000,
-  headers: {'Content-Type': 'application/json', 'Accept': 'application/json'}
-});
+const axiosInstance = new ApiClient();
 
 class UserClient {
 
   static signUp(user) {
     return new Promise((resolve, reject) => {
         axiosInstance.post('/users', user).then((({ data }) => {
+          axiosInstance.defaults.headers['X-USER-TOKEN'] = data.token;
           resolve(data);
         })).catch(error => {
           reject(error.message);
@@ -23,6 +18,7 @@ class UserClient {
   static signIn(user) {
     return new Promise((resolve, reject) => {
         axiosInstance.post('/users/sign_in', user).then((({ data }) => {
+          axiosInstance.defaults.headers['X-USER-TOKEN'] = data.token;
           resolve(data);
         })).catch(error => {
           reject(error.message);
@@ -44,11 +40,20 @@ class UserClient {
     });
   }
 
-  static signOut(token) {
-    axiosInstance.defaults.headers['X-USER-TOKEN'] = token;
+  static resetPassword(settings, userId) {
     return new Promise((resolve, reject) => {
-      axiosInstance.delete('users/sign_out', null).then((({ data }) => {
-        resolve(data);
+        axiosInstance.put('/users/' + userId + '/password/change', settings).then((({ data }) => {
+          resolve(data);
+        })).catch(error => {
+          reject(error.message);
+        });
+    });
+  }
+
+  static signOut() {
+    return new Promise((resolve, reject) => {
+      axiosInstance.delete('users/sign_out').then((() => {
+        resolve();
       })).catch(error => {
         reject(error.message);
       });

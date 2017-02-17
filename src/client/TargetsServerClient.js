@@ -1,22 +1,19 @@
-import axios from 'axios';
-import { BASE_URL } from '../constants/constants';
+import ApiClient from './ApiClient';
 
-let axiosInstance;
+let axiosInstance = new ApiClient();
+let targetsPath = '/users/';
 
 class TargetClient {
 
-  static setUserInfo(userToken, userIdentifier){
-    axiosInstance = axios.create({
-      baseURL: BASE_URL + '/users/' + userIdentifier,
-      // timeout can be overriden in those cases where the answer might take a while (i.e. images)
-      timeout: 2000,
-      headers: {'Content-Type': 'application/json', 'Accept': 'application/json', 'X-USER-TOKEN': userToken}
-    });
+  static setPath(userIdentifier){
+    if (!targetsPath.endsWith('/targets/')) {
+      targetsPath += (userIdentifier + '/targets/');
+    }
   }
 
   static getMyTargets() {
     return new Promise((resolve, reject) => {
-      axiosInstance.get('/targets').then((({ data })=> {
+      axiosInstance.get(targetsPath).then((({ data })=> {
         resolve(data);
       })).catch(error => {
         reject(error.message);
@@ -26,7 +23,7 @@ class TargetClient {
 
   static createTarget(target) {
     return new Promise((resolve, reject) => {
-      axiosInstance.post('/targets', target).then((({ data })=> {
+      axiosInstance.post(targetsPath, target).then((({ data })=> {
         resolve(data);
       })).catch(error => {
         reject(error.message);
@@ -36,7 +33,7 @@ class TargetClient {
 
   static updateTarget(targetJson, targetId) {
     return new Promise((resolve, reject) => {
-      axiosInstance.put('/targets/' + targetId, targetJson).then((({ data })=> {
+      axiosInstance.put(targetsPath + targetId, targetJson).then((({ data })=> {
         resolve(data);
       })).catch(error => {
         reject(error.message);
@@ -46,7 +43,7 @@ class TargetClient {
 
   static deleteTarget(targetId) {
     return new Promise((resolve, reject) => {
-      axiosInstance.delete('/targets/' + targetId).then((({ data })=> {
+      axiosInstance.delete(targetsPath + targetId).then((({ data })=> {
         resolve(data);
       })).catch(error => {
         reject(error.message);

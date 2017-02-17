@@ -17,6 +17,7 @@ import targetIcon from '../../res/images/common/targetIcon.png';
 import HomeWelcome from '../common/HomeWelcome';
 import Home from '../contents/Home';
 import Chat from '../contents/Chat';
+import UserProfile from '../contents/UserProfile';
 import { setPusherClient } from 'react-pusher';
 import Pusher from 'pusher-js';
 import * as C from '../../constants/constants';
@@ -63,7 +64,6 @@ export const SideBarContainer = (props) => {
         );
 
     case CONTENTS.TargetForm:{
-
       const formEnabled = props.targets.length < 10;
 
       const contentChanged = () => {
@@ -123,6 +123,21 @@ export const SideBarContainer = (props) => {
         </div>
         );
 
+    case CONTENTS.UserProfile:{
+      return (
+        <div className="sidebarContainer">
+          <CustomAlert />
+          <Header
+            title={"EDIT PROFILE"}
+            style="sidebarHeader"
+            withBackButton
+            onBackPressed={props.actions.switchContent}
+          />
+          <UserProfile />
+        </div>
+        );
+    }
+
     default:
       return null;
 
@@ -136,8 +151,8 @@ SideBarContainer.propTypes = {
   topics: PropTypes.array.isRequired,
   session: PropTypes.object.isRequired,
   alert: PropTypes.object.isRequired,
-  content: PropTypes.string.isRequired,
-  selectedTarget: PropTypes.object.isRequired
+  content: PropTypes.symbol.isRequired,
+  selectedTarget: PropTypes.object
 };
 
 const mapStateToProps = ({ newTarget, session, alert, topics, content, selectedTarget, targets }) => {

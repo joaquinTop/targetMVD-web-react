@@ -1,8 +1,7 @@
 import * as types from './actionTypes';
-import { ALERT_GOALS } from '../enums/enums'
+import { ALERT_GOALS } from '../enums/enums';
 import userClient from '../client/UsersServerClient';
 import targetClient from '../client/TargetsServerClient';
-import topicClient from '../client/TopicsServerClient';
 import matchesClient from '../client/MatchesServerClient';
 import messagesClient from '../client/MessagesServerClient';
 import pushClient from '../client/PushClient';
@@ -22,15 +21,14 @@ export function resetSession(){
 
 export function configureSession(data, firstTime){
   return dispatch => {
-    targetClient.setUserInfo(data.token, data.user_id);
-    topicClient.setUserInfo(data.token);
-    matchesClient.setUserInfo(data.token, data.user_id);
-    messagesClient.setUserInfo(data.token, data.user_id);
-    pushClient.setUserInfo(data.token);
+    targetClient.setPath(data.user_id);
+    matchesClient.setPath(data.token, data.user_id);
+    messagesClient.setPath(data.token, data.user_id);
     dispatch(updateSessionInformation("user_id", data.user_id));
     dispatch(updateSessionInformation("user_token", data.token));
     dispatch(updateSessionInformation("isLoggedIn", true));
     dispatch(updateSessionInformation("firstTime", firstTime));
+    dispatch(updateSessionInformation("user", {email: data.email, image: data.image, name: data.name}));
     dispatch(loadTopics());
     dispatch(loadMatches());
   };
@@ -75,6 +73,16 @@ export const signUp = (userJson) => {
       setUser(userJson, false);
     }).catch(error => {
       dispatch(createAlert(ALERT_GOALS.SignInPage, error, "error"));
+    });
+  };
+};
+
+export const resetPasswordAction = (settings, userId) => {
+  return dispatch => {
+    return userClient.resetPassword(settings, userId).then(data => {
+      dispatch(createAlert(ALERT_GOALS.SideBarContainer, "Password reset successfully", "success"));
+    }).catch(error => {
+      dispatch(createAlert(ALERT_GOALS.SideBarContainer, error, "error"));
     });
   };
 };

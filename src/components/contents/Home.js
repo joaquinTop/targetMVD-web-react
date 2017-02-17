@@ -14,6 +14,10 @@ export const Home = ({ switchContentAction, matches, actions, beginLogout }) => 
     switchContentAction(CONTENTS.TargetForm);
   };
 
+  const editProfile = () => {
+    switchContentAction(CONTENTS.UserProfile);
+  };
+
   return (
     <div className="home-sidebar-container">
       <div className="home-inside-container-up">
@@ -23,7 +27,10 @@ export const Home = ({ switchContentAction, matches, actions, beginLogout }) => 
             <img className="user-img" src={userPlaceholder} />
           </div>
           <h4 className="home-username">@nickname</h4>
-          <h5 className="home-options">Edit / <a className="logoutButton" onClick={beginLogout} >Logout</a></h5>
+          <h5 className="home-options">
+            <a className="logoutButton" onClick={editProfile} >Edit</a> /
+            <a className="logoutButton" onClick={beginLogout} >Logout</a>
+          </h5>
           <hr className="custom-line-home" />
         </div>
       </div>
