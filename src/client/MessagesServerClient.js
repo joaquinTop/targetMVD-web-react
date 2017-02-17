@@ -6,7 +6,9 @@ let messagesPath = '/users/';
 class MessagesClient {
 
   static setPath(userIdentifier){
-    messagesPath += (userIdentifier + '/match_conversations/');
+    if (!messagesPath.endsWith('/match_conversations/')) {
+      messagesPath += (userIdentifier + '/match_conversations/');
+    }
   }
 
   static getMessages(matchId) {

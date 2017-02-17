@@ -6,7 +6,9 @@ let matchesPath = '/users/';
 class MatchesClient {
 
   static setPath(userIdentifier){
-    matchesPath += (userIdentifier + '/match_conversations/');
+    if (!matchesPath.endsWith('/match_conversations/')) {
+      matchesPath += (userIdentifier + '/match_conversations/');
+    }
   }
 
   static getMatches() {

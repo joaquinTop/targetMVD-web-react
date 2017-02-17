@@ -15,7 +15,7 @@ export const Home = ({ switchContentAction, matches, actions, beginLogout }) => 
   };
 
   const editProfile = () => {
-    switchContentAction("UserProfile");
+    switchContentAction(CONTENTS.UserProfile);
   };
 
   return (

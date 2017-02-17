@@ -6,7 +6,9 @@ let targetsPath = '/users/';
 class TargetClient {
 
   static setPath(userIdentifier){
-    targetsPath += (userIdentifier + '/targets/');
+    if (!targetsPath.endsWith('/targets/')) {
+      targetsPath += (userIdentifier + '/targets/');
+    }
   }
 
   static getMyTargets() {

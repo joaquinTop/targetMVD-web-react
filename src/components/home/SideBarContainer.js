@@ -63,10 +63,9 @@ export const SideBarContainer = (props) => {
         </div>
         );
 
-
     case CONTENTS.TargetForm:{
       const formEnabled = props.targets.length < 10;
-      
+
       const contentChanged = () => {
         props.actions.switchContent(CONTENTS.Home);
       };
@@ -124,7 +123,7 @@ export const SideBarContainer = (props) => {
         </div>
         );
 
-    case "UserProfile":{
+    case CONTENTS.UserProfile:{
       const onBackPressed = () => {
         props.actions.switchContent("Home");
       };
