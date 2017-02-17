@@ -1,7 +1,9 @@
 import React, {PropTypes} from 'react';
 import {GoogleMapLoader, GoogleMap, Marker} from 'react-google-maps';
 import { getCircle, getMyPosition, mapMarkerToTarget } from '../../utils/uiHelper/MapHelper';
+import { ALERT_GOALS } from '../../enums/enums'
 import markerIcon from '../../res/images/targets/myPosition.png';
+import * as Colors from '../../utils/Colors';
 import { getTopicIcon } from '../../utils/TopicsHelper';
 
 class Map extends React.Component {
@@ -99,7 +101,7 @@ class Map extends React.Component {
     const { updateTargetInfo, unselectTarget, changeContent } = this.props;
     unselectTarget();
     updateTargetInfo({lat: lat, lng: lng, isVisible: true});
-    changeContent("TargetForm");
+    changeContent(ALERT_GOALS.TargetForm);
   }
 
   onMarkerClick(e) {
@@ -113,8 +115,8 @@ class Map extends React.Component {
     const { removeFreeTarget, selectTarget, changeContent } = this.props;
     removeFreeTarget();
     selectTarget(targetFound);
-    changeContent("TargetForm");
     this.handleCenterChanged(targetFound);
+    changeContent(ALERT_GOALS.TargetForm);
   }
 
   render() {
@@ -170,7 +172,11 @@ class Map extends React.Component {
 
     // TARGETS RADIUS
     let circles = this.props.markers.map((venue) => {
-      const color = (this.props.targetSelected === venue) ? 'rgb(48, 188, 247)' : 'rgb(239, 197, 55)';
+
+      const { targetSelected } = this.props;
+      const isSelectedTarget = targetSelected && targetSelected.id === venue.id;
+      const color = isSelectedTarget ? Colors.BLUE : Colors.YELLOW;
+      isSelectedTarget && (venue = targetSelected);
 
       return getCircle(parseInt(venue.radius), {
         lat: venue.lat,
@@ -183,11 +189,11 @@ class Map extends React.Component {
     });
 
     // FREE TARGET RADIUS
-    let newTargetRadius = getCircle(parseInt(this.props.newTarget.radius), {
+    let newTargetRadius = getCircle(parseInt(newTarget.radius), {
       lat: newTarget.lat,
       lng: newTarget.lng
     }, {
-      fillColor: 'rgb(239, 197, 55)',
+      fillColor: Colors.YELLOW,
       fillOpacity: 0.70,
       strokeOpacity: 0
     });
@@ -206,7 +212,7 @@ class Map extends React.Component {
       lng: longitudeTest
     }, {
       fillOpacity: 0,
-      strokeColor: 'rgb(239, 197, 55)',
+      strokeColor: Colors.YELLOW,
       strokeOpacity: 1,
       strokeWeight: 1
     });

@@ -4,10 +4,12 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as targetActions from '../../actions/targetActions';
 import * as newTargetActions from '../../actions/newTargetActions';
+import * as selectedTargetActions from '../../actions/selectedTargetActions';
 import * as sessionActions from '../../actions/sessionActions';
 import * as alertActions from '../../actions/alertActions';
 import * as contentActions from '../../actions/contentActions';
 import CustomAlert from '../../utils/uiHelper/CustomAlert';
+import { ALERT_GOALS, CONTENTS, FORM_MODE } from '../../enums/enums'
 import Header from '../common/Header';
 import SubHeader from '../common/SubHeader';
 import TargetForm from '../targets/TargetForm';
@@ -23,12 +25,12 @@ import { getToken } from '../../utils/LocalStorageHelper';
 
 export const SideBarContainer = (props) => {
 
-  if (props.alert.goal === "SideBarContainer") {
+  if (props.alert.goal === ALERT_GOALS.SideBarContainer) {
     CustomAlert.showAlert(props.alert.text, props.alert.alertType);
     props.actions.deleteAlert();
   }
   if (!props.session.firstTime && props.content === "HomeWelcome") {
-      props.actions.switchContent("TargetForm");
+      props.actions.switchContent(CONTENTS.TargetForm);
   }
 
   if (props.session.firstTime) {
@@ -52,7 +54,7 @@ export const SideBarContainer = (props) => {
 
   switch (props.content) {
 
-    case "HomeWelcome":
+    case CONTENTS.HomeWelcome:
       return (
         <div className="sidebarContainer">
           <CustomAlert />
@@ -60,20 +62,12 @@ export const SideBarContainer = (props) => {
         </div>
         );
 
-    case "TargetForm":{
-      const logOut = () => {
-        pushwooshService.unregisterDevice();
-        props.actions.signOut();
-        browserHistory.push('/sign-in');
-      };
+    case CONTENTS.TargetForm:{
 
-      let formEnabled = true;
-      if (!props.newTarget.isActive) {
-        formEnabled = false;
-      }
+      const formEnabled = props.targets.length < 10;
 
       const contentChanged = () => {
-        props.actions.switchContent("Home");
+        props.actions.switchContent(CONTENTS.Home);
       };
 
       return (
@@ -91,34 +85,37 @@ export const SideBarContainer = (props) => {
             {!props.selectedTarget && <SubHeader title={"CREATE NEW TARGET"} />}
             <TargetForm
               enabled={formEnabled}
-              updateTargetInfo={props.actions.updateFreeTarget}
+              updateTargetInfo={props.selectedTarget ? props.actions.updateSelectedTargetField : props.actions.updateFreeTarget}
               currentTarget={props.selectedTarget || props.newTarget}
               createTargetAction={props.actions.createTarget}
+              updateTargetAction={props.actions.updateTarget}
               deleteTargetAction={props.actions.deleteTarget}
               createAlertAction={props.actions.createAlert}
               topicsList={props.topics}
-              formMode={props.selectedTarget ? "Edit" : "New"}
+              formMode={props.selectedTarget ? FORM_MODE.Edit : FORM_MODE.New}
             />
             <button onClick={contentChanged} className="btn-matches">MATCHES</button>
             <br />
-            <button
-              onClick={logOut}
-              type="button"
-              className="btn btn-danger btn-sign-out">Sign out</button>
           </div>
         </div>
       );
     }
 
-    case "Home":
+    case CONTENTS.Home:{
+      const logOut = () => {
+        pushwooshService.unregisterDevice();
+        props.actions.signOut();
+        browserHistory.push('/sign-in');
+      };
       return (
         <div className="sidebarContainer">
           <CustomAlert />
-          <Home switchContentAction={props.actions.switchContent} />
+          <Home switchContentAction={props.actions.switchContent} beginLogout={logOut} />
         </div>
         );
+    }
 
-    case "Chat":
+    case CONTENTS.Chat:
       return (
         <div className="sidebarContainer">
           <CustomAlert />
@@ -135,16 +132,18 @@ export const SideBarContainer = (props) => {
 SideBarContainer.propTypes = {
   actions: PropTypes.object.isRequired,
   newTarget: PropTypes.object.isRequired,
+  targets: PropTypes.array.isRequired,
   topics: PropTypes.array.isRequired,
   session: PropTypes.object.isRequired,
   alert: PropTypes.object.isRequired,
   content: PropTypes.string.isRequired,
-  targetSelected: PropTypes.object.isRequired
+  selectedTarget: PropTypes.object.isRequired
 };
 
-const mapStateToProps = ({ newTarget, session, alert, topics, content, selectedTarget }) => {
+const mapStateToProps = ({ newTarget, session, alert, topics, content, selectedTarget, targets }) => {
   return {
     newTarget,
+    targets,
     session,
     alert,
     topics,
@@ -155,7 +154,8 @@ const mapStateToProps = ({ newTarget, session, alert, topics, content, selectedT
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(Object.assign({}, targetActions, newTargetActions, sessionActions, alertActions, contentActions), dispatch)
+    actions: bindActionCreators(Object.assign({}, targetActions, newTargetActions, selectedTargetActions,
+       sessionActions, alertActions, contentActions), dispatch)
   };
 }
 

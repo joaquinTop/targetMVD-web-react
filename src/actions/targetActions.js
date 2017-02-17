@@ -1,7 +1,8 @@
 import * as types from './actionTypes';
 import targetClient from '../client/TargetsServerClient';
-import {updateFreeTarget} from './newTargetActions';
-import {createAlert} from './alertActions';
+import { updateFreeTarget } from './newTargetActions';
+import { ALERT_GOALS } from '../enums/enums'
+import { createAlert } from './alertActions';
 
 export function createTargetSuccess(target){
   return { type: types.CREATE_TARGET, target };
@@ -10,10 +11,10 @@ export function createTargetSuccess(target){
 export const createTarget = (target) => {
   return dispatch => {
     return targetClient.createTarget(target).then(data => {
-      dispatch(createAlert("SideBarContainer", "Target created successfully", "success"));
+      dispatch(createAlert(ALERT_GOALS.SideBarContainer, "Target successfully created", "success"));
       dispatch(createTargetSuccess(data.target));
     }).catch(error => {
-      dispatch(createAlert("SideBarContainer", error, "error"));
+      dispatch(createAlert(ALERT_GOALS.SideBarContainer, error, "error"));
     });
   };
 };
@@ -42,16 +43,27 @@ export const deleteTargetSuccess = (target) => {
 export const deleteTarget = (targetId) => {
   return dispatch => {
     return targetClient.deleteTarget(targetId).then(data => {
-      dispatch(createAlert("SideBarContainer", "Target successfully deleted", "success"));
+      dispatch(createAlert(ALERT_GOALS.SideBarContainer, "Target successfully deleted", "success"));
       dispatch(deleteTargetSuccess(data.target));
     }).catch(error => {
-      dispatch(createAlert("SideBarContainer", error, "error"));
+      dispatch(createAlert(ALERT_GOALS.SideBarContainer, error, "error"));
     });
   };
 };
 
-export const updateTarget = (index, fieldName, value) => {
-  return { type: types.UPDATE_TARGET, index, fieldName, value };
+export const updateTargetSuccess = (target) => {
+  return { type: types.UPDATE_TARGET, target };
+};
+
+export const updateTarget = (targetJson, targetId) => {
+  return dispatch => {
+    return targetClient.updateTarget(targetJson, targetId).then(data => {
+      dispatch(createAlert(ALERT_GOALS.SideBarContainer, "Target successfully updated", "success"));
+      dispatch(updateTargetSuccess(data.target));
+    }).catch(error => {
+      dispatch(createAlert(ALERT_GOALS.SideBarContainer, error, "error"));
+    });
+  };
 };
 
 export const resetTargets = () => {

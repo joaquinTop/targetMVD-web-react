@@ -34,9 +34,9 @@ class TargetClient {
     });
   }
 
-  static updateTarget(target) {
+  static updateTarget(targetJson, targetId) {
     return new Promise((resolve, reject) => {
-      axiosInstance.post('/targets', target).then((({ data })=> {
+      axiosInstance.put('/targets/' + targetId, targetJson).then((({ data })=> {
         resolve(data);
       })).catch(error => {
         reject(error.message);

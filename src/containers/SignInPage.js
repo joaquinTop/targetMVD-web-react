@@ -5,6 +5,7 @@ import {bindActionCreators} from 'redux';
 import * as sessionActions from '../actions/sessionActions';
 import * as alertActions from '../actions/alertActions';
 import CustomAlert from '../utils/uiHelper/CustomAlert';
+import { ALERT_GOALS } from '../enums/enums'
 import SignInForm from '../components/signin/SignInForm';
 import LandingRightSide from '../components/common/LandingRightSide';
 import { getUser } from '../utils/LocalStorageHelper';
@@ -23,7 +24,7 @@ export const SignInPage = (props) => {
     return null;
   }
 
-  if (props.alert.goal === "SignInPage") {
+  if (props.alert.goal === ALERT_GOALS.SignInPage) {
     CustomAlert.showAlert(props.alert.text, props.alert.alertType);
     props.actions.deleteAlert();
   }

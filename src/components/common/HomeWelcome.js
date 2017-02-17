@@ -1,11 +1,12 @@
 import React, {PropTypes} from 'react';
 import smilies from '../../res/images/common/smilies.png';
 import * as C from '../../res/strings/strings-en.js';
+import { CONTENTS } from '../../enums/enums'
 
 export const HomeWelcome = (props) => {
 
   const contentChanged = () => {
-    props.switchContentAction("TargetForm");
+    props.switchContentAction(CONTENTS.TargetForm);
   };
 
   return (

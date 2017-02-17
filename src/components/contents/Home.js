@@ -6,11 +6,12 @@ import * as currentConversationActions from '../../actions/currentConversationAc
 import * as messagesActions from '../../actions/messagesActions';
 import userPlaceholder from '../../res/images/profile/placeholder-user.png';
 import ConversationsComponent from '../common/ConversationsComponent';
+import { CONTENTS } from '../../enums/enums'
 
-export const Home = ({ switchContentAction, matches, actions }) => {
+export const Home = ({ switchContentAction, matches, actions, beginLogout }) => {
 
   const contentChanged = () => {
-    switchContentAction("TargetForm");
+    switchContentAction(CONTENTS.TargetForm);
   };
 
   return (
@@ -22,13 +23,13 @@ export const Home = ({ switchContentAction, matches, actions }) => {
             <img className="user-img" src={userPlaceholder} />
           </div>
           <h4 className="home-username">@nickname</h4>
-          <h5 className="home-options">Edit / Logout</h5>
+          <h5 className="home-options">Edit / <a className="logoutButton" onClick={beginLogout} >Logout</a></h5>
           <hr className="custom-line-home" />
         </div>
       </div>
       <div className="home-inside-container">
         <ConversationsComponent
-          converastions={matches}
+          conversations={matches}
           updateCurrentConversationAction={actions.updateCurrentConversation}
           switchContent={switchContentAction}
           getMessagesAction={actions.loadMessages}
@@ -42,6 +43,7 @@ export const Home = ({ switchContentAction, matches, actions }) => {
 Home.propTypes = {
   actions: PropTypes.object.isRequired,
   matches: PropTypes.array.isRequired,
+  beginLogout: PropTypes.func.isRequired,
   switchContentAction: PropTypes.func.isRequired
 };
 

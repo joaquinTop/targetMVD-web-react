@@ -1,5 +1,6 @@
 import React, {PropTypes} from 'react';
 import {browserHistory} from 'react-router';
+import { ALERT_GOALS, FORM_MODE } from '../../enums/enums'
 import TextInput from '../common/TextInput';
 import smilies from '../../res/images/common/smilies.png';
 import Dropdown from 'react-dropdown';
@@ -13,6 +14,7 @@ class TargetForm extends React.Component{
     this.onFieldChange = this.onFieldChange.bind(this);
     this.onTopicChange = this.onTopicChange.bind(this);
     this.onTargetSubmit = this.onTargetSubmit.bind(this);
+    this.onTargetDelete = this.onTargetDelete.bind(this);
   }
 
   onFieldChange(fieldName, value) {
@@ -27,16 +29,19 @@ class TargetForm extends React.Component{
     updateTargetInfo({topic: index});
   }
 
+  onTargetDelete(e){
+    e.preventDefault();
+    const { deleteTargetAction, currentTarget: { id } } = this.props;
+    deleteTargetAction(id);
+  }
+
   onTargetSubmit(e){
     e.preventDefault();
-    const { enabled, formMode, currentTarget, createTargetAction, createAlertAction, deleteTargetAction } = this.props;
-    if (!enabled) {
-      createAlertAction("SideBarContainer", "Max of 10 targets reached", "error");
-      return;
-    }
 
-    if (formMode === "Edit") {
-      deleteTargetAction(currentTarget.id);
+    const { enabled, formMode, currentTarget, createAlertAction, createTargetAction, updateTargetAction } = this.props;
+
+    if (!enabled && formMode === FORM_MODE.New) {
+      createAlertAction(ALERT_GOALS.SideBarContainer, "Max of 10 targets reached", "error");
       return;
     }
 
@@ -46,13 +51,18 @@ class TargetForm extends React.Component{
         lat: currentTarget.lat,
         lng:  currentTarget.lng,
         radius: currentTarget.radius,
-        topic_id: currentTarget.topic
+        topic_id: currentTarget.topic.id || currentTarget.topic
       }
     };
 
     const error = validateTarget(targetJson.target);
     if (error) {
-      createAlertAction("SideBarContainer", error, "error");
+      createAlertAction(ALERT_GOALS.SideBarContainer, error, "error");
+      return;
+    }
+
+    if (formMode === FORM_MODE.Edit) {
+      updateTargetAction(targetJson, currentTarget.id);
       return;
     }
 
@@ -65,7 +75,7 @@ class TargetForm extends React.Component{
   }
 
   render(){
-    const { currentTarget, topicsList, formMode } = this.props;
+    const { topicsList, currentTarget, formMode } = this.props;
     const defaultOption = currentTarget.topic.label ||
       getTopicName(currentTarget.topic, topicsList);
 
@@ -110,10 +120,19 @@ class TargetForm extends React.Component{
             value={defaultOption}
             placeholder={topicPlaceholder}
           />
+          <br />
+          {formMode === FORM_MODE.Edit &&
+            <input
+              onClick={this.onTargetDelete}
+              type="submit"
+              value="DELETE TARGET"
+              className="btn-delete-target"
+            />
+          }
           <input
             className="btn-save-target"
             type="submit"
-            value={formMode === "Edit" ? "DELETE TARGET" : "SAVE TARGET"}
+            value={formMode === FORM_MODE.Edit ? "EDIT TARGET" : "SAVE TARGET"}
             onClick={this.onTargetSubmit}
           /><br />
           <img className="smilies-img-sidebar" src={smilies} alt="Smiley faces" />
@@ -124,14 +143,15 @@ class TargetForm extends React.Component{
 }
 
 TargetForm.propTypes = {
-  enabled:PropTypes.bool.isRequired,
-  formMode:PropTypes.string.isRequired,
-  updateTargetInfo:PropTypes.func.isRequired,
-  createTargetAction:PropTypes.func.isRequired,
-  deleteTargetAction:PropTypes.func.isRequired,
-  currentTarget:PropTypes.object.isRequired,
-  createAlertAction:PropTypes.func.isRequired,
-  topicsList:PropTypes.array.isRequired
+  enabled: PropTypes.bool.isRequired,
+  formMode: PropTypes.string.isRequired,
+  updateTargetInfo: PropTypes.func.isRequired,
+  createTargetAction: PropTypes.func.isRequired,
+  updateTargetAction: PropTypes.func.isRequired,
+  deleteTargetAction: PropTypes.func.isRequired,
+  currentTarget: PropTypes.object.isRequired,
+  createAlertAction: PropTypes.func.isRequired,
+  topicsList: PropTypes.array.isRequired
 };
 
 export default TargetForm;

@@ -1,5 +1,6 @@
 import React, { Component, PropTypes} from 'react';
 import * as C from '../../res/strings/strings-en';
+import { CONTENTS } from '../../enums/enums'
 import imgCount from '../../res/images/common/yellow-circle.png';
 
 class ConversationsComponent extends Component{
@@ -11,11 +12,12 @@ class ConversationsComponent extends Component{
     const { getMessagesAction, updateCurrentConversationAction, switchContent } = this.props;
     getMessagesAction(match.match_id);
     updateCurrentConversationAction(match);
-    switchContent("Chat");
+    switchContent(CONTENTS.Chat);
   };
 
   render() {
-    const matchesCount = this.props.converastions.length;
+    const { conversations } = this.props;
+    const matchesCount = conversations ? conversations.length : 0;
     if (matchesCount === 0) {
       return (
         <h3 className="noTargets">{ C.TEXT_NO_TARGETS_YET }</h3>
@@ -26,7 +28,7 @@ class ConversationsComponent extends Component{
           <h4 className="home-chat">Chat</h4>
           <ul className="people">
             <hr className="custom-line-chats" />
-            {this.props.converastions.map((item) => {
+            {conversations.map((item) => {
               return (
                 <div key={item.match_id}>
                   <li className="person" onClick={this.conversationSelected.bind(this, item)}>
@@ -47,7 +49,7 @@ class ConversationsComponent extends Component{
 }
 
 ConversationsComponent.propTypes = {
-  converastions: PropTypes.array.isRequired,
+  conversations: PropTypes.array.isRequired,
   updateCurrentConversationAction: PropTypes.func.isRequired,
   switchContent: PropTypes.func.isRequired,
   getMessagesAction: PropTypes.func.isRequired

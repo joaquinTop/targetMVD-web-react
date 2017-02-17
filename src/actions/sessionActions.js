@@ -1,4 +1,5 @@
 import * as types from './actionTypes';
+import { ALERT_GOALS } from '../enums/enums'
 import userClient from '../client/UsersServerClient';
 import targetClient from '../client/TargetsServerClient';
 import topicClient from '../client/TopicsServerClient';
@@ -41,7 +42,7 @@ export const signIn = (userJson) => {
       dispatch(configureSession(data, false));
       setUser(userJson, false);
     }).catch(error => {
-      dispatch(createAlert("SignInPage", error, "error"));
+      dispatch(createAlert(ALERT_GOALS.SignInPage, error, "error"));
     });
   };
 };
@@ -51,7 +52,7 @@ export const setPushToken = (token, userId) => {
     return pushClient.sendPushToken(token, userId).then(() => {
       setToken(token);
     }).catch(error => {
-      dispatch(createAlert("SideBarContainer", error, "error"));
+      dispatch(createAlert(ALERT_GOALS.SideBarContainer, error, "error"));
     });
   };
 };
@@ -62,7 +63,7 @@ export const signInWithFB = (accessToken, firstTime) => {
       dispatch(configureSession(data, firstTime));
       setUser(accessToken, true);
     }).catch(error => {
-      dispatch(createAlert("SignInPage", error, "error"));
+      dispatch(createAlert(ALERT_GOALS.SignInPage, error, "error"));
     });
   };
 };
@@ -73,7 +74,7 @@ export const signUp = (userJson) => {
       dispatch(configureSession(data, true));
       setUser(userJson, false);
     }).catch(error => {
-      dispatch(createAlert("SignInPage", error, "error"));
+      dispatch(createAlert(ALERT_GOALS.SignInPage, error, "error"));
     });
   };
 };
